@@ -17,4 +17,14 @@ public class UserService {
 	public List<UserVo> getUserList() {
 		return userDao.getList();
 	}
+
+	public void join( UserVo vo ) {
+		userDao.insert( vo );
+	}
+	
+	public UserVo login( UserVo vo ) {
+		UserVo userVo = userDao.get( vo.getEmail(), vo.getPassword() );
+		return userVo;
+	}
+	
 }

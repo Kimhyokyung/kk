@@ -1,14 +1,17 @@
 package com.bit.kuku.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.vo.UserVo;
@@ -30,18 +33,53 @@ public class MainController {
 		}
 		// ----------------------------------------------------
 		
-		return "index";
+		return "main/index";
 	}
 	
 	@RequestMapping(value ="/login")
 	public String login(Locale locale, Model model) {
 		
-		return "login";
+		return "/user/login";
 	}
 	
-	@RequestMapping(value ="/register")
+	@RequestMapping( value="/login2", method=RequestMethod.POST )
+	public String login( HttpSession session, @ModelAttribute UserVo userVo ) {
+		UserVo authUser = userService.login( userVo );
+		
+		if( authUser == null ) {
+			return "/user/login_fail";
+		}
+		
+		// 인증 처리
+		session.setAttribute( "authUser", authUser);
+		
+		// redirect
+		return "/main/index";
+	}
+	
+	@RequestMapping( value="/logout" )
+	public String logout( HttpServletRequest request ) {
+		HttpSession session = request.getSession();
+		if( session != null ) {
+			//request.removeAttribute( "authUser" );
+			session.removeAttribute("authUser");
+			session.invalidate();
+		}
+		return "/main/index";
+	}
+	
+	
+	@RequestMapping(value ="/registration")
 	public String register(Locale locale, Model model) {
 		
-		return "registration";
+		return "/user/registration";
+	}
+	
+	//회원가입 버튼 클릭
+	@RequestMapping( value="/join1", method=RequestMethod.POST )
+	public String join( @ModelAttribute UserVo userVo ) {
+		System.out.println( userVo );
+		userService.join( userVo );
+		return "user/joinsuccess";
 	}
 }

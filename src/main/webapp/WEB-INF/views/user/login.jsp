@@ -21,16 +21,16 @@
 											</div>
 										</header>
 										<div id="login-box-inner">
-											<form role="form" action="index.html">
+											<form role="form" method="post" action="login2">
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-user"></i></span>
 													<input class="form-control" type="text"
-														placeholder="Email address">
+														placeholder="email" name="email">
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-key"></i></span>
 													<input type="password" class="form-control"
-														placeholder="Password">
+														placeholder="password" name="password">
 												</div>
 												<div id="remember-me-wrapper">
 													<div class="row">
@@ -45,8 +45,9 @@
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-xs-12">
+													<div class="col-xs-12">														
 														<button type="submit" class="btn btn-success col-xs-12">Login</button>
+														
 													</div>
 												</div>
 												<div class="row">

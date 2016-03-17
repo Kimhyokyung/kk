@@ -2,24 +2,39 @@ package com.bit.kuku.vo;
 
 public class UserVo {
 
+	private int idx;
 	private String email;
-	private String nick;
-	
+	private String password;
+	private String nickname;
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNick() {
-		return nick;
+	public String getPassword() {
+		return password;
 	}
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserVo [email=" + email + ", nick=" + nick + "]";
+		return "KukuVo [idx=" + idx + ", email=" + email + ", password=" + password+ "," 
+				+ ", nickname =" + nickname+ "]";
 	}
+
 }

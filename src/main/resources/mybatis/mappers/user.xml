@@ -4,8 +4,26 @@
 <mapper namespace="user">
 	<select id="selectList" resultType="UserVo">
 		<![CDATA[		
-		    select EMAIL, NICKNAME 
+		    select IDX, EMAIL, PASSWORD, NICKNAME 
 		    from tb_user
 		]]>	
 	</select>
+	
+	 <select id="selectByNoAndPassword" parameterType="map" resultType="UserVo">
+		<![CDATA[
+		select IDX, EMAIL, NICKNAME
+		  from tb_user
+		 where email = #{email }
+		   and password = #{password }
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="UserVo">
+		<![CDATA[		
+		insert into tb_user (EMAIL, PASSWORD, NICKNAME)
+		     values ( #{email}, #{password }, #{nickname} )	
+		]]>
+	</insert>
+	
+	
 </mapper>
