@@ -84,6 +84,13 @@ public class MainController {
 	public String join( @ModelAttribute UserVo userVo ) {
 		System.out.println( userVo );
 		userService.join( userVo );
-		return "user/joinsuccess";
+		return "user/join_talker";
+	}
+	
+	@RequestMapping( value="/join_Listener", method=RequestMethod.POST )
+	public String join_Listener( @ModelAttribute UserVo userVo ) {
+		System.out.println( userVo );
+		userService.join( userVo );
+		return "user/Listener_Question";
 	}
 }

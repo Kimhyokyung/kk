@@ -69,7 +69,19 @@ $(function() {
 												</div>
 											</header>
 											<div id="login-box-inner">
-											<form id="join-form" name="joinForm" method="post" action="join">
+												<script>
+													function othersubmit(n) {
+														if (n == 1) {
+															document.otherform.action = "join";
+														}
+														if (n == 2) {
+															document.otherform.action = "Listener_Questions.jsp";
+														}
+														document.other.submit();
+													}
+												</script>
+
+												<form id="join-form" name="joinForm" method="post" action="join">
 													<div class="input-group">
 														<span class="input-group-addon"><i class="fa fa-user"></i></span>
 														<input class="form-control" type="text" placeholder="ID ( Email )" name="email" id="email">
@@ -101,8 +113,17 @@ $(function() {
 														</div>
 													</div>
 													<div class="row">
-														<div class="col-xs-12">
-															<button type="submit" class="btn btn-success col-xs-12">Register</button>
+														<div class="col-xs-12 col-sm-6">
+															<button type="submit"
+																class="btn btn-primary col-xs-12 btn-facebook">
+																</i> 토커로 회원가입
+															</button>
+														</div>
+														<div class="col-xs-12 col-sm-6">
+															<button type="submit"
+																class="btn btn-primary col-xs-12 btn-twitter" formaction="join_Listener">
+																</i> 리스너로 회원가입
+															</button>
 														</div>
 													</div>
 												</form>
