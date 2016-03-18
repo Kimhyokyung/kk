@@ -1,7 +1,9 @@
 package com.bit.kuku.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.vo.UserVo;
@@ -76,7 +80,7 @@ public class MainController {
 	}
 	
 	//회원가입 버튼 클릭
-	@RequestMapping( value="/join1", method=RequestMethod.POST )
+	@RequestMapping( value="/join", method=RequestMethod.POST )
 	public String join( @ModelAttribute UserVo userVo ) {
 		System.out.println( userVo );
 		userService.join( userVo );

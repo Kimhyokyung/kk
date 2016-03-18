@@ -25,5 +25,11 @@
 		]]>
 	</insert>
 	
-	
+	<select id="selectByEmail" parameterType="string" resultType="UserVo">
+	<![CDATA[
+	select email
+     from tb_user
+    where email = #{email}
+	]]>
+	</select>
 </mapper>

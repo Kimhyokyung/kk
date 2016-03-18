@@ -6,44 +6,46 @@
 <head>
 <title>kukuMental</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link href="/kuku/assets/css/user.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="/kuku/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
-$(function(){
-	$("#email").change( function(){
-		 $("#button-checkemail").show();
-// 		 $("#image-checkemail").hide();		
-	});
-	
-	$( "#button-id" ).click( function(){
+$(function() {
+// 	$("#email").change(function(){
+// 		$("#button-checkEmail").show();
+// 		$("#image-checkEmail").hide();
+// 	});
+	$("#button-checkemail").click(function() {
 		var email = $("#email").val();
-		if( email == "" ) {
+		console.log(email);
+		if (email == "" || email == null || email == 'undefined') {
+			alert("email을 입력해주세요.");
 			return;
-		} 
-		
-		$.ajax( {
-		   url : "/kuku/user/checkemail?email=" + email,
-		   type: "get",
-		   dataType: "json",
-		   data: "",
-	  //  contentType: "application/json",
-  	       success: function( response ){
-			 console.log( response );
-			 if(response.data == true) {
-				 $("#email").val( "" );
-				 alert( "이미 존재하는 아이디입니다. 다른 아이디를 사용해 주세요."  );
-				 $("#email").focus();
-				 return;
-			 }
-			                                                       
-			 // 사용 가능한 경우
-			 $("#button-checkemail").hide();
-// 			 $("#image-checkemail").show();
-	       },
-		   error: function( jqXHR, status, error ){
-			  console.error( status + " : " + error );
-		   }
-	   });
+		}
+		$.ajax({
+			url : "/kuku/user/checkemail?email=" + email,
+			type : "get",
+			dataType : "json",
+			data : "",
+			
+			//  contentType: "application/json",
+			success : function(response) {
+				console.log("success!");
+				console.log(response);
+				if (response.data == true) {
+					alert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요");
+					$("#email").focus();
+					return;
+				} else
+					{
+					alert("사용 가능한 이메일입니다.");
+					$("#password").focus();
+					return;
+					}
+
+				//이메일 사용 가능한 경우
+// 				$("#button-checkEmail").hide();
+// 				$("#image-checkEmail").show();
+			}
+		});
 	});
 });
 </script>
@@ -67,10 +69,10 @@ $(function(){
 												</div>
 											</header>
 											<div id="login-box-inner">
-											<form id="join-form" name="joinForm" method="post" action="join1">
+											<form id="join-form" name="joinForm" method="post" action="join">
 													<div class="input-group">
 														<span class="input-group-addon"><i class="fa fa-user"></i></span>
-														<input class="form-control" type="text" placeholder="ID ( Email )" name="email">
+														<input class="form-control" type="text" placeholder="ID ( Email )" name="email" id="email">
 													</div>
 													
 													<div id="remember-me-wrapper" class="row" >

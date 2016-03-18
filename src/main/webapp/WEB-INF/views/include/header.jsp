@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css" />
 	
 	<!-- RTL support - for demo only -->
-	<script src="/assets/js/demo-rtl.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/demo-rtl.js"></script>
 	
 	<!-- 
 	If you need RTL support just include here RTL CSS file <link rel="stylesheet" type="text/css" href="css/libs/bootstrap-rtl.min.css" />

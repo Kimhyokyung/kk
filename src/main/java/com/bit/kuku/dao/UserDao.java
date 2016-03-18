@@ -25,6 +25,16 @@ public class UserDao {
 		sqlSession.insert( "user.insert", vo );		
 	}
 	
+	public UserVo get(Long no) {
+		UserVo userVo = sqlSession.selectOne("user.selectByNo", no);
+		return userVo;
+	}
+	
+	public UserVo get(String email) {
+		UserVo userVo = sqlSession.selectOne("user.selectByEmail", email);
+		return userVo;
+	}
+	
 	public UserVo get(String email, String password) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "email", email );
