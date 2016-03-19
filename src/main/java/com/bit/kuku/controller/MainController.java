@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.kuku.service.UserService;
+import com.bit.kuku.vo.TalkerVo;
 import com.bit.kuku.vo.UserVo;
+
+import oracle.net.aso.s;
 
 @Controller
 public class MainController {
@@ -28,14 +32,6 @@ public class MainController {
 	
 	@RequestMapping(value="/main")
 	public String main(Locale locale, Model model) {
-		
-		// ----------------------------------------------------
-		// userList select문 테스트 예제
-		List<UserVo> userList = userService.getUserList();
-		for(int i=0; i<userList.size(); i++) {
-			System.out.println(userList.get(i).toString());
-		}
-		// ----------------------------------------------------
 		
 		return "main/index";
 	}
@@ -60,6 +56,21 @@ public class MainController {
 		// redirect
 		return "/main/index";
 	}
+	/*
+	@RequestMapping( value="/login_talker", method=RequestMethod.POST )
+	public String login( HttpSession session, @ModelAttribute TalkerVo talkerVo ) {
+		TalkerVo authUser = userService.login_talker( talkerVo );
+		
+		if( authUser == null ) {
+			return "/user/login_fail";
+		}
+		
+		// 인증 처리
+		session.setAttribute( "authUser", authUser);
+		
+		// redirect
+		return "/main/index";
+	}*/
 	
 	@RequestMapping( value="/logout" )
 	public String logout( HttpServletRequest request ) {
@@ -72,25 +83,47 @@ public class MainController {
 		return "/main/index";
 	}
 	
-	
 	@RequestMapping(value ="/registration")
 	public String register(Locale locale, Model model) {
 		
 		return "/user/registration";
 	}
 	
-	//회원가입 버튼 클릭
-	@RequestMapping( value="/join", method=RequestMethod.POST )
-	public String join( @ModelAttribute UserVo userVo ) {
-		System.out.println( userVo );
-		userService.join( userVo );
+	@RequestMapping( value="/join_talker")
+	public String join_talker(HttpServletRequest request, @ModelAttribute UserVo userVo) {
+		System.out.println("fwd : " +userVo);
+		HttpSession session = request.getSession();
+		session.setAttribute("user", userVo);
 		return "user/join_talker";
 	}
 	
-	@RequestMapping( value="/join_Listener", method=RequestMethod.POST )
-	public String join_Listener( @ModelAttribute UserVo userVo ) {
-		System.out.println( userVo );
-		userService.join( userVo );
-		return "user/Listener_Question";
+	@RequestMapping(value ="/joinsuccess")
+	public String joinsuccess(HttpServletRequest request, @RequestParam("stress_degree") String stress_degrees,
+			@RequestParam("consulting_topic") String consulting_topics) {
+		
+		HttpSession session = request.getSession();
+		UserVo userVo = (UserVo)session.getAttribute("user");
+		if(stress_degrees != null && consulting_topics != null) {
+			// 토커 가입
+			
+			String stress_degree = stress_degrees;
+			String consulting_topic = consulting_topics;
+			
+			
+			TalkerVo talkerVo = new TalkerVo();
+			talkerVo.setEmail(userVo.getEmail());
+			talkerVo.setPassword(userVo.getPassword());
+			talkerVo.setNickname(userVo.getNickname());
+			talkerVo.setStress_degree(stress_degree);
+			talkerVo.setConsulting_topic(consulting_topic);
+			
+			
+			userService.join_talker(talkerVo);
+			return "/user/joinsuccess";
+		} else {
+			// 리스너 가입
+		
+		}
+		return "/user/joinsuccess";
 	}
 }

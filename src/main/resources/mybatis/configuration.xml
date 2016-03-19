@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="UserVo" type="com.bit.kuku.vo.UserVo" />
+		<typeAlias alias="TalkerVo" type="com.bit.kuku.vo.TalkerVo" />
    	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />

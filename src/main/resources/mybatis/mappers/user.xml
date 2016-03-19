@@ -18,10 +18,26 @@
 		]]>
 	</select>
 	
+	<select id="selectByNoAndPassword_talker" parameterType="map" resultType="TalkerVo">
+		<![CDATA[
+		select IDX, EMAIL, NICKNAME
+		  from talker
+		 where email = #{email }
+		   and password = #{password }
+		]]>
+	</select>
+	
 	<insert id="insert" parameterType="UserVo">
 		<![CDATA[		
-		insert into tb_user (EMAIL, PASSWORD, NICKNAME)
-		     values ( #{email}, #{password }, #{nickname} )	
+		insert into tb_user (EMAIL, PASSWORD, NICKNAME )
+		     values ( #{email}, #{password }, #{nickname})	
+		]]>
+	</insert>
+	
+	<insert id="insert_talker" parameterType="TalkerVo">
+		<![CDATA[		
+		insert into talker (EMAIL, PASSWORD, NICKNAME, STRESS_DEGREE, CONSULTING_TOPIC)
+		     values ( #{email}, #{password }, #{nickname}, #{stress_degree}, #{consulting_topic} )	
 		]]>
 	</insert>
 	

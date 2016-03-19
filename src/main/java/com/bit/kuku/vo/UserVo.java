@@ -6,6 +6,7 @@ public class UserVo {
 	private String email;
 	private String password;
 	private String nickname;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -36,5 +37,4 @@ public class UserVo {
 		return "KukuVo [idx=" + idx + ", email=" + email + ", password=" + password+ "," 
 				+ ", nickname =" + nickname+ "]";
 	}
-
 }

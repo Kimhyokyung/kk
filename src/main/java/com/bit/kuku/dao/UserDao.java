@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bit.kuku.vo.TalkerVo;
 import com.bit.kuku.vo.UserVo;
 
 @Repository
@@ -23,6 +24,12 @@ public class UserDao {
 
 	public void insert(UserVo vo) {
 		sqlSession.insert( "user.insert", vo );		
+	}
+	
+	public void insert_talker(TalkerVo vo) {
+		
+		//System.out.println(vo);
+		sqlSession.insert("user.insert_talker", vo);
 	}
 	
 	public UserVo get(Long no) {
@@ -44,4 +51,5 @@ public class UserDao {
 
 		return userVo;
 	}
+		
 }
