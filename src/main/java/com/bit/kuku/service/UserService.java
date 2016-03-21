@@ -42,19 +42,20 @@ public class UserService {
 		return userVo;
 	}
 	
-	public boolean checkEmail(String email, String userType) {		
+	public boolean checkEmail(String email, String userType) {
 		boolean isExist = false;
-		
+				
 		if(userType.equals("talker")) {
+			
 			TalkerVo talkerVo = talkerDao.get(email);
 			if(talkerVo != null)
 				isExist = true;
 		} else if(userType.equals("listenr")) {
+			
 			ListenerVo listenerVo = listenerDao.get(email);
 			if(listenerVo != null)
 				isExist = true;
-		}
-		
+		} 		
 		return isExist;
 	}
 

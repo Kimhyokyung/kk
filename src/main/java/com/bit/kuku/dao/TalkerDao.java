@@ -15,6 +15,7 @@ public class TalkerDao {
 
 	public TalkerVo get(String email) {
 		TalkerVo talkerVo = sqlSession.selectOne("talker.selectByEmail", email);
+		System.out.println(talkerVo);
 		return talkerVo;
 	}
 }

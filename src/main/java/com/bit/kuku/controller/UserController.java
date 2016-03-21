@@ -54,7 +54,7 @@ public class UserController {
 		// 회원가입 유저 타입 가져오기
 		HttpSession session = request.getSession();
 		String userType = (String)session.getAttribute("userType");
-		
+
 		boolean isExist = userService.checkEmail(email, userType);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(isExist) {
@@ -88,31 +88,8 @@ public class UserController {
 	}
 	
 	@RequestMapping(value ="/join_success")
-	public String joinsuccess(HttpServletRequest request, 
-			@RequestParam("stress_degree") String stress_degrees,
-			@RequestParam("consulting_topic") String consulting_topics) {
-
-		HttpSession session = request.getSession();
-		UserVo userVo = (UserVo)session.getAttribute("user");
-		if(stress_degrees != null && consulting_topics != null) {
-			// 토커 가입
-			String stress_degree = stress_degrees;
-			String consulting_topic = consulting_topics;
-
-			TalkerVo talkerVo = new TalkerVo();
-			talkerVo.setEmail(userVo.getEmail());
-			talkerVo.setPassword(userVo.getPassword());
-			talkerVo.setNickname(userVo.getNickname());
-			talkerVo.setStress_degree(stress_degree);
-			talkerVo.setConsulting_topic(consulting_topic);
-
-
-			userService.join_talker(talkerVo);
-			return "/user/join_success";
-		} else {
-			// 리스너 가입
-
-		}
+	public String joinsuccess(HttpServletRequest request ) {
+	
 		return "user/joinsuccess";
 	}
 

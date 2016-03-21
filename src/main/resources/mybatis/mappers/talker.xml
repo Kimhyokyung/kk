@@ -5,7 +5,7 @@
 	<select id="selectByEmail" parameterType="string" resultType="TalkerVo">
 	<![CDATA[
 		select email
-	     from tb_listener
+		from tb_talker
 	    where email = #{email}
 	]]>
 	</select>
