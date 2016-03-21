@@ -74,17 +74,15 @@
 																<div class="col-xs-12 col-sm-6">
 																	<input type="button"
 																		class="btn btn-primary col-xs-12 btn-facebook"
-																		value="talker"
+																		value="토커로 회원가입"
 																		id="btn_talker">
-																		</i> <h2>토커로 회원가입</h2>
 																	</button>
 																</div>
 																<div class="col-xs-12 col-sm-6">
 																	<input type="button"
 																		class="btn btn-primary col-xs-12 btn-twitter"
-																		value="listener"
+																		value="리스너로 회원가입"
 																		id="btn_listener">
-																		</i> <h2>리스너로 회원가입</h2>
 																	</button>
 																</div>
 															</div>
