@@ -4,8 +4,10 @@
 	<typeAliases>
 		<typeAlias alias="UserVo" type="com.bit.kuku.vo.UserVo" />
 		<typeAlias alias="TalkerVo" type="com.bit.kuku.vo.TalkerVo" />
+		<typeAlias alias="ListenerVo" type="com.bit.kuku.vo.ListenerVo" />
    	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/listener.xml" />
 	</mappers>
 </configuration>

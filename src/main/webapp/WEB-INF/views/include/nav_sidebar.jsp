@@ -14,13 +14,13 @@
 			<ul class="nav nav-pills nav-stacked">
 			<c:choose>
 				<c:when test="${empty authUser }">	
-					<li><a href="/kuku/login"> <span>로그인</span> </a> </li>
-					<li><a href="/kuku/registration"> <span>회원가입</span> </a> </li>					
+					<li><a href="/kuku/user/loginform"> <span>로그인</span> </a> </li>
+					<li><a href="/kuku/user/select_join_type"> <span>회원가입</span> </a> </li>					
 				</c:when>
 				<c:otherwise>
 					<li><a href="logout"> <span>로그아웃</span> </a> </li>
-					<li><a href="/kuku/registration"> <span>회원정보수정</span> </a> </li>
-					<li>    ${authUser.email }님 안녕하세요 ^^;</li>
+					<li><a href="/kuku/user/update_user"> <span>회원정보수정</span> </a> </li>
+					<li>${authUser.email }님 안녕하세요 ^^;</li>
 				</c:otherwise>
 		    </c:choose>
 			</ul>

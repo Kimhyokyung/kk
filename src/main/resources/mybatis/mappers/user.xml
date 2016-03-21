@@ -48,4 +48,12 @@
     where email = #{email}
 	]]>
 	</select>
+	
+	<update id="update" parameterType="UserVo">
+	<![CDATA[
+		update tb_user set EMAIL = #{email}, PASSWORD = #{password}, 
+		NICKNAME = #{nickname}
+		where email = #{email}
+	]]>
+	</update>
 </mapper>

@@ -18,9 +18,7 @@
 									<div class="col-xs-12">
 										<header id="login-header">
 											<div id="login-logo">
-												<img
-													src="${pageContext.request.contextPath}/assets/img/logo.png"
-													alt="" />
+												<img src="${pageContext.request.contextPath}/assets/img/logo.png"alt="" />
 											</div>
 										</header>
 										<div id="login-box-inner">

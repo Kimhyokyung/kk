@@ -22,12 +22,11 @@
 							}
 							$
 									.ajax({
-										url : "/kuku/user/checkemail?email="
+										url : "/kuku/user/check_email?email="
 												+ email,
 										type : "get",
 										dataType : "json",
 										data : "",
-
 										success : function(response) {
 											console.log("success!");
 											console.log(response);
@@ -50,9 +49,7 @@
 	});
 	//토커 회원가입 
 	function selectChkBox(button) {
-
 		var joinform = document.getElementById('join-form');
-
 		if (joinform.email.value == "") {
 			alert("이메일을 입력해주세요.")
 			joinform.email.focus()
@@ -107,7 +104,7 @@
 													</div>
 												</header>
 												<div id="login-box-inner">
-													<form id="join-form" name="joinForm" method="POST">
+													<form id="join-form" name="joinForm" method="POST" action="join_talker">
 														<div class="row">
 															<div class="input-group">
 																<span class="input-group-addon"><i
@@ -151,20 +148,12 @@
 																	</div>
 																</div>
 															</div>
-															<div class="col-xs-12 col-sm-6">
+															<div style="width: 315px; height: 80px; margin: auto">
 																<button type="submit"
 																	class="btn btn-primary col-xs-12 btn-facebook"
-																	onClick="selectChkBox(this)" value="talker"
+																	onClick="selectChkBox(this)" value="next"
 																	disabled="disabled" id="btn_talker">
-																	</i> 토커로 회원가입
-																</button>
-															</div>
-															<div class="col-xs-12 col-sm-6">
-																<button type="submit"
-																	class="btn btn-primary col-xs-12 btn-twitter"
-																	onClick="selectChkBox(this)" value="listener"
-																	disabled="disabled" id="btn_listener">
-																	</i> 리스너로 회원가입
+																	</i> 다음으로
 																</button>
 															</div>
 														</div>

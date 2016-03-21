@@ -50,5 +50,4 @@ public class TalkerVo {
 		return "TalkerVo [idx=" + idx + ", email=" + email + ", password=" + password + ", nickname=" + nickname
 				+ ", stress_degree=" + stress_degree + ", consulting_topic=" + consulting_topic + "]";
 	}
-	
 }

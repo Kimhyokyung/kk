@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bit.kuku.dao.TalkerDao;
+//import com.bit.kuku.dao.TalkerDao;
 import com.bit.kuku.dao.UserDao;
 import com.bit.kuku.vo.TalkerVo;
 import com.bit.kuku.vo.UserVo;
@@ -14,7 +14,7 @@ import com.bit.kuku.vo.UserVo;
 public class UserService {
 	@Autowired
 	UserDao userDao;
-	TalkerDao talkerDao;
+	//TalkerDao talkerDao;
 	
 	public List<UserVo> getUserList() {
 		return userDao.getList();
@@ -42,5 +42,9 @@ public class UserService {
 		UserVo userVo = userDao.get(email);
 		return userVo;
 	}
-	
+
+	public void update(UserVo obj) {
+		userDao.update(obj);
+		System.out.println("update");
+	}
 }
