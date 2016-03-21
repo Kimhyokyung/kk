@@ -10,18 +10,44 @@
 <title>Insert title here</title>
 </head>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
-function clickTypeBtn(typeBtn) {
-	var joinform = document.getElementById('join-form');
-	
-	if (typeBtn.value == "talker") {
-		joinform.action = "joinform";
-		joinform.submit();
-	} else if (typeBtn.value == "listener") {
-		joinform.action = "joinform";
-		joinform.submit();
-	}
-}
+	$(function() {
+		$("#btn_talker").click( function() {
+				var type = $("#btn_talker").val();
+				console.log(type);
+				$.ajax({
+					url : "/kuku/user/check_type?type=" + type,
+					type : "get",
+					dataType : "json",
+					data : "",
+					
+					success : function(response) {
+						console.log("success!");
+						var joinForm = document.getElementById('join-form');
+						joinForm.action="joinform";
+						joinForm.submit();
+					}
+				});
+		});
+		
+		$("#btn_listener").click( function() {
+			var type = $("#btn_listener").val();
+			console.log(type);
+			$.ajax({
+				url : "/kuku/user/check_type?type=" + type,
+				type : "get",
+				dataType : "json",
+				data : "",
+				success : function(response) {
+					console.log("success!");
+					var joinForm = document.getElementById('join-form');
+					joinForm.action="joinform";
+					joinForm.submit();
+				}
+			});
+	});
+});
 </script>
 <body>
 	<div id="theme-wrapper">
@@ -43,20 +69,20 @@ function clickTypeBtn(typeBtn) {
 													</div>
 													</header>
 													<div id="login-box-inner">
-														<form id="join-form" name="joinForm" method="POST">
+														<form id="join-form" name="joinForm" method="POST" action="joinform">
 															<div class="row">
 																<div class="col-xs-12 col-sm-6">
-																	<button type="submit"
+																	<input type="button"
 																		class="btn btn-primary col-xs-12 btn-facebook"
-																		onClick="clickTypeBtn(this)" value="talker"
+																		value="talker"
 																		id="btn_talker">
 																		</i> <h2>토커로 회원가입</h2>
 																	</button>
 																</div>
 																<div class="col-xs-12 col-sm-6">
-																	<button type="submit"
+																	<input type="button"
 																		class="btn btn-primary col-xs-12 btn-twitter"
-																		onClick="clickTypeBtn(this)" value="listener"
+																		value="listener"
 																		id="btn_listener">
 																		</i> <h2>리스너로 회원가입</h2>
 																	</button>

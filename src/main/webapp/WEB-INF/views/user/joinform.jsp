@@ -11,42 +11,37 @@
 <script type="text/javascript">
 	//이메일 중복확인
 	$(function() {
-		$("#button-checkemail")
-				.click(
-						function() {
-							var email = $("#email").val();
-							if (email == "" || email == null
-									|| email == 'undefined') {
-								alert("email을 입력해주세요.");
-								return;
-							}
-							$
-									.ajax({
-										url : "/kuku/user/check_email?email="
-												+ email,
-										type : "get",
-										dataType : "json",
-										data : "",
-										success : function(response) {
-											console.log("success!");
-											console.log(response);
-											if (response.data == true) {
-												alert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요");
-												$("#email").focus();
-												return;
-											} else {
-												alert("사용 가능한 이메일입니다.");
-												document
-														.getElementById('btn_talker').disabled = false;
-												document
-														.getElementById('btn_listener').disabled = false;
-												$("#password").focus();
-												return;
-											}
-										}
-									});
-						});
+		$("#button-checkemail").click( function() {
+				var email = $("#email").val();
+				if (email == "" || email == null || email == 'undefined') {
+					alert("email을 입력해주세요.");
+					return;
+				}
+				
+				$.ajax({
+					url : "/kuku/user/check_email?email=" + email,
+					type : "get",
+					dataType : "json",
+					data : "",
+					
+					success : function(response) {
+						console.log("success!");
+						console.log(response);
+						if (response.exist == true) {
+							alert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요");
+							$("#email").focus();
+							return;
+						} else {
+							alert("사용 가능한 이메일입니다.");
+							document.getElementById('btn_next').disabled = false;
+							$("#password").focus();
+							return;
+						}
+					}
+				});
+		});
 	});
+	
 	//토커 회원가입 
 	function selectChkBox(button) {
 		var joinform = document.getElementById('join-form');
@@ -152,7 +147,7 @@
 																<button type="submit"
 																	class="btn btn-primary col-xs-12 btn-facebook"
 																	onClick="selectChkBox(this)" value="next"
-																	disabled="disabled" id="btn_talker">
+																	disabled="disabled" id="btn_next">
 																	</i> 다음으로
 																</button>
 															</div>

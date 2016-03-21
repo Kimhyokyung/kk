@@ -22,7 +22,7 @@
 											</div>
 										</header>
 										<div id="login-box-inner">
-											<form role="form" method="post" action="login2">
+											<form role="form" method="post" action="login">
 												<div class="input-group">
 													<span class="input-group-addon"><i
 														class="fa fa-user"></i></span> <input class="form-control"

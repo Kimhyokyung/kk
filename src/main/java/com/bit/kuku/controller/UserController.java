@@ -27,12 +27,26 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value ="/select_join_type")
+	@RequestMapping(value = "/select_join_type")
 	public String register_first() {
 		return "user/select_join_type";
 	}
+
+	@RequestMapping(value = "/check_type")
+	@ResponseBody
+	public Object check_type(@RequestParam("type") String type, HttpServletRequest request) {
+		
+		System.out.println("유저 타입 : " + type);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("userType", type);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		return map;
+	}
 	
-	@RequestMapping("/check_email")
+	@RequestMapping(value = "/check_email")
 	@ResponseBody
 	public Object checkEmail(@RequestParam("email") String email) {
 		
@@ -51,11 +65,11 @@ public class UserController {
 		return map;
 	}
 	
-	@RequestMapping(value ="/joinform")
-	public String register_second() {
+	@RequestMapping(value = "/joinform")
+	public String joinform() {
 		return "user/joinform";
 	}
-
+	
 	@RequestMapping(value="/join_talker")
 	public String join_talker(HttpServletRequest request, @ModelAttribute UserVo userVo) {
 //		System.out.println("fwd : " +userVo);
@@ -104,7 +118,7 @@ public class UserController {
 	@RequestMapping(value ="/loginform")
 	public String login(Locale locale, Model model) {
 
-		return "user/login";
+		return "user/loginform";
 	}
 	
 	@RequestMapping( value="/login", method=RequestMethod.POST )
