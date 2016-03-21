@@ -23,10 +23,12 @@
 					type : "get",
 					dataType : "json",
 					data : "",
-					
 					success : function(response) {
 						console.log("success!");
 						console.log(response);
+						
+						// UserController의 check_type함수에서 넘겨준  map값이 response에서 담겨온다
+						// response에는 이메일이 존재하는지 판단하는 불린값이 있음
 						if (response.exist == true) {
 							alert("이미 존재하는 이메일입니다. 다른 이메일을 사용해 주세요");
 							$("#email").focus();

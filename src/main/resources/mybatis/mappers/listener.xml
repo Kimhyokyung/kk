@@ -2,42 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="listener">
-	<select id="selectList" resultType="ListenerVo">
-		<![CDATA[		
-		    select IDX, EMAIL, PASSWORD, NICKNAME 
-		    from tb_listener
-		]]>	
-	</select>
-	
-	 <select id="selectByNoAndPassword" parameterType="map" resultType="ListenerVo">
-		<![CDATA[
-		select IDX, EMAIL, NICKNAME
-		  from tb_listener
-		 where email = #{email }
-		   and password = #{password }
-		]]>
-	</select>
-	
-	<insert id="insert" parameterType="ListenerVo">
-		<![CDATA[		
-		insert into tb_listener (EMAIL, PASSWORD, NICKNAME)
-		     values ( #{email}, #{password }, #{nickname} )	
-		]]>
-	</insert>
-	
 	<select id="selectByEmail" parameterType="string" resultType="ListenerVo">
 	<![CDATA[
-	select email
-     from tb_listener
-    where email = #{email}
+		select email
+	     from tb_listener
+	    where email = #{email}
 	]]>
 	</select>
-	
-	<update id="update" parameterType="ListenerVo">
-	<![CDATA[
-		update tb_listener set EMAIL = #{email}, PASSWORD = #{password}, 
-		NICKNAME = #{nickname}
-		where email = #{email}
-	]]>
-	</update>
 </mapper>

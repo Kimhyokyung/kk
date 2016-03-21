@@ -38,6 +38,7 @@ public class UserController {
 		
 		System.out.println("유저 타입 : " + type);
 		
+		// 회원가입 유저 타입 저장(토커, 리스너)
 		HttpSession session = request.getSession();
 		session.setAttribute("userType", type);
 		
@@ -46,17 +47,17 @@ public class UserController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/check_email")
+	@RequestMapping(value="/check_email")
 	@ResponseBody
-	public Object checkEmail(@RequestParam("email") String email) {
+	public Object check_email(@RequestParam("email") String email, HttpServletRequest request) {
 		
+		// 회원가입 유저 타입 가져오기
+		HttpSession session = request.getSession();
+		String userType = (String)session.getAttribute("userType");
+		
+		boolean isExist = userService.checkEmail(email, userType);
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		// 이메일 중복 확인
-		UserVo userVo = userService.checkEmail(email);
-		if(userVo != null)
-		{
-			System.out.println(userVo.getEmail() + "유저 존재");
+		if(isExist) {
 			map.put("exist", true);
 		} else {
 			map.put("exist", false);
