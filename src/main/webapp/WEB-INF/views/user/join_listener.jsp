@@ -71,7 +71,7 @@ function Rradio_OnOff(id) {
 			<div class="row">
 				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
 				<div id="content-wrapper">
-				<form id="join_listener" name="joinlistenerForm" method="POST" action="join_success2">
+				<form id="join_listener" name="join_listener" method="POST" action="join_success2">
 					<div id="myWizard" class="wizard">
 						<div class="wizard-inner">
 							<ul class="steps">
@@ -93,7 +93,7 @@ function Rradio_OnOff(id) {
 <!---------------- 버튼------------------------------------------------------------------------------------------------------------------->
 							<div class="actions">
 								<button type="button" class="btn btn-success btn-mini btn-next"	name="next" id="next" data-last="Finish"
-								disabled="disabled" onclick="btn_next()">
+								disabled="disabled">
 									Next<i class="icon-arrow-right"></i>
 								</button>
 							</div>

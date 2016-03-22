@@ -1,5 +1,6 @@
 package com.bit.kuku.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class UserController {
 		HttpSession session = request.getSession();
 		String userType = (String)session.getAttribute("userType");
 		boolean isExist = userService.checkEmail(email, userType);
-		
+		System.out.println(userType);
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(isExist) {
 			map.put("exist", true);
@@ -94,9 +95,9 @@ public class UserController {
 			@RequestParam("stress_degree") String stress_degrees,
 			@RequestParam("consulting_topic") String consulting_topics) {
 
+		System.out.println(consulting_topics);
 		HttpSession session = request.getSession();
 		TalkerVo talkerVo = (TalkerVo)session.getAttribute("talker");
-		
 		
 		String stress_degree = stress_degrees;
 		String consulting_topic = consulting_topics;

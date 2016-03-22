@@ -18,7 +18,6 @@
 				<c:otherwise>
 					<li><a href="logout"> <span>로그아웃</span> </a> </li>
 					<li><a href="/kuku/user/update_user"> <span>회원정보수정</span> </a> </li>
-					<li>${sessionScope.authUser.email }님 안녕하세요 ^^;</li>
 				</c:otherwise>
 		    </c:choose>
 			</ul>

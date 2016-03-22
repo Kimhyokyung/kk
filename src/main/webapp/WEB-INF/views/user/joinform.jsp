@@ -13,6 +13,7 @@
 	$(function() {
 		$("#button-checkemail").click( function() {
 				var email = $("#email").val();
+				console.log(email);
 				if (email == "" || email == null || email == 'undefined') {
 					alert("email을 입력해주세요.");
 					return;

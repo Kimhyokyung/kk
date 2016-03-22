@@ -27,7 +27,6 @@ public class UserService {
 		listenerDao.insert_listener(vo);
 	}
 	
-	
 	public TalkerVo login_talker( TalkerVo vo ) {
 		TalkerVo talkerVo = talkerDao.get( vo.getEmail(), vo.getPassword() );
 		return talkerVo;
@@ -40,23 +39,28 @@ public class UserService {
 	
 	public boolean checkEmail(String email, String userType) {
 		boolean isExist = false;
-				
+		
 		if(userType.equals("talker")) {
 			
 			TalkerVo talkerVo = talkerDao.get(email);
+			System.out.println(talkerVo);
 			if(talkerVo != null)
 				isExist = true;
-		} else if(userType.equals("listenr")) {
+		} else if(userType.equals("listener")) {
 			
 			ListenerVo listenerVo = listenerDao.get(email);
+			System.out.println(listenerVo);
+			
 			if(listenerVo != null)
 				isExist = true;
 		} 		
 		return isExist;
 	}
 
-/*	public void update(UserVo obj) {
+/*	
+ 	public void update(UserVo obj) {
 		userDao.update(obj);
 		System.out.println("update");
-	}*/
+	}
+*/
 }
