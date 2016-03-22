@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.kuku.service.UserService;
+import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
 import com.bit.kuku.vo.UserVo;
 
@@ -27,12 +28,12 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping(value = "/select_join_type")
+	@RequestMapping(value="/select_join_type")
 	public String register_first() {
 		return "user/select_join_type";
 	}
 
-	@RequestMapping(value = "/check_type")
+	@RequestMapping(value="/check_type")
 	@ResponseBody
 	public Object check_type(@RequestParam("type") String type, HttpServletRequest request) {
 		
@@ -54,8 +55,8 @@ public class UserController {
 		// 회원가입 유저 타입 가져오기
 		HttpSession session = request.getSession();
 		String userType = (String)session.getAttribute("userType");
-
 		boolean isExist = userService.checkEmail(email, userType);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(isExist) {
 			map.put("exist", true);
@@ -66,40 +67,44 @@ public class UserController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/joinform")
+	@RequestMapping(value="/joinform")
 	public String joinform() {
 		return "user/joinform";
 	}
 	
 	@RequestMapping(value="/join_talker")
-	public String join_talker(HttpServletRequest request, @ModelAttribute UserVo userVo) {
-//		System.out.println("fwd : " +userVo);
-//		HttpSession session = request.getSession();
-//		session.setAttribute("user", userVo);
+	public String join_talker(HttpServletRequest request, @ModelAttribute TalkerVo talkerVo) {
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("joinUser", talkerVo);
+		System.out.println(talkerVo);
+
 		return "user/join_talker";
 	}
 
 	@RequestMapping(value="/join_listener")
-	public String join_listener(HttpServletRequest request, @ModelAttribute UserVo userVo) {
-//		System.out.println("fwd : " +userVo);
-//		HttpSession session = request.getSession();
-//		session.setAttribute("user", userVo);
+	public String join_listener(HttpServletRequest request, @ModelAttribute ListenerVo listenerVo) {
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("joinUser", listenerVo);
+		System.out.println(listenerVo);
+		
 		return "user/join_listener";
 	}
 	
-	@RequestMapping(value ="/join_success")
-	public String joinsuccess(HttpServletRequest request ) {
-	
-		return "user/joinsuccess";
+	@RequestMapping(value="/join_success")
+	public String joinsuccess(HttpServletRequest request) {
+		
+		return "user/join_success";
 	}
 
-	@RequestMapping(value ="/loginform")
+	@RequestMapping(value = "/loginform")
 	public String login(Locale locale, Model model) {
 
 		return "user/loginform";
 	}
 	
-	@RequestMapping( value="/login", method=RequestMethod.POST )
+	@RequestMapping(value = "/login", method=RequestMethod.POST )
 	public String login( HttpSession session, @ModelAttribute UserVo userVo ) {
 		UserVo authUser = userService.login( userVo );
 
@@ -114,11 +119,10 @@ public class UserController {
 		return "main/index";
 	}
 	
-	@RequestMapping( value="/logout" )
+	@RequestMapping(value="/logout" )
 	public String logout( HttpServletRequest request ) {
 		HttpSession session = request.getSession();
 		if( session != null ) {
-			//request.removeAttribute( "authUser" );
 			session.removeAttribute("authUser");
 			session.invalidate();
 		}

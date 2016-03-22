@@ -47,32 +47,43 @@
 	//토커 회원가입 
 	function selectChkBox(button) {
 		var joinform = document.getElementById('join-form');
+		
 		if (joinform.email.value == "") {
 			alert("이메일을 입력해주세요.")
 			joinform.email.focus()
+			return;
 		} else if (joinform.password.value == "") {
 			alert("비밀번호를 입력하지 않았습니다.")
 			joinform.password.focus()
+			return;
 		} else if (joinform.password2.value == "") {
 			alert("비밀번호를 입력하지 않았습니다.")
 			joinform.password2.focus()
+			return;
 		} else if (joinform.password.value.length<4 || joinform.password.value.length>12) {
 			alert("비밀번호를 4~12자까지 입력해주세요.")
 			joinform.password.focus()
+			return;
 		} else if (joinform.nickname.value == "") {
 			alert("닉네임을 입력하지 않았습니다.")
 			joinform.nickname.focus()
+			return;
 		}
 		//비밀번호와 비밀번호 확인 일치여부 체크
 		else if (joinform.password.value != joinform.password2.value) {
 			alert("비밀번호가 일치하지 않습니다")
 			joinform.pwdConfirm.focus()
+			return;
 		} else {
-			if (button.value == "talker") {
+			var userType = "${sessionScope.userType}";
+			console.log(userType);
+			if (userType == "talker") {
+				console.log("talker page");
 				joinform.action = "join_talker";
 				joinform.submit();
-			} else if (button.value == "listener") {
-				joinform.action = "join_Listener";
+			} else if (userType == "listener") {
+				console.log("listener page");
+				joinform.action = "join_listener";
 				joinform.submit();
 			}
 		}
@@ -101,7 +112,7 @@
 													</div>
 												</header>
 												<div id="login-box-inner">
-													<form id="join-form" name="joinForm" method="POST" action="join_talker">
+													<form id="join-form" name="joinForm" method="POST">
 														<div class="row">
 															<div class="input-group">
 																<span class="input-group-addon"><i

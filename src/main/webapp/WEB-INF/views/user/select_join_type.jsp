@@ -81,7 +81,7 @@
 																<div class="col-xs-12 col-sm-6">
 																	<input type="button"
 																		class="btn btn-primary col-xs-12 btn-twitter"
-																		value="listenr"
+																		value="listener"
 																		id="btn_listener">
 																	</button>
 																</div>
