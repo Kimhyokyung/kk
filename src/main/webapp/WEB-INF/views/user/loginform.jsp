@@ -3,6 +3,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
+
+<script type="text/javascript">
+	function clickLogin(loginBtn) {
+		if(loginBtn.value == "talker") {
+			console.log("talker click");
+			document.getElementById('userType').setAttribute('value', "talker");
+		} else if(loginBtn.value == "listener") {
+			console.log("listener click");
+			document.getElementById('userType').setAttribute('value', "listener");
+		}
+		
+		console.log(document.getElementById('userType').value);
+		
+		var loginform = document.getElementById('loginform');
+		loginform.action="login";
+		loginform.submit();
+	}
+</script>
+
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div id="theme-wrapper">
@@ -22,7 +41,7 @@
 											</div>
 										</header>
 										<div id="login-box-inner">
-											<form role="form" method="post" action="login">
+											<form role="form" method="post" id="loginform">
 												<div class="input-group">
 													<span class="input-group-addon"><i
 														class="fa fa-user"></i></span> <input class="form-control"
@@ -53,17 +72,22 @@
 												</div>
 												<div class="row">
 													<div class="col-xs-12 col-sm-6">
-														<button type="submit"
-															class="btn btn-primary col-xs-12 btn-facebook">
+														<button
+															class="btn btn-primary col-xs-12 btn-facebook"
+															onclick="clickLogin(this)"
+															value="talker">
 															</i> TALKER로 로그인
 														</button>
 													</div>
 													<div class="col-xs-12 col-sm-6">
-														<button type="submit"
-															class="btn btn-primary col-xs-12 btn-twitter">
+														<button
+															class="btn btn-primary col-xs-12 btn-twitter"
+															onclick="clickLogin(this)"
+															value="listener">
 															</i> LISTENER로 로그인
 														</button>
 													</div>
+													<input type="hidden" id="userType" name="userType"/>
 												</div>
 											</form>
 										</div>

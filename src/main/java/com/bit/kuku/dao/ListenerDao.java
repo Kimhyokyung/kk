@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.bit.kuku.vo.ListenerVo;
-import com.bit.kuku.vo.UserVo;
+import com.bit.kuku.vo.TalkerVo;
 
 @Repository
 public class ListenerDao {
@@ -21,5 +21,21 @@ public class ListenerDao {
 	public ListenerVo get(String email) {
 		ListenerVo listenerVo = sqlSession.selectOne("listener.selectByEmail", email);
 		return listenerVo;
+	}
+	
+	public ListenerVo get(String email, String password) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "email", email );
+		map.put( "password", password );
+		System.out.println("input email : " + email + "password : " + password);
+		ListenerVo listenerVo = sqlSession.selectOne( "listener.selectByNoAndPassword", map );
+
+		return listenerVo;
+	}
+	
+	public void insert_listener(ListenerVo vo) {
+		
+		//System.out.println(vo);
+		sqlSession.insert("listener.insert", vo);
 	}
 }

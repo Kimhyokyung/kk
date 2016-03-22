@@ -9,4 +9,21 @@
 	    where email = #{email}
 	]]>
 	</select>
+	
+	<insert id="insert" parameterType="ListenerVo">
+		<![CDATA[		
+		insert into tb_listener (EMAIL, PASSWORD, NICKNAME)
+		     values ( #{email}, #{password }, #{nickname})	
+		]]>
+	</insert>
+	
+	<select id="selectByNoAndPassword" parameterType="map" resultType="ListenerVo">
+		<![CDATA[
+		select IDX, EMAIL, NICKNAME
+		  from tb_listener
+		 where email = #{email }
+		   and password = #{password }
+		]]>
+	</select>
+	
 </mapper>

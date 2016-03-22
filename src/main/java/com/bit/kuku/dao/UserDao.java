@@ -8,8 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
-import com.bit.kuku.vo.UserVo;
+//import com.bit.kuku.vo.UserVo;
 
 @Repository
 public class UserDao {
@@ -17,7 +18,7 @@ public class UserDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	public List<UserVo> getList() {
+/*	public List<UserVo> getList() {
 		List<UserVo> result = sqlSession.selectList("user.selectList");
 		return result;
 	}
@@ -29,7 +30,13 @@ public class UserDao {
 	public void insert_talker(TalkerVo vo) {
 		
 		//System.out.println(vo);
-		sqlSession.insert("user.insert_talker", vo);
+		sqlSession.insert("talker.insert", vo);
+	}
+	
+	public void insert_listener(ListenerVo vo) {
+		
+		//System.out.println(vo);
+		sqlSession.insert("listner.insert", vo);
 	}
 	
 	public UserVo get(Long no) {
@@ -54,5 +61,5 @@ public class UserDao {
 		
 	public void update(UserVo vo) {
 		sqlSession.update("user.update", vo);
-	}
+	}*/
 }

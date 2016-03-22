@@ -3,10 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@page import="com.bit.kuku.vo.UserVo"%>
-<%
-   UserVo authUser = (UserVo) session.getAttribute("authUser");
-%>
+
 <header class="navbar" id="header-navbar">
    <div class="container">
       <a href="/kuku/main" id="logo" class="navbar-brand"> <img
@@ -105,7 +102,7 @@
                   <li class="dropdown profile-dropdown"><a href="#"
                               class="dropdown-toggle" data-toggle="dropdown"> <img
                                  src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png" alt="" /> <span
-                                 class="hidden-xs">${authUser.nickname}님 안녕하세요 </li></span> <b class="caret"></b>
+                                 class="hidden-xs">${sessionScope.authUser.nickname}님 안녕하세요 </li></span> <b class="caret"></b>
                            </a>
                </c:otherwise>
             </c:choose>

@@ -1,5 +1,8 @@
 package com.bit.kuku.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +20,21 @@ public class TalkerDao {
 		TalkerVo talkerVo = sqlSession.selectOne("talker.selectByEmail", email);
 		System.out.println(talkerVo);
 		return talkerVo;
+	}
+	
+	public TalkerVo get(String email, String password) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "email", email );
+		map.put( "password", password );
+		System.out.println("input email : " + email + "password : " + password);
+		TalkerVo talkerVo = sqlSession.selectOne( "talker.selectByNoAndPassword", map );
+
+		return talkerVo;
+	}
+	
+	public void insert_talker(TalkerVo vo) {
+		
+		//System.out.println(vo);
+		sqlSession.insert("talker.insert", vo);
 	}
 }

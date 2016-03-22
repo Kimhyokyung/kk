@@ -128,6 +128,7 @@ Wizard.prototype = {
 
 	previous: function () {
 		var canMovePrev = (this.currentStep > 1);
+
 		if (canMovePrev) {
 			var e = $.Event('change');
 			this.$element.trigger(e, {step: this.currentStep, direction: 'previous'});
@@ -136,11 +137,14 @@ Wizard.prototype = {
 			this.currentStep -= 1;
 			this.setState();
 		}
+		//활성화
+		this.$nextBtn.attr('disabled', false);
 	},
 
 	next: function () {
 		var canMoveNext = (this.currentStep + 1 <= this.numSteps);
 		var lastStep = (this.currentStep === this.numSteps);
+		
 
 		if (canMoveNext) {
 			var e = $.Event('change');
@@ -150,9 +154,18 @@ Wizard.prototype = {
 
 			this.currentStep += 1;
 			this.setState();
+			
+			//비활성화 next버튼 눌럿을때
+			this.$nextBtn.attr('disabled', true);
+			
 		}
 		else if (lastStep) {
 			this.$element.trigger('finished');
+			
+			// 리스너 질문이 끝났을 때 회원가입 완료 페이지로 이동
+			var form = document.getElementById('join_listener');
+			form.submit();
+			console.log("submit");
 		}
 	},
 

@@ -47,18 +47,21 @@
 <!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
-	<![endif]-->
+	<![endif]-->d
 <script type="text/javascript"	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 function Rradio_OnOff(id) {
+	document.getElementById('next').disabled = false; 
 	if (id == "Rradio_On") {
 		alert("정답입니다. 다음 화면(Next)을 선택해주세요.");
 		document.getElementById('next').disabled = false; 
 	} else {
 		alert("정답이 아닙니다. 다시 선택해주세요");
 		document.getElementById('next').disabled = true; 
-	}
+	} 
 }
+
+// function 
 </script>
 </head>
 <body>
@@ -68,7 +71,7 @@ function Rradio_OnOff(id) {
 			<div class="row">
 				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
 				<div id="content-wrapper">
-
+				<form id="join_listener" name="joinlistenerForm" method="POST" action="join_success2">
 					<div id="myWizard" class="wizard">
 						<div class="wizard-inner">
 							<ul class="steps">
@@ -89,10 +92,8 @@ function Rradio_OnOff(id) {
 							</ul>
 <!---------------- 버튼------------------------------------------------------------------------------------------------------------------->
 							<div class="actions">
-								<button type="button" class="btn btn-default btn-mini btn-prev"	name="prev" id="prev">
-									<i class="icon-arrow-left"></i>Prev
-								</button>
-								<button type="button" class="btn btn-success btn-mini btn-next"	name="next" id="next" data-last="Finish" disabled="disabled">
+								<button type="button" class="btn btn-success btn-mini btn-next"	name="next" id="next" data-last="Finish"
+								disabled="disabled" onclick="btn_next()">
 									Next<i class="icon-arrow-right"></i>
 								</button>
 							</div>
@@ -102,7 +103,6 @@ function Rradio_OnOff(id) {
 							<div class="col-lg-12">
 								<div class="main-box clearfix" style="min-height: 820px;">
 									<div class="step-content">
-
 										<div class="step-pane active" id="step1">
 											<br />
 											<div class="alert alert-success fade in"
@@ -319,6 +319,7 @@ function Rradio_OnOff(id) {
 							</div>
 						</div>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -356,6 +357,5 @@ function Rradio_OnOff(id) {
 			$("#maskedPhoneExt").mask("(999) 999-9999? x99999");
 		});
 	</script>
-
 </body>
 </html>

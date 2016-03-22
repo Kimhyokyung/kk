@@ -7,39 +7,35 @@ import org.springframework.stereotype.Service;
 
 import com.bit.kuku.dao.ListenerDao;
 import com.bit.kuku.dao.TalkerDao;
-//import com.bit.kuku.dao.TalkerDao;
-import com.bit.kuku.dao.UserDao;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
-import com.bit.kuku.vo.UserVo;
 
 @Service
 public class UserService {
-	
-	@Autowired
-	UserDao userDao;
 	
 	@Autowired
 	TalkerDao talkerDao;
 	
 	@Autowired
 	ListenerDao listenerDao;
-	
-	public List<UserVo> getUserList() {
-		return userDao.getList();
-	}
-
-	public void join( UserVo vo ) {
-		userDao.insert( vo );
-	}
 
 	public void join_talker(TalkerVo vo) {
-		userDao.insert_talker(vo);
+		talkerDao.insert_talker(vo);
 	}
 	
-	public UserVo login( UserVo vo ) {
-		UserVo userVo = userDao.get( vo.getEmail(), vo.getPassword() );
-		return userVo;
+	public void join_listener(ListenerVo vo) {
+		listenerDao.insert_listener(vo);
+	}
+	
+	
+	public TalkerVo login_talker( TalkerVo vo ) {
+		TalkerVo talkerVo = talkerDao.get( vo.getEmail(), vo.getPassword() );
+		return talkerVo;
+	}
+	
+	public ListenerVo login_listener( ListenerVo vo ) {
+		ListenerVo listenerVo = listenerDao.get( vo.getEmail(), vo.getPassword() );
+		return listenerVo;
 	}
 	
 	public boolean checkEmail(String email, String userType) {
@@ -59,8 +55,8 @@ public class UserService {
 		return isExist;
 	}
 
-	public void update(UserVo obj) {
+/*	public void update(UserVo obj) {
 		userDao.update(obj);
 		System.out.println("update");
-	}
+	}*/
 }

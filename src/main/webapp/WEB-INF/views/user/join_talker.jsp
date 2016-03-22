@@ -32,7 +32,7 @@
 														</div>
 													</header>
 													<div id="login-box-inner">
-														<form id="join-form" name="joinForm" method="post" action="/user/join_success">
+														<form id="join-form" name="joinForm" method="post" action="join_success">
 															<h1 align="center">스트레스 정도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
 															<h3></h3>
 															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"

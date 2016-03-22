@@ -30,9 +30,9 @@
 	<!-- MySql DataSource -->
     <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/khk_schema"/>
-        <property name="username" value="khk"/>
-        <property name="password" value="khk"/>
+        <property name="url" value="jdbc:mysql://localhost/test_shema"/>
+        <property name="username" value="hong"/>
+        <property name="password" value="hong"/>
     </bean>
 
 	<!-- MyBatis SqlMapClientFactoryBean --> 

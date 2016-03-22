@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
-import com.bit.kuku.vo.UserVo;
 
 @Controller
 @RequestMapping("/user")
@@ -74,29 +73,60 @@ public class UserController {
 	
 	@RequestMapping(value="/join_talker")
 	public String join_talker(HttpServletRequest request, @ModelAttribute TalkerVo talkerVo) {
-		
+		System.out.println("fwd : " +talkerVo);
 		HttpSession session = request.getSession();
-		session.setAttribute("joinUser", talkerVo);
-		System.out.println(talkerVo);
-
+		session.setAttribute("talker", talkerVo);
 		return "user/join_talker";
 	}
 
 	@RequestMapping(value="/join_listener")
 	public String join_listener(HttpServletRequest request, @ModelAttribute ListenerVo listenerVo) {
-		
+		System.out.println("fwd : " +listenerVo);
 		HttpSession session = request.getSession();
-		session.setAttribute("joinUser", listenerVo);
+		session.setAttribute("listener", listenerVo);
 		System.out.println(listenerVo);
 		
 		return "user/join_listener";
 	}
 	
-	@RequestMapping(value="/join_success")
-	public String joinsuccess(HttpServletRequest request) {
+	@RequestMapping(value ="/join_success")
+	public String joinsuccess(HttpServletRequest request, 
+			@RequestParam("stress_degree") String stress_degrees,
+			@RequestParam("consulting_topic") String consulting_topics) {
+
+		HttpSession session = request.getSession();
+		TalkerVo talkerVo = (TalkerVo)session.getAttribute("talker");
 		
+		
+		String stress_degree = stress_degrees;
+		String consulting_topic = consulting_topics;
+			
+		talkerVo.setEmail(talkerVo.getEmail());
+		talkerVo.setPassword(talkerVo.getPassword());
+		talkerVo.setNickname(talkerVo.getNickname());
+		talkerVo.setStress_degree(stress_degree);
+		talkerVo.setConsulting_topic(consulting_topic);
+		System.out.println("fwd2 : " +talkerVo);
+		userService.join_talker(talkerVo);
 		return "user/join_success";
 	}
+	
+	@RequestMapping(value ="/join_success2")
+	public String joinsuccess(HttpServletRequest request){
+
+		HttpSession session = request.getSession();
+		ListenerVo listenerVo = (ListenerVo)session.getAttribute("listener");
+		System.out.println("fwd2 : " +listenerVo);
+
+		listenerVo.setEmail(listenerVo.getEmail());
+		listenerVo.setPassword(listenerVo.getPassword());
+		listenerVo.setNickname(listenerVo.getNickname());
+		
+		userService.join_listener(listenerVo);
+		return "user/join_success";
+	}
+	
+	
 
 	@RequestMapping(value = "/loginform")
 	public String login(Locale locale, Model model) {
@@ -105,16 +135,29 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/login", method=RequestMethod.POST )
-	public String login( HttpSession session, @ModelAttribute UserVo userVo ) {
-		UserVo authUser = userService.login( userVo );
+	public String login( HttpSession session, 
+			@ModelAttribute TalkerVo talkerVo,
+			@ModelAttribute ListenerVo listenerVo,
+			@RequestParam("userType") String userType) {
+		
+		System.out.println("login 컨트롤러 : " + userType);
 
-		if( authUser == null ) {
-			return "/user/login_fail";
+		if(userType.equals("talker")){
+			TalkerVo authUser = userService.login_talker(talkerVo);
+			if( authUser == null ) {
+				return "/user/login_fail";
+			}
+			// 인증 처리
+			session.setAttribute( "authUser", authUser);
 		}
-
-		// 인증 처리
-		session.setAttribute( "authUser", authUser);
-
+		else{
+			ListenerVo authUser = userService.login_listener(listenerVo);		
+			if( authUser == null ) {
+				return "/user/login_fail";
+			}
+			// 인증 처리
+			session.setAttribute( "authUser", authUser);
+		}
 		// redirect
 		return "main/index";
 	}
@@ -140,7 +183,7 @@ public class UserController {
 			@RequestParam("password") String password,
 			@RequestParam("nickname") String nickname) {
 
-		System.out.println("Listener_Modify"); 
+/*		System.out.println("Listener_Modify"); 
 
 		UserVo user = new UserVo();
 		user.setEmail(email);
@@ -151,7 +194,7 @@ public class UserController {
 		System.out.println(user.getPassword());
 		System.out.println(user.getNickname());
 
-		userService.update(user);
+		userService.update(user);*/
 
 		return "user/Listener_Modify"; 
 	}
