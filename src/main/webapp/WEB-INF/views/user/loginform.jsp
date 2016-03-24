@@ -97,8 +97,8 @@
 							<div id="login-box-footer">
 								<div class="row">
 									<div class="col-xs-12">
-										Do not have an account? <a href="registration.html">
-											Register now </a>
+										계정이 없으십니까 ? <a href="/kuku/user/joinform">
+											지금 당장 가입하세요! </a>
 									</div>
 								</div>
 							</div>

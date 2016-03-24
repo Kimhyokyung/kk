@@ -150,6 +150,7 @@ public class UserController {
 			}
 			// 인증 처리
 			session.setAttribute( "authUser", authUser);
+			session.setAttribute( "userType", userType);
 		}
 		else{
 			ListenerVo authUser = userService.login_listener(listenerVo);		
@@ -158,6 +159,7 @@ public class UserController {
 			}
 			// 인증 처리
 			session.setAttribute( "authUser", authUser);
+			session.setAttribute( "userType", userType);
 		}
 		// redirect
 		return "main/index";
