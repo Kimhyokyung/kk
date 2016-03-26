@@ -48,7 +48,7 @@
 												</select>
 											</div>
 										</div>
-										<div style="margin-left: 450" class="form-group col-xs-3">
+										<div style="margin-left: 600" class="form-group col-xs-3">
 											<button type="submit" class="btn btn-info btn-sm btn-block">Search</button>
 										</div>
 									</form>
@@ -70,18 +70,22 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr>
-															<td><img
-																src="${pageContext.request.contextPath}/assets/img/samples/george.png"
-																alt=""> <a href="#" class="user-link">Hong</a></td>
-															<td>직장 문제</td>
-															<td class="text-center"><span
-																class="label label-success">접속</span></td>
-															<td><a href="#">hong@hong</a></td>
-															<td style="width: 20%;"><a href="#"
-																class="table-link"> <span class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+														<c:choose>
+															<c:when test="${fn:length(list) > 0 }">
+																<c:forEach items="${list }" var="row">
+																	<tr>
+																		<td><img src="${pageContext.request.contextPath}/assets/img/samples/ryan.png" alt="">
+																		${row.NICKNAME } <span class="user-subhead">Listener</span></td>
+																	
+																		<td>${row.CONSULTING_TOPIC }</td>
+																		
+																		<td class="text-center"><span class="label label-success">접속</span></td>
+																	
+																		<td>${row.EMAIL }</td>
+																	
+																		<td style="width: 20%;"><a href="#"	class="table-link"> <span class="fa-stack">
+																		<i class="fa fa-square fa-stack-2x"></i>
+																		<i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
 																</span>
 															</a> <a href="#" class="table-link"> <span
 																	class="fa-stack"> <i
@@ -89,90 +93,34 @@
 																		class="fa fa-comment fa-stack-1x fa-inverse"></i>
 																</span>
 															</a></td>
-														</tr>
-														<tr>
-															<td><img
-																src="${pageContext.request.contextPath}/assets/img/samples/user-profile-1.png"
-																alt=""> <a href="#" class="user-link">Kim</a> <span
-																class="user-subhead">Admin</span></td>
-															<td>진로 상담</td>
-															<td class="text-center"><span
-																class="label label-default">비접속</span></td>
-															<td><a href="#">kim@kim</a></td>
-															<td style="width: 20%;"><a href="#"
-																class="table-link"> <span class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-																</span>
-															</a> <a href="#" class="table-link"> <span
-																	class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-comment fa-stack-1x fa-inverse"></i>
-																</span>
-															</a></td>
-														</tr>
-														<tr>
-															<td><img
-																src="${pageContext.request.contextPath}/assets/img/samples/emma.png"
-																alt=""> <a href="#" class="user-link">Ha</a></td>
-															<td>학업 문제</td>
-															<td class="text-center"><span
-																class="label label-default">비접속</span></td>
-															<td><a href="#">ha@ha</a></td>
-															<td style="width: 20%;"><a href="#"
-																class="table-link"> <span class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-																</span>
-															</a> <a href="#" class="table-link"> <span
-																	class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-comment fa-stack-1x fa-inverse"></i>
-																</span>
-															</a></td>
-														</tr>
-														<tr>
-															<td><img
-																src="${pageContext.request.contextPath}/assets/img/samples/robert.png"
-																alt=""> <a href="#" class="user-link">Taek</a> <span
-																class="user-subhead">Admin</span></td>
-															<td>금주/금연</td>
-															<td class="text-center"><span
-																class="label label-success">접속</span></td>
-															<td><a href="#">taek@taek</a></td>
-															<td style="width: 20%;"><a href="#"
-																class="table-link"> <span class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-																</span>
-															</a> <a href="#" class="table-link"> <span
-																	class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-comment fa-stack-1x fa-inverse"></i>
-																</span>
-															</a></td>
-														</tr>
-														<tr>
-															<td><img
-																src="${pageContext.request.contextPath}/assets/img/samples/ryan.png"
-																alt=""> <a href="#" class="user-link">KKu</a> <span
-																class="user-subhead">Admin</span></td>
-															<td>기타</td>
-															<td class="text-center"><span
-																class="label label-success">접속</span></td>
-															<td><a href="#">kku@kku</a></td>
-															<td style="width: 20%;"><a href="#"
-																class="table-link"> <span class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
-																</span>
-															</a> <a href="#" class="table-link"> <span
-																	class="fa-stack"> <i
-																		class="fa fa-square fa-stack-2x"></i> <i
-																		class="fa fa-comment fa-stack-1x fa-inverse"></i>
-																</span>
-															</a></td>
-														</tr>
+																	
+																	</tr>
+																</c:forEach>
+															</c:when>
+														
+														<c:otherwise>
+														<tr><td colspan="5">조회된 결과가 없습니다.</td></tr>
+														</c:otherwise>
+														</c:choose>
+
+<%-- 													        <c:choose> --%>
+<%-- 													            <c:when test="${fn:length(list) > 0}"> --%>
+<%-- 													                <c:forEach items="${list }" var="row"> --%>
+<!-- 													                    <tr> -->
+<%-- 													                        <td>${row.IDX }</td> --%>
+<%-- 													                        <td>${row.EMAIL }</td> --%>
+<%-- 													                        <td>${row.NICKNAME }</td> --%>
+<%-- 													                        <td>${row.PASSWORD }</td> --%>
+<!-- 													                    </tr> -->
+<%-- 													                </c:forEach> --%>
+<%-- 													            </c:when> --%>
+<%-- 													            <c:otherwise> --%>
+<!-- 													                <tr> -->
+<!-- 													                    <td colspan="4">조회된 결과가 없습니다dd!!.</td> -->
+<!-- 													                </tr> -->
+<%-- 													            </c:otherwise> --%>
+<%-- 													        </c:choose> --%>
+
 													</tbody>
 												</table>
 											</div>

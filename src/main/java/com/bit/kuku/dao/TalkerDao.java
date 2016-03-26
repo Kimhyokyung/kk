@@ -33,8 +33,6 @@ public class TalkerDao {
 	}
 	
 	public void insert_talker(TalkerVo vo) {
-		
-		//System.out.println(vo);
 		sqlSession.insert("talker.insert", vo);
 	}
 }

@@ -49,24 +49,8 @@
 															8 &nbsp; <input type="radio" name="stress_degree"
 																value="9">&nbsp; 9 &nbsp; <input type="radio"
 																name="stress_degree" value="10">&nbsp; 10 &nbsp;
-															<h3></h3>
-
-															<div class="form-group">
-																<h1 align="center">상담주제를 선택하여 주세요^.^</h1>
-																<h3></h3>
-																</br> <select class="form-control" name="consulting_topic">
-																	<option value="직장문제">직장문제</option>
-																	<option value="학교문제">학교문제</option>
-																	<option value="진로상담">진로상담</option>
-																	<option value="금주/금연">금주/금연</option>
-																	<option value="재정 문제">재정 문제</option>
-																	<option value="다이어트">다이어트</option>
-																	<option value="이성문제">이성문제</option>
-																	<option value="기타">기타</option>
-																</select>
-															</div>
-															<h3></h3>
 															<div style="width: 340px; height: 80px; margin: auto">
+																<br>
 																<button type="submit"
 																	class="btn btn-primary col-xs-12 btn-facebook">
 																	</i> 회원가입완료

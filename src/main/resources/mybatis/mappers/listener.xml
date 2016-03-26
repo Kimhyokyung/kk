@@ -12,8 +12,8 @@
 	
 	<insert id="insert" parameterType="ListenerVo">
 		<![CDATA[		
-		insert into tb_listener (EMAIL, PASSWORD, NICKNAME)
-		     values ( #{email}, #{password }, #{nickname})	
+		insert into tb_listener (EMAIL, PASSWORD, NICKNAME, CONSULTING_TOPIC)
+		     values ( #{email}, #{password }, #{nickname}, #{consulting_topic})	
 		]]>
 	</insert>
 	
@@ -25,5 +25,4 @@
 		   and password = #{password }
 		]]>
 	</select>
-	
 </mapper>

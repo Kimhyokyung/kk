@@ -25,4 +25,11 @@
 		   and password = #{password }
 		]]>
 	</select>
+	
+	<select id="selectListenerList" parameterType="map" resultType="map">
+	<![CDATA[
+	select IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC from tb_listener;
+		]]>
+	</select>
+	
 </mapper>

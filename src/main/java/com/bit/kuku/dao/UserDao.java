@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,6 +16,8 @@ import com.bit.kuku.vo.TalkerVo;
 
 @Repository
 public class UserDao {
+	
+	protected Log log = LogFactory.getLog(UserDao.class);
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
@@ -62,4 +66,22 @@ public class UserDao {
 	public void update(UserVo vo) {
 		sqlSession.update("user.update", vo);
 	}*/
+	protected void printQueryId(String queryId) {
+		if(log.isDebugEnabled()){
+			log.debug("\t QueryId  \t:  " + queryId);
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List selectList(String queryId){
+		printQueryId(queryId);
+		return sqlSession.selectList(queryId);
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public List selectList(String queryId, Object params){
+		printQueryId(queryId);
+		return sqlSession.selectList(queryId,params);
+	}
+	
 }

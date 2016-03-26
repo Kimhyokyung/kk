@@ -2,6 +2,7 @@ package com.bit.kuku.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
@@ -92,21 +95,18 @@ public class UserController {
 	
 	@RequestMapping(value ="/join_success")
 	public String joinsuccess(HttpServletRequest request, 
-			@RequestParam("stress_degree") String stress_degrees,
-			@RequestParam("consulting_topic") String consulting_topics) {
+			@RequestParam("stress_degree") String stress_degrees) {
 
-		System.out.println(consulting_topics);
 		HttpSession session = request.getSession();
 		TalkerVo talkerVo = (TalkerVo)session.getAttribute("talker");
 		
 		String stress_degree = stress_degrees;
-		String consulting_topic = consulting_topics;
 			
 		talkerVo.setEmail(talkerVo.getEmail());
 		talkerVo.setPassword(talkerVo.getPassword());
 		talkerVo.setNickname(talkerVo.getNickname());
 		talkerVo.setStress_degree(stress_degree);
-		talkerVo.setConsulting_topic(consulting_topic);
+		talkerVo.setConsulting_topic(talkerVo.getConsulting_topic());
 		System.out.println("fwd2 : " +talkerVo);
 		userService.join_talker(talkerVo);
 		return "user/join_success";
@@ -122,7 +122,8 @@ public class UserController {
 		listenerVo.setEmail(listenerVo.getEmail());
 		listenerVo.setPassword(listenerVo.getPassword());
 		listenerVo.setNickname(listenerVo.getNickname());
-		
+		listenerVo.setConsulting_topic(listenerVo.getConsulting_topic());
+
 		userService.join_listener(listenerVo);
 		return "user/join_success";
 	}

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
 
-@Repository
-public class ListenerDao {
+@Repository("listenerDAO")
+public class ListenerDao extends UserDao{
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
@@ -37,5 +37,10 @@ public class ListenerDao {
 		
 		//System.out.println(vo);
 		sqlSession.insert("listener.insert", vo);
+	}
+	
+	@SuppressWarnings("unchecked")
+    public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception{
+        return (List<Map<String, Object>>)selectList("talker.selectListenerList", map);
 	}
 }

@@ -6,7 +6,8 @@ public class ListenerVo {
 	private String password;
 	private String nickname;
 	private int jumsu;
-	
+	private String consulting_topic;
+				
 	public int getIdx() {
 		return idx;
 	}
@@ -31,16 +32,21 @@ public class ListenerVo {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
-	@Override
-	public String toString() {
-		return "KukuVo [idx=" + idx + ", email=" + email + ", password=" + password+ "," 
-				+ ", nickname =" + nickname+ "]";
-	}
 	public int getJumsu() {
 		return jumsu;
 	}
 	public void setJumsu(int jumsu) {
 		this.jumsu = jumsu;
+	}
+	public String getConsulting_topic() {
+		return consulting_topic;
+	}
+	public void setConsulting_topic(String consulting_topic) {
+		this.consulting_topic = consulting_topic;
+	}
+	@Override
+	public String toString() {
+		return "ListenerVo [idx=" + idx + ", email=" + email + ", password=" + password+ "," 
+				+ ", nickname =" + nickname+ ", consulting_topic="+ consulting_topic +"]";
 	}
 }
