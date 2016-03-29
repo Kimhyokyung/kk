@@ -86,7 +86,15 @@
 																			${row.NICKNAME}
 																			<span class="user-subhead">Listener</span></td>									
 																			<td>${row.CONSULTING_TOPIC}</td>
-																			<td class="text-center"><span class="label label-success">접속</span></td>
+																			<td class="text-center"><c:set var="isDoing" value="true"/> 
+                                                       			<c:forEach items="${userMap}" var="user">
+                                                           			<c:if test="${ row.EMAIL == user.key }">
+                                                       		  			<span class="label label-success">접속</span>
+                                                       		  			<c:set var="isDoing" value="false"/> 
+                                                       				</c:if>
+                                                       			</c:forEach>
+                                                       			<c:if test="${isDoing}"> 
+                                                       			<span class="label label-default">비접속</span></c:if></td>
 																			<td>${row.EMAIL}</td>
 																			<td style="width: 20%;">
 																				<span class="fa-stack">

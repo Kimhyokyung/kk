@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
+import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ChatroomVo;
 import com.bit.kuku.vo.TalkerVo;
 
@@ -68,7 +69,10 @@ public class TalkerController {
 		ModelAndView mv = new ModelAndView("/talker/talker_listener_search");
 		
 		List<Map<String,Object>> list = talkerService.selectListenerList(commandMap);
+		SessionHandler ssHandler = SessionHandler.getInstance();
+		Map<String, HttpSession> userMap = ssHandler.selectUserMap();
 		mv.addObject("list",list);
+		mv.addObject("userMap", userMap);
 		return mv;
 	}
 	

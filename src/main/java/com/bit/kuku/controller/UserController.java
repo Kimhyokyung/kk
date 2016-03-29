@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
+import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
 
@@ -139,33 +140,57 @@ public class UserController {
 		
 		System.out.println("login 컨트롤러 : " + userType);
 
-		if(userType.equals("talker")){
+		if (userType.equals("talker")) {
 			TalkerVo authUser = userService.login_talker(talkerVo);
-			if( authUser == null ) {
+			if (authUser == null) {
 				return "/user/login_fail";
 			}
 			// 인증 처리
-			session.setAttribute( "authUser", authUser);
-			session.setAttribute( "userType", userType);
-		}
-		else{
-			ListenerVo authUser = userService.login_listener(listenerVo);		
-			if( authUser == null ) {
+			session.setAttribute("authUser", authUser);
+			session.setAttribute("userType", userType);
+
+			// 로그인 유저 세션 정보 리스트에 저장
+			SessionHandler ssHandler = SessionHandler.getInstance();
+			ssHandler.add(authUser.getEmail(), session);
+		} else {
+			ListenerVo authUser = userService.login_listener(listenerVo);
+			if (authUser == null) {
 				return "/user/login_fail";
 			}
 			// 인증 처리
-			session.setAttribute( "authUser", authUser);
-			session.setAttribute( "userType", userType);
+			session.setAttribute("authUser", authUser);
+			session.setAttribute("userType", userType);
+
+			// 로그인 유저 세션 정보 리스트에 저장
+			SessionHandler ssHandler = SessionHandler.getInstance();
+			ssHandler.add(authUser.getEmail(), session);
 		}
+
 		// redirect
 		return "main/index";
 	}
 	
-	@RequestMapping(value="/logout")
-	public String logout( HttpServletRequest request ) {
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		if( session != null ) {
+		if (session != null) {
+			SessionHandler ssHandler = SessionHandler.getInstance();
+			// ssHandler.delete(session);
+
+			String userType = (String) session.getAttribute("userType");
+			System.out.println("usertype : "+userType);
+			if (userType.equals("talker")) {
+				TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
+				System.out.println("logout talker");
+				ssHandler.delete(authUser.getEmail());
+			} else {
+				ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
+				System.out.println("logout listener");
+				ssHandler.delete(authUser.getEmail());
+			}
+			
 			session.removeAttribute("authUser");
+			System.out.println("로그아웃안되는거니?");
 			session.invalidate();
 		}
 		return "main/index";
@@ -198,5 +223,26 @@ public class UserController {
 */
 
 		return "user/Listener_Modify"; 
+	}
+	
+	@RequestMapping(value = "/sessionout_exitbrowser")
+	@ResponseBody
+	public Object sessionout_exitbrowser( HttpServletRequest request) {
+
+		// 회원가입 유저 타입 저장(토커, 리스너)
+		HttpSession session = request.getSession();
+		SessionHandler ssHandler = SessionHandler.getInstance();
+		
+		String userType = (String) session.getAttribute("userType");
+		if (userType.equals("talker")) {
+			TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
+			ssHandler.delete(authUser.getEmail());
+			System.out.println("exit browser talker"); 
+		} else {
+			ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
+			ssHandler.delete(authUser.getEmail());
+			System.out.println("exit browser listener"); 
+		}
+		return ssHandler.selectUserMap();
 	}
 }
