@@ -6,35 +6,45 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
 <script type="text/javascript">
 	var sock;
-	var talker_email;
-	var listener_email;
+	var receiver_email;
 
 	sock_conn();
 
 	function sock_conn() {
 		if (sock == null) {
 			sock = new SockJS('/kuku/chat');
-			console.log("sockjs conn");
-
-			initNickname();
-			console.log("nickname init");
+			
+        	sock.onopen = function () {
+        		console.log('[Connect]');
+        		initNickname();
+            };
+            
+            sock.onmessage = function (event) {
+            	console.log('[Onmessage]' + event.data);
+            };
+            
+            sock.onclose = function (event) {
+            	console.log('[Disconnect]');
+            };
 		}
 	}
 
-	function clickChatroom(chatroom) {
-		console.log(chatroom);
+	function clickChatroom(receiver) {
+		receiver_email = receiver;
+		console.log(receiver_email);
 	}
 
 	function initNickname() {
 		var msg = 'init/' + '${authUser.email}';
 		sock.send(msg);
+		console.log('[init]');
 	}
 
 	function clickChat() {
 		var chat = document.getElementById('chat').value;
-		var msg = 'chat/' + listener_email + '/' + chat;
-		console.log(msg);
+		var msg = 'chat/' + receiver_email + '/' + 'test';
 		sock.send(msg);
+		console.log('[chat]');
 	}
 </script>
 <html>
@@ -66,12 +76,12 @@
 																<c:choose>
 																	<c:when test="${userType=='talker'}">
 																		<tr>
-																			<td><p onclick="clickChatroom'${chatroom}');">${chatroom.listener_email}</p></td>
+																			<td><p onclick="clickChatroom('${chatroom.listener_email}');">${chatroom.listener_email}</p></td>
 																		</tr>
 																	</c:when>
 																	<c:otherwise>
 																		<tr>
-																			<td><p onclick="clickChatroom'${chatroom}');">${chatroom.talker_email}</p></td>
+																			<td><p onclick="clickChatroom('${chatroom.talker_email}');">${chatroom.talker_email}</p></td>
 																		</tr>
 																	</c:otherwise>
 																</c:choose>
@@ -88,7 +98,7 @@
 								<div class="main-box clearfix">
 									<div class="tabs-wrapper profile-tabs">
 										<div class="conversation-wrapper">
-											<div class="conversation-content">
+											<div class="conversation-content" style="overflow:auto; width:100%; height:350px;">
 												<div class="conversation-inner">
 													<div class="conversation-item item-left clearfix">
 														<div class="conversation-user">
@@ -189,7 +199,6 @@
 												</div>
 											</div>
 											<div class="conversation-new-message">
-												<form>
 													<div class="form-group">
 														<textarea id="chat" class="form-control" rows="2"
 															placeholder="Enter your message..."></textarea>
@@ -198,7 +207,6 @@
 														<button class="btn btn-info pull-right"
 															onclick="clickChat()">Send message</button>
 													</div>
-												</form>
 											</div>
 										</div>
 									</div>

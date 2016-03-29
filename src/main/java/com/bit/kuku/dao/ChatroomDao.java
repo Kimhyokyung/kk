@@ -32,8 +32,13 @@ public class ChatroomDao {
 		sqlSession.insert("chatroom.insert", map);
 	}
 	
-	public List<ChatroomVo> selectChatroomList(String talker_email) {
+	public List<ChatroomVo> selectTalkerChatroomList(String talker_email) {
 		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectChatroomListByTalker", talker_email);
+		return list;
+	}
+	
+	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
+		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectChatroomListByListener", listener_email);
 		return list;
 	}
 }

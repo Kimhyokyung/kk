@@ -1,13 +1,14 @@
 package com.bit.kuku.vo;
 
 public class ListenerVo {
+	
 	private int idx;
 	private String email;
 	private String password;
 	private String nickname;
-	private int jumsu;
 	private String consulting_topic;
-				
+	private int score;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -32,11 +33,11 @@ public class ListenerVo {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getJumsu() {
-		return jumsu;
+	public int getScore() {
+		return score;
 	}
-	public void setJumsu(int jumsu) {
-		this.jumsu = jumsu;
+	public void setScore(int score) {
+		this.score = score;
 	}
 	public String getConsulting_topic() {
 		return consulting_topic;

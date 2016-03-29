@@ -43,8 +43,7 @@ public class TalkerController {
 		String talker_email = talker.getEmail();
 		
 		// 현재 토커의 모든 채팅방 가져오기
-		List<ChatroomVo> list = chatroomService.getChatroomList(talker_email);
-		System.out.println(list);
+		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(talker_email);
 		mv.addObject("chatroomList", list);
 		return mv;		
 	}
@@ -96,8 +95,7 @@ public class TalkerController {
 		mv.addObject("curChatroom", chatroom);
 		
 		// 현재 토커의 모든 채팅방 가져오기
-		List<ChatroomVo> list = chatroomService.getChatroomList(talker_email);
-		System.out.println(list);
+		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(talker_email);
 		mv.addObject("chatroomList", list);
 		return mv;
 	}

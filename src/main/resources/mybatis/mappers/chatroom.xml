@@ -25,4 +25,12 @@
 		where talker_email=#{talker_email}
 		]]>
 	</select>
+	
+	<select id="selectChatroomListByListener" parameterType="string" resultType="ChatroomVo">
+		<![CDATA[ 
+		select *
+		from tb_chatroom
+		where listener_email=#{listener_email}
+		]]>
+	</select>
 </mapper>

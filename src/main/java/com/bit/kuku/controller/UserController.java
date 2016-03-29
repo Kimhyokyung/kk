@@ -39,9 +39,6 @@ public class UserController {
 	@RequestMapping(value="/check_type")
 	@ResponseBody
 	public Object check_type(@RequestParam("type") String type, HttpServletRequest request) {
-		
-		System.out.println("유저 타입 : " + type);
-		
 		// 회원가입 유저 타입 저장(토커, 리스너)
 		HttpSession session = request.getSession();
 		session.setAttribute("userType", type);
@@ -128,8 +125,6 @@ public class UserController {
 		return "user/join_success";
 	}
 	
-	
-
 	@RequestMapping(value = "/loginform")
 	public String login(Locale locale, Model model) {
 
@@ -166,7 +161,7 @@ public class UserController {
 		return "main/index";
 	}
 	
-	@RequestMapping(value="/logout" )
+	@RequestMapping(value="/logout")
 	public String logout( HttpServletRequest request ) {
 		HttpSession session = request.getSession();
 		if( session != null ) {
@@ -187,7 +182,8 @@ public class UserController {
 			@RequestParam("password") String password,
 			@RequestParam("nickname") String nickname) {
 
-/*		System.out.println("Listener_Modify"); 
+/*		
+ * 		System.out.println("Listener_Modify"); 
 
 		UserVo user = new UserVo();
 		user.setEmail(email);
@@ -198,7 +194,8 @@ public class UserController {
 		System.out.println(user.getPassword());
 		System.out.println(user.getNickname());
 
-		userService.update(user);*/
+		userService.update(user);
+*/
 
 		return "user/Listener_Modify"; 
 	}

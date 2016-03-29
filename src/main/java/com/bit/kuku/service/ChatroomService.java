@@ -22,8 +22,13 @@ public class ChatroomService {
 		chatroomDao.insertChatroom(talker_email, listener_email);
 	}
 	
-	public List<ChatroomVo> getChatroomList(String talker_email) {
-		List<ChatroomVo> list = chatroomDao.selectChatroomList(talker_email);
+	public List<ChatroomVo> getTalkerChatroomList(String talker_email) {
+		List<ChatroomVo> list = chatroomDao.selectTalkerChatroomList(talker_email);
+		return list;
+	}
+	
+	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
+		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(listener_email);
 		return list;
 	}
 }

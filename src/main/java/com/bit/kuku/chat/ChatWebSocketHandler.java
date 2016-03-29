@@ -28,18 +28,30 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		
 		String payloadMessage = (String) message.getPayload();
 		String[] msgArr = payloadMessage.split("/");
 		
+		System.out.println(payloadMessage);
+		
 		if(msgArr[0].equals("init")) {
-			System.out.println("init");
+			
+			System.out.println("-------------------init-------------------");
+			if(users.containsKey(msgArr[1])) {
+				users.remove(msgArr[1]);
+			}
 			users.put(msgArr[1], session);
+
 		} else if (msgArr[0].equals("chat")) {
-			System.out.println("chat");
+			
+			System.out.println("-------------------chat-------------------");
 			WebSocketSession s = users.get(msgArr[1]);
+			
 			TextMessage msg = new TextMessage(msgArr[2]);
-			s.sendMessage(msg);
 			session.sendMessage(msg);
+			if(s != null) {
+				s.sendMessage(msg);
+			}
 		}
 	}
 

@@ -1,6 +1,7 @@
 package com.bit.kuku.vo;
 
 public class ChatroomVo {
+	
 	private int idx;
 	private String talker_email;
 	private String listener_email;
@@ -30,7 +31,6 @@ public class ChatroomVo {
 	public void setListener_response(boolean listener_response) {
 		this.listener_response = listener_response;
 	}
-	
 	@Override
 	public String toString() {
 		return "ChatroomVo [idx=" + idx + ", talker_email=" + talker_email + ", listener_email=" + listener_email
