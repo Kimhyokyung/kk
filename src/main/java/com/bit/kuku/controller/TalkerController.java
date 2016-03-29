@@ -10,35 +10,47 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
+import com.bit.kuku.vo.ChatroomVo;
+import com.bit.kuku.vo.TalkerVo;
 
 @Controller
 @RequestMapping("/talker")
 public class TalkerController {
+	
 	@Autowired
 	UserService userService;
 	
-	@Resource(name="talkerService")
+	@Autowired
 	private TalkerService talkerService;
 	
+	@Autowired
+	private ChatroomService chatroomService;
+	
 	@RequestMapping(value="/my_chat")
-	public String my_chat() {
+	public ModelAndView my_chat(HttpServletRequest request) {	
 		
-		return "talker/my_chat";
+		ModelAndView mv = new ModelAndView("/talker/my_chat");
+		
+		// 로그인 정보 가져오기
+		HttpSession session = request.getSession();
+		TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
+		String talker_email = talker.getEmail();
+		
+		// 현재 토커의 모든 채팅방 가져오기
+		List<ChatroomVo> list = chatroomService.getChatroomList(talker_email);
+		System.out.println(list);
+		mv.addObject("chatroomList", list);
+		return mv;		
 	}
 
-//	@RequestMapping(value="/talker_listener_search")
-//	public String talker_listener_search() {
-//		
-//		return "talker/talker_listener_search";
-//	}
-	
 	@RequestMapping(value="/my_kuku_stat")
 	public String my_kuku_stat() {
-		
 		return "talker/my_kuku_stat";
 	}
 	
@@ -49,7 +61,7 @@ public class TalkerController {
 			session.removeAttribute("authUser");
 			session.invalidate();
 		}
-		return "main/index";
+		return "main";
 	}
 	
 	@RequestMapping(value="/talker_listener_search")
@@ -58,6 +70,35 @@ public class TalkerController {
 		
 		List<Map<String,Object>> list = talkerService.selectListenerList(commandMap);
 		mv.addObject("list",list);
+		return mv;
+	}
+	
+	@RequestMapping(value="/createChatroom")
+	public ModelAndView createChatroom(HttpServletRequest request, 
+			@RequestParam(value="listener_email") String listener_email) throws Exception {
+		
+		ModelAndView mv = new ModelAndView("/talker/my_chat");
+		
+		// 로그인 정보 가져오기
+		HttpSession session = request.getSession();
+		TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
+		String talker_email = talker.getEmail();
+		
+		// 채팅방 존재유무 체크
+		ChatroomVo chatroom = chatroomService.getChatroom(talker_email, listener_email);
+		if(chatroom == null) {
+			// 새로운 채팅방 만들기
+			chatroomService.createChatroom(talker_email, listener_email);
+		}
+		
+		// 현재 토커와 리스너의 채팅방 가져오기
+		chatroom = chatroomService.getChatroom(talker_email, listener_email);
+		mv.addObject("curChatroom", chatroom);
+		
+		// 현재 토커의 모든 채팅방 가져오기
+		List<ChatroomVo> list = chatroomService.getChatroomList(talker_email);
+		System.out.println(list);
+		mv.addObject("chatroomList", list);
 		return mv;
 	}
 }

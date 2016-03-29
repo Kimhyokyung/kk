@@ -12,7 +12,6 @@ import com.bit.kuku.vo.TalkerVo;
 
 @Service
 public class UserService {
-	
 	@Autowired
 	TalkerDao talkerDao;
 	
@@ -56,11 +55,4 @@ public class UserService {
 		} 		
 		return isExist;
 	}
-
-/*	
- 	public void update(UserVo obj) {
-		userDao.update(obj);
-		System.out.println("update");
-	}
-*/
 }

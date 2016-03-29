@@ -5,24 +5,25 @@
 	<select id="selectByEmail" parameterType="string" resultType="ListenerVo">
 	<![CDATA[
 		select email
-	     from tb_listener
+		from tb_listener
 	    where email = #{email}
 	]]>
 	</select>
 	
 	<insert id="insert" parameterType="ListenerVo">
 		<![CDATA[		
-		insert into tb_listener (EMAIL, PASSWORD, NICKNAME, CONSULTING_TOPIC)
-		     values ( #{email}, #{password }, #{nickname}, #{consulting_topic})	
+		insert 
+		into tb_listener
+		(email, password, nickname, consulting_topic)
+		values (#{email}, #{password}, #{nickname}, #{consulting_topic})	
 		]]>
 	</insert>
 	
-	<select id="selectByNoAndPassword" parameterType="map" resultType="ListenerVo">
+	<select id="selectByEmailAndPassword" parameterType="map" resultType="ListenerVo">
 		<![CDATA[
-		select IDX, EMAIL, NICKNAME
-		  from tb_listener
-		 where email = #{email }
-		   and password = #{password }
+		select email, nickname
+		from tb_listener
+		where email=#{email} and password=#{password}
 		]]>
 	</select>
 </mapper>
