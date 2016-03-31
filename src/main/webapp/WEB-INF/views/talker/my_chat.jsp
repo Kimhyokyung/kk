@@ -2,10 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
 <script type="text/javascript">
 	var sock;
+	var chatroom_idx;
 	var receiver_email;
 
 	sock_conn();
@@ -16,7 +16,7 @@
 			
         	sock.onopen = function () {
         		console.log('[Connect]');
-        		initNickname();
+        		addUser();
             };
             
             sock.onmessage = function (event) {
@@ -25,31 +25,46 @@
             
             sock.onclose = function (event) {
             	console.log('[Disconnect]');
+            	sock=null;
+            	sock_conn();
             };
 		}
 	}
 
-	function clickChatroom(receiver) {
+	function clickChatroom(chatroom, receiver) {
+		chatroom_idx = chatroom;
 		receiver_email = receiver;
+		console.log(chatroom_idx);
 		console.log(receiver_email);
 	}
 
-	function initNickname() {
-		var msg = 'init/' + '${authUser.email}';
+	function addUser() {
+		var msg = 'add/' + '${authUser.email}';
 		sock.send(msg);
-		console.log('[init]');
+		console.log('[Add]');
 	}
 
+	function removeUser() {
+		var msg = 'remove/' + '${authUser.email}';
+		sock.send(msg);
+		console.log('[Remove]');
+	}
+	
 	function clickChat() {
 		var chat = document.getElementById('chat').value;
-		var msg = 'chat/' + receiver_email + '/' + 'test';
+		if(chat == null || chat == 'undefined' || chat == '') {
+			alert('채팅 내용을 입력하세요');
+			return;
+		}
+		
+		var msg = 'chat/' +chatroom_idx + '/' + '${authUser.email}' + '/' +receiver_email + '/' + chat;
 		sock.send(msg);
-		console.log('[chat]');
+		document.getElementById('chat').value = null;
 	}
 </script>
 <html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-<body>
+<body onbeforeunload="return removeUser()">
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
@@ -76,12 +91,12 @@
 																<c:choose>
 																	<c:when test="${userType=='talker'}">
 																		<tr>
-																			<td><p onclick="clickChatroom('${chatroom.listener_email}');">${chatroom.listener_email}</p></td>
+																			<td><p onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}');">${chatroom.listener_nickname}</p></td>
 																		</tr>
 																	</c:when>
 																	<c:otherwise>
 																		<tr>
-																			<td><p onclick="clickChatroom('${chatroom.talker_email}');">${chatroom.talker_email}</p></td>
+																			<td><p onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}');">${chatroom.talker_nickname}</p></td>
 																		</tr>
 																	</c:otherwise>
 																</c:choose>
@@ -199,14 +214,14 @@
 												</div>
 											</div>
 											<div class="conversation-new-message">
-													<div class="form-group">
-														<textarea id="chat" class="form-control" rows="2"
-															placeholder="Enter your message..."></textarea>
-													</div>
-													<div class="clearfix">
-														<button class="btn btn-info pull-right"
-															onclick="clickChat()">Send message</button>
-													</div>
+												<div class="form-group">
+													<textarea id="chat" class="form-control" rows="2"
+														placeholder="Enter your message..."></textarea>
+												</div>
+												<div class="clearfix">
+													<button class="btn btn-info pull-right"
+														onclick="clickChat()">Send message</button>
+												</div>
 											</div>
 										</div>
 									</div>

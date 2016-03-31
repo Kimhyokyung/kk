@@ -15,19 +15,23 @@ public class ChatroomDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	public ChatroomVo selectChatroom(String talker_email, String listener_email) {
+	public ChatroomVo selectChatroom(String tk_email,  String ls_email) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("talker_email", talker_email);
-		map.put("listener_email", listener_email);
+		
+		map.put("talker_email", tk_email);
+		map.put("listener_email", ls_email);
 		
 		ChatroomVo chatroom = sqlSession.selectOne("chatroom.selectByTalkerAndListener", map);
 		return chatroom;
 	}
 	
-	public void insertChatroom(String talker_email, String listener_email) {
+	public void insertChatroom(String tk_email, String tk_nick, String ls_email, String ls_nick) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("talker_email", talker_email);
-		map.put("listener_email", listener_email);
+		
+		map.put("talker_email", tk_email);
+		map.put("talker_nickname", tk_nick);
+		map.put("listener_email", ls_email);
+		map.put("listener_nickname", ls_nick);
 		
 		sqlSession.insert("chatroom.insert", map);
 	}
@@ -40,5 +44,14 @@ public class ChatroomDao {
 	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
 		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectChatroomListByListener", listener_email);
 		return list;
+	}
+	
+	public List<ChatroomVo> selectListenerRequestChatroom(String listener_email) {
+		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectListenerRequestChatroom", listener_email);
+		return list;
+	}
+	
+	public void updateListenerResponse(String chatroom_idx) {
+		sqlSession.update("chatroom.updateListenerResponse",  chatroom_idx);
 	}
 }

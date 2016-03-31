@@ -3,7 +3,6 @@ package com.bit.kuku.controller;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,38 +31,12 @@ public class TalkerController {
 	
 	@Autowired
 	private ChatroomService chatroomService;
-	
-	@RequestMapping(value="/my_chat")
-	public ModelAndView my_chat(HttpServletRequest request) {	
-		
-		ModelAndView mv = new ModelAndView("/talker/my_chat");
-		
-		// 로그인 정보 가져오기
-		HttpSession session = request.getSession();
-		TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
-		String talker_email = talker.getEmail();
-		
-		// 현재 토커의 모든 채팅방 가져오기
-		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(talker_email);
-		mv.addObject("chatroomList", list);
-		return mv;		
-	}
 
 	@RequestMapping(value="/my_kuku_stat")
 	public String my_kuku_stat() {
 		return "talker/my_kuku_stat";
 	}
-	
-	@RequestMapping(value="/logout" )
-	public String logout( HttpServletRequest request ) {
-		HttpSession session = request.getSession();
-		if( session != null ) {
-			session.removeAttribute("authUser");
-			session.invalidate();
-		}
-		return "main";
-	}
-	
+		
 	@RequestMapping(value="/talker_listener_search")
 	public ModelAndView talker_listener_search(Map<String, Object> commandMap) throws Exception {
 		ModelAndView mv = new ModelAndView("/talker/talker_listener_search");
@@ -78,29 +51,32 @@ public class TalkerController {
 	
 	@RequestMapping(value="/createChatroom")
 	public ModelAndView createChatroom(HttpServletRequest request, 
-			@RequestParam(value="listener_email") String listener_email) throws Exception {
+			@RequestParam(value="listener_email") String ls_email,
+			@RequestParam(value="listener_nickname") String ls_nick) throws Exception {
 		
-		ModelAndView mv = new ModelAndView("/talker/my_chat");
+		ModelAndView mv = new ModelAndView("/chat/my_chat");
 		
 		// 로그인 정보 가져오기
 		HttpSession session = request.getSession();
 		TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
-		String talker_email = talker.getEmail();
+		String tk_email = talker.getEmail();
+		String tk_nick = talker.getNickname();
 		
 		// 채팅방 존재유무 체크
-		ChatroomVo chatroom = chatroomService.getChatroom(talker_email, listener_email);
+		ChatroomVo chatroom = chatroomService.getChatroom(tk_email, ls_email);
 		if(chatroom == null) {
 			// 새로운 채팅방 만들기
-			chatroomService.createChatroom(talker_email, listener_email);
+			chatroomService.createChatroom(tk_email, tk_nick, ls_email, ls_nick);
 		}
 		
 		// 현재 토커와 리스너의 채팅방 가져오기
-		chatroom = chatroomService.getChatroom(talker_email, listener_email);
+		chatroom = chatroomService.getChatroom(tk_email, ls_email);
 		mv.addObject("curChatroom", chatroom);
 		
 		// 현재 토커의 모든 채팅방 가져오기
-		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(talker_email);
+		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(tk_email);
 		mv.addObject("chatroomList", list);
+		
 		return mv;
 	}
 }

@@ -13,22 +13,27 @@ public class ChatroomService {
 	@Autowired
 	ChatroomDao chatroomDao;
 	
-	public ChatroomVo getChatroom(String talker_email, String listener_email) {
-		ChatroomVo chatroom = chatroomDao.selectChatroom(talker_email, listener_email);
+	public ChatroomVo getChatroom(String tk_email, String ls_email) {
+		ChatroomVo chatroom = chatroomDao.selectChatroom(tk_email, ls_email);
 		return chatroom;
 	}
 	
-	public void createChatroom(String talker_email, String listener_email) {
-		chatroomDao.insertChatroom(talker_email, listener_email);
+	public void createChatroom(String tk_email, String tk_nick, String ls_email, String ls_nick) {
+		chatroomDao.insertChatroom(tk_email, tk_nick, ls_email, ls_nick);
 	}
 	
-	public List<ChatroomVo> getTalkerChatroomList(String talker_email) {
-		List<ChatroomVo> list = chatroomDao.selectTalkerChatroomList(talker_email);
+	public List<ChatroomVo> getTalkerChatroomList(String tk_email) {
+		List<ChatroomVo> list = chatroomDao.selectTalkerChatroomList(tk_email);
 		return list;
 	}
 	
-	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
-		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(listener_email);
+	public List<ChatroomVo> getListenerChatroomList(String ls_email) {
+		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(ls_email);
+		return list;
+	}
+	
+	public List<ChatroomVo> getListenerRequestChatroom(String ls_email) {
+		List<ChatroomVo> list = chatroomDao.selectListenerRequestChatroom(ls_email);
 		return list;
 	}
 }
