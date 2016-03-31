@@ -16,7 +16,7 @@
 					<li><a href="/kuku/user/select_join_type"> <span>회원가입</span> </a> </li>					
 				</c:when>
 				<c:otherwise>
-					<li><a href="logout"> <span>로그아웃</span> </a> </li>
+					<li><a href="/kuku/user/logout"> <span>로그아웃</span> </a> </li>
 					<li><a href="/kuku/user/update_user"> <span>회원정보수정</span> </a> </li>
 				</c:otherwise>
 		    </c:choose>

@@ -11,23 +11,23 @@
 	sock_conn();
 
 	function sock_conn() {
-		
-		if (sock == null) 
-		{
+		if (sock == null) {
 			sock = new SockJS('/kuku/chat');
 			
-	       	sock.onopen = function () {
-	       		console.log('[Connect]');
-	       		addUser();
-           };
-	           
-           sock.onmessage = function (event) {
-           	console.log('[Onmessage]' + event.data);
-           };
-           
-           sock.onclose = function (event) {
-           	console.log('[Disconnect]');
-           };
+        	sock.onopen = function () {
+        		console.log('[Connect]');
+        		addUser();
+            };
+            
+            sock.onmessage = function (event) {
+            	console.log('[Onmessage]' + event.data);
+            };
+            
+            sock.onclose = function (event) {
+            	console.log('[Disconnect]');
+            	sock=null;
+            	sock_conn();
+            };
 		}
 	}
 
@@ -51,12 +51,15 @@
 	}
 	
 	function clickChat() {
-		sock_conn();
-		
 		var chat = document.getElementById('chat').value;
+		if(chat == null || chat == 'undefined' || chat == '') {
+			alert('채팅 내용을 입력하세요');
+			return;
+		}
+		
 		var msg = 'chat/' +chatroom_idx + '/' + '${authUser.email}' + '/' +receiver_email + '/' + chat;
 		sock.send(msg);
-		console.log('[Chat]');
+		document.getElementById('chat').value = null;
 	}
 </script>
 <html>
@@ -113,6 +116,11 @@
 											<div class="conversation-content" style="overflow:auto; width:100%; height:350px;">
 												<div class="conversation-inner">
 													<div class="conversation-item item-left clearfix">
+														<div class="conversation-user">
+															<img
+																src="${pageContext.request.contextPath}/assets/img/samples/ryan.png"
+																alt="" />
+														</div>
 														<div class="conversation-body">
 															<div class="name">Ryan Gossling</div>
 															<div class="time hidden-xs">September 21, 2013
@@ -123,6 +131,11 @@
 														</div>
 													</div>
 													<div class="conversation-item item-right clearfix">
+														<div class="conversation-user">
+															<img
+																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
+																alt="" />
+														</div>
 														<div class="conversation-body">
 															<div class="name">Mila Kunis</div>
 															<div class="time hidden-xs">September 21, 2013
@@ -134,6 +147,11 @@
 														</div>
 													</div>
 													<div class="conversation-item item-right clearfix">
+														<div class="conversation-user">
+															<img
+																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
+																alt="" />
+														</div>
 														<div class="conversation-body">
 															<div class="name">Mila Kunis</div>
 															<div class="time hidden-xs">September 21, 2013
@@ -145,6 +163,11 @@
 														</div>
 													</div>
 													<div class="conversation-item item-left clearfix">
+														<div class="conversation-user">
+															<img
+																src="${pageContext.request.contextPath}/assets/img/samples/ryan.png"
+																alt="" />
+														</div>
 														<div class="conversation-body">
 															<div class="name">Ryan Gossling</div>
 															<div class="time hidden-xs">September 21, 2013
@@ -155,6 +178,11 @@
 														</div>
 													</div>
 													<div class="conversation-item item-right clearfix">
+														<div class="conversation-user">
+															<img
+																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
+																alt="" />
+														</div>
 														<div class="conversation-body">
 															<div class="name">Mila Kunis</div>
 															<div class="time hidden-xs">September 21, 2013
