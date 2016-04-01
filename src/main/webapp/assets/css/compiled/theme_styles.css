@@ -3837,23 +3837,23 @@ input[type="radio"] {
   }
 }
 #newsfeed .story-user {
-  position: absolute;
+/*   position: absolute; */
 }
 #newsfeed .story-user a {
-  display: block;
+/*   display: block; */
 }
 #newsfeed .story-user a img {
-  display: block;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background-clip: padding-box;
+/*   display: block; */
+/*   width: 70px; */
+/*   height: 70px; */
+/*   border-radius: 50%; */
+/*   background-clip: padding-box; */
   /* stops bg color from leaking outside the border: */
 }
 @media (max-width: 767px) {
   #newsfeed .story-user a img {
-    width: 30px;
-    height: 30px;
+/*     width: 30px; */
+/*     height: 30px; */
   }
 }
 #newsfeed .story-content {

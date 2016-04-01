@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bit.kuku.vo.TalkerVo;
 
-@Repository
+@Repository("talkerDAO")
 public class TalkerDao {
 	
 	@Autowired
@@ -18,6 +18,7 @@ public class TalkerDao {
 
 	public TalkerVo get(String email) {
 		TalkerVo talkerVo = sqlSession.selectOne("talker.selectByEmail", email);
+		System.out.println(talkerVo);
 		return talkerVo;
 	}
 	
@@ -25,6 +26,7 @@ public class TalkerDao {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "email", email );
 		map.put( "password", password );
+		System.out.println("input email : " + email + "password : " + password);
 		TalkerVo talkerVo = sqlSession.selectOne( "talker.selectByEmailAndPassword", map );
 
 		return talkerVo;

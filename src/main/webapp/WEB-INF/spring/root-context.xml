@@ -50,11 +50,11 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-	<mongo:mongo host="localhost" port="27017" />
+	<mongo:mongo host="192.168.1.9" port="27017" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
-		<constructor-arg name="databaseName" value="test" />
+		<constructor-arg name="databaseName" value="KuKuMental" />
 	</bean>
 
 </beans>

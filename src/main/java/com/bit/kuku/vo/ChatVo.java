@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 public class ChatVo {
 
 	private String chatroom_num;
-	private String Sender_email;
+	private String sender_email;
 	private String receiver_email;
 	private String chat;
 	private String time;
@@ -16,11 +16,11 @@ public class ChatVo {
 		  // TODO Auto-generated constructor stub
 		 }
 
-		 public ChatVo(String chatroom_num, String Sender_email, String receiver_email, String chat,
+		 public ChatVo(String chatroom_num, String sender_email, String receiver_email, String chat,
 				 String time, String receiver_response) {
 		  super();
 		  this.chatroom_num = chatroom_num;
-		  this.Sender_email = Sender_email;
+		  this.sender_email = sender_email;
 		  this.receiver_email = receiver_email;
 		  this.chat = chat;
 		  this.time = time;
@@ -36,11 +36,11 @@ public class ChatVo {
 		}
 
 		public String getSender_email() {
-			return Sender_email;
+			return sender_email;
 		}
 
 		public void setSender_email(String sender_email) {
-			Sender_email = sender_email;
+			this.sender_email = sender_email;
 		}
 
 		public String getReceiver_email() {
@@ -75,11 +75,12 @@ public class ChatVo {
 			this.receiver_response = receiver_response;
 		}
 
-	@Override
-	public String toString() {
-		return "ChatVo [chatroom_num=" + chatroom_num + ", Sender_email=" + Sender_email + ", receiver_email="
-				+ receiver_email + ", chat=" + chat + ", time=" + time + ", receiver_response=" + receiver_response
-				+ "]";
-	}
+		@Override
+		public String toString() {
+			return "ChatVo [chatroom_num=" + chatroom_num + ", sender_email=" + sender_email + ", receiver_email="
+					+ receiver_email + ", chat=" + chat + ", time=" + time + ", receiver_response=" + receiver_response
+					+ "]";
+		}
+
 	
 }

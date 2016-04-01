@@ -36,7 +36,7 @@
 						</c:when>
 						<c:when test="${userType eq 'talker'}">
 							<ul class="nav navbar-nav navbar-center">
-								<li><a href="/kuku/chat/my_chat">나의 채팅</a></li>
+								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
 								<li><a href="/kuku/talker/talker_listener_search">리스너 찾기</a></li>
 								<li><a href="/kuku/talker/my_kuku_stat">내 쿠크 상태</a></li>
 								<li><a href="#마이 페이지">마이 페이지</a></li>
@@ -51,7 +51,7 @@
 						</c:when>						
 						<c:otherwise>
 							<ul class="nav navbar-nav navbar-center">
-								<li><a href="/kuku/chat/my_chat">나의 채팅</a></li>
+								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
 								<li><a href="/kuku/listener/join_chatlist">요청 보기</a></li>
 								<li><a href="/kuku/listener/join_score">평가 보기</a></li>
 								<li><a href="#마이 페이지">마이 페이지</a></li>

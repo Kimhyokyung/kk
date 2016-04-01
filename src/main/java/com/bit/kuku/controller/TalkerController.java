@@ -1,22 +1,26 @@
 package com.bit.kuku.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.kuku.service.ChatroomService;
+import com.bit.kuku.service.SearchCriteria;
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ChatroomVo;
+import com.bit.kuku.vo.PageMaker;
 import com.bit.kuku.vo.TalkerVo;
 
 @Controller
@@ -28,7 +32,7 @@ public class TalkerController {
 	
 	@Autowired
 	private TalkerService talkerService;
-	
+		
 	@Autowired
 	private ChatroomService chatroomService;
 
@@ -37,16 +41,17 @@ public class TalkerController {
 		return "talker/my_kuku_stat";
 	}
 		
-	@RequestMapping(value="/talker_listener_search")
-	public ModelAndView talker_listener_search(Map<String, Object> commandMap) throws Exception {
-		ModelAndView mv = new ModelAndView("/talker/talker_listener_search");
+	@RequestMapping(value = "/talker_listener_search", method=RequestMethod.GET)
+	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		
-		List<Map<String,Object>> list = talkerService.selectListenerList(commandMap);
-		SessionHandler ssHandler = SessionHandler.getInstance();
-		Map<String, HttpSession> userMap = ssHandler.selectUserMap();
-		mv.addObject("list",list);
-		mv.addObject("userMap", userMap);
-		return mv;
+		model.addAttribute("list", talkerService.listSearchCriteria(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(talkerService.listSearchCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	@RequestMapping(value="/createChatroom")

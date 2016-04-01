@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
+<style>.a{background:000000}</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script type="text/javascript">
 	var sock;
 	var chatroom_idx;
@@ -11,31 +13,64 @@
 	sock_conn();
 
 	function sock_conn() {
-		if (sock == null) {
+		
+		if (sock == null) 
+		{
 			sock = new SockJS('/kuku/chat');
 			
-        	sock.onopen = function () {
-        		console.log('[Connect]');
-        		addUser();
-            };
-            
-            sock.onmessage = function (event) {
-            	console.log('[Onmessage]' + event.data);
-            };
-            
-            sock.onclose = function (event) {
-            	console.log('[Disconnect]');
-            	sock=null;
-            	sock_conn();
-            };
+	       	sock.onopen = function () {
+	       		console.log('[Connect]');
+	       		addUser();
+           };
+	           
+           sock.onmessage = function (event) {
+           	console.log('[Onmessage]' + event.data);
+           	
+           };
+           
+           sock.onclose = function (event) {
+           	console.log('[Disconnect]');
+           };
 		}
 	}
 
+
+	
 	function clickChatroom(chatroom, receiver) {
+		console.log("clickChatroom");
 		chatroom_idx = chatroom;
 		receiver_email = receiver;
 		console.log(chatroom_idx);
 		console.log(receiver_email);
+		
+		$.ajax({
+			url : "/kuku/chat/my_chat?chatroom_idx=" + chatroom_idx,
+			type : "get",
+			dataType : "json",
+			data : "",
+			success : function(response)  {
+				console.log("success!");
+				
+				var chatArr = response.chat;
+				
+				var chatDiv = document.getElementById("chat-div");
+				
+				for(var i=0; i<chatArr.length; i++) {
+					if(receiver_email == chatArr[i].receiver_email) {
+						createReceiveChat(chatArr[i].sender_email, chatArr[i].chat);
+					} else {
+						createSendChat(chatArr[i].sender_email, chatArr[i].chat);
+					}
+				}
+				
+				// 스크롤 아래로 이동
+				var divChatPanel = document.getElementById("divChatPanel");
+				
+				if(divChatPanel.scrollHeight > 0) {
+					divChatPanel.scrollTop = divChatPanel.scrollHeight;
+				}
+			}
+		});
 	}
 
 	function addUser() {
@@ -51,16 +86,71 @@
 	}
 	
 	function clickChat() {
+		console.log('clickChat');
+		
 		var chat = document.getElementById('chat').value;
 		if(chat == null || chat == 'undefined' || chat == '') {
 			alert('채팅 내용을 입력하세요');
 			return;
 		}
-		
+		createSendChat('${authUser.nickname}', chat);
+// 		createReceiveChat("khk", chat);
+
 		var msg = 'chat/' +chatroom_idx + '/' + '${authUser.email}' + '/' +receiver_email + '/' + chat;
 		sock.send(msg);
-		document.getElementById('chat').value = null;
+		console.log('[Chat]');
+		
+		document.getElementById('chat').value = '';
 	}
+	
+	// 보냈을 때 말풍선 생성
+	function createSendChat(sender, chat) {
+		var chatDiv = document.getElementById("chat-div");
+		time = new Date()
+		console.log(chatDiv);
+
+		var chatHtml = "<div class=\"conversation-item item-right clearfix\" style=\"right:-40px\">";
+		chatHtml += "<div class=\"conversation-body\">";
+		chatHtml += "<div class=\"name\">" + sender + "</div>";
+		chatHtml += "<div class=\"time hidden-xs\">" + time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"
+		+time.getMinutes()+":"+time.getSeconds()+"</div>";
+		chatHtml += "<div class=\"text\">" + chat + "</div>";
+		chatHtml += "</div></div>";
+		
+		chatDiv.innerHTML += chatHtml;
+		
+		// 스크롤 아래로 이동
+		var divChatPanel = document.getElementById("divChatPanel");
+		
+		if(divChatPanel.scrollHeight > 0) {
+			divChatPanel.scrollTop = divChatPanel.scrollHeight;
+		}
+	}
+	
+	// 받았을 때 말풍선 생성
+	function createReceiveChat(sender, chat) {
+		var chatDiv = document.getElementById("chat-div");
+		console.log(chatDiv);
+		time = new Date()
+		
+		var chatHtml = "<div class=\"conversation-item item-left clearfix\" style=\"left:-60px\">";
+		chatHtml += "<div class=\"conversation-body\">";
+		chatHtml += "<div class=\"name\">" + sender + "</div>";
+		chatHtml += "<div class=\"time hidden-xs\">" + time.getFullYear()+"-"+(time.getMonth()+1)+"-"+time.getDate()+" "+time.getHours()+":"
+		+time.getMinutes()+":"+time.getSeconds()+"</div>";
+		chatHtml += "<div class=\"text\">" + chat + "</div>";
+		chatHtml += "</div></div>";
+		
+		chatDiv.innerHTML += chatHtml;
+		
+		// 스크롤 아래로 이동
+		var divChatPanel = document.getElementById("divChatPanel");
+		
+		if(divChatPanel.scrollHeight > 0) {
+			divChatPanel.scrollTop = divChatPanel.scrollHeight;
+		}
+	}
+	
 </script>
 <html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -113,106 +203,38 @@
 								<div class="main-box clearfix">
 									<div class="tabs-wrapper profile-tabs">
 										<div class="conversation-wrapper">
-											<div class="conversation-content" style="overflow:auto; width:100%; height:350px;">
-												<div class="conversation-inner">
+											<div class="conversation-content" id="divChatPanel" style="overflow:auto; width:100%; height:350px; overflow-X:hidden">
+												<div class="conversation-inner" id="chat-div"></div>
 													<div class="conversation-item item-left clearfix">
-														<div class="conversation-user">
-															<img
-																src="${pageContext.request.contextPath}/assets/img/samples/ryan.png"
-																alt="" />
-														</div>
-														<div class="conversation-body">
-															<div class="name">Ryan Gossling</div>
-															<div class="time hidden-xs">September 21, 2013
-																18:28</div>
-															<div class="text">I don't think they tried to
-																market it to the billionaire, spelunking, base-jumping
-																crowd.</div>
-														</div>
-													</div>
-													<div class="conversation-item item-right clearfix">
-														<div class="conversation-user">
-															<img
-																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
-																alt="" />
-														</div>
-														<div class="conversation-body">
-															<div class="name">Mila Kunis</div>
-															<div class="time hidden-xs">September 21, 2013
-																12:45</div>
-															<div class="text">Normally, both your asses would
-																be dead as fucking fried chicken, but you happen to pull
-																this shit while I'm in a transitional period so I don't
-																wanna kill you, I wanna help you.</div>
-														</div>
-													</div>
-													<div class="conversation-item item-right clearfix">
-														<div class="conversation-user">
-															<img
-																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
-																alt="" />
-														</div>
-														<div class="conversation-body">
-															<div class="name">Mila Kunis</div>
-															<div class="time hidden-xs">September 21, 2013
-																12:45</div>
-															<div class="text">Normally, both your asses would
-																be dead as fucking fried chicken, but you happen to pull
-																this shit while I'm in a transitional period so I don't
-																wanna kill you, I wanna help you.</div>
-														</div>
-													</div>
-													<div class="conversation-item item-left clearfix">
-														<div class="conversation-user">
-															<img
-																src="${pageContext.request.contextPath}/assets/img/samples/ryan.png"
-																alt="" />
-														</div>
-														<div class="conversation-body">
-															<div class="name">Ryan Gossling</div>
-															<div class="time hidden-xs">September 21, 2013
-																18:28</div>
-															<div class="text">I don't think they tried to
-																market it to the billionaire, spelunking, base-jumping
-																crowd.</div>
-														</div>
-													</div>
-													<div class="conversation-item item-right clearfix">
-														<div class="conversation-user">
-															<img
-																src="${pageContext.request.contextPath}/assets/img/samples/kunis.png"
-																alt="" />
-														</div>
-														<div class="conversation-body">
-															<div class="name">Mila Kunis</div>
-															<div class="time hidden-xs">September 21, 2013
-																12:45</div>
-															<div class="text">Normally, both your asses would
-																be dead as fucking fried chicken, but you happen to pull
-																this shit while I'm in a transitional period so I don't
-																wanna kill you, I wanna help you.</div>
-														</div>
-														<div class="conversation-body">
-															<div class="name">Mila Kunis</div>
-															<div class="time hidden-xs">September 21, 2013
-																12:45</div>
-															<div class="text">Normally, both your asses would
-																be dead as fucking fried chicken, but you happen to pull
-																this shit while I'm in a transitional period so I don't
-																wanna kill you, I wanna help you.</div>
-														</div>
-														<div class="conversation-body">
-															<div class="name">Mila Kunis</div>
-															<div class="time hidden-xs">September 21, 2013
-																12:45</div>
-															<div class="text">Normally, both your asses would
-																be dead as fucking fried chicken, but you happen to pull
-																this shit while I'm in a transitional period so I don't
-																wanna kill you, I wanna help you.</div>
-														</div>
-													</div>
+													<c:choose>
+														<c:when test="${fn:length(chatList) > 0}">
+															<c:forEach items="${chatList}" var="chat">
+																<c:choose>
+																	<c:when test="${chat.sender_email==authUser.email}">
+																		<div class="conversation-item item-right clearfix">
+																			<div class="conversation-body">
+																				<div class="name">${chat.sender_email}</div>
+																				<div class="time hidden-xs">${chat.time }</div>
+																				<div class="text">${chat.chat}</div>
+																			</div>
+																		</div>
+																	</c:when>
+																	<c:otherwise>
+																		<div class="conversation-item item-left clearfix">
+																			<div class="conversation-body">
+																				<div class="name">${chat.sender_email} </div>
+																				<div class="time hidden-xs">${chat.time }</div>
+																				<div class="text">${chat.chat}</div>
+																			</div>
+																		</div>
+																	</c:otherwise>
+																</c:choose>
+															</c:forEach>
+														</c:when>
+													</c:choose>
 												</div>
 											</div>
+											
 											<div class="conversation-new-message">
 												<div class="form-group">
 													<textarea id="chat" class="form-control" rows="2"

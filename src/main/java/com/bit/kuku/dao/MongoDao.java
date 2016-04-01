@@ -28,11 +28,23 @@ public class MongoDao {
 		mongoOperation.save(chat, "chatlog");
 	}
 
-	public void chat_select(int chatroom_id) {
+	public List<ChatVo> chat_select(int chatroom_num) {
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
-		List<ChatVo> list = mongoOperation.find(new Query(Criteria.where("chatroom_id").is(chatroom_id)), ChatVo.class, "chatlog");
+		List<ChatVo> list = mongoOperation.find(new Query(Criteria.where("chatroom_num").is(chatroom_num)), ChatVo.class, "chatlog");
 
-		for (int i = 0; i < list.size(); i++)
+		
+		System.out.println(list.size());
+		/*for (int i = 0; i < list.size(); i++){
+			
 			System.out.println(list.get(i).toString());
+		}*/
+		return list;
+	}
+	
+	public void chat_selectOne(int chatroom_id) {
+		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
+		ChatVo chatvo = mongoOperation.findOne(new Query(Criteria.where("chatroom_id").is(chatroom_id)), ChatVo.class, "chatlog");
+	
+		System.out.println(chatvo.toString());
 	}
 }
