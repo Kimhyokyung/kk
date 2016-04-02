@@ -32,7 +32,9 @@ public class ChatController {
 	MongoDao mongoDao;
 	
 	@RequestMapping(value="/my_chat_room")
-	public ModelAndView my_chat_room(HttpServletRequest request) {	
+	public ModelAndView my_chat_room(HttpServletRequest request,
+			@RequestParam(value="listener_email", required=false) String listener_email,
+			@RequestParam(value="listener_nick", required=false) String listener_nick) {	
 		
 		ModelAndView mv = new ModelAndView("/chat/my_chat");
 		
@@ -44,23 +46,30 @@ public class ChatController {
 		
 		if(userType.equals("talker")) {		
 			TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
-			String talker_email = talker.getEmail();
-			System.out.println("talker_email : "+talker_email);
-		
+			String tk_email = talker.getEmail();
+			String tk_nick = talker.getNickname();
+			
+			// 현재 토커와 리스너의 채팅방이 존재하지 않다면 새로 생성
+			if(listener_email != null && listener_nick != null) {
+				ChatroomVo chatroom = chatroomService.getChatroom(tk_email, listener_email);
+				if(chatroom==null) {
+					chatroomService.createChatroom(tk_email, tk_nick, listener_email, listener_nick);
+					chatroom = chatroomService.getChatroom(tk_email, listener_email);
+				}
+				
+				// 현재 토커와 리스너의 채팅방 가져오기
+				mv.addObject("curChatroom", chatroom);
+			}
+			
 			// 현재 토커의 모든 채팅방 가져오기
-			List<ChatroomVo> list = chatroomService.getTalkerChatroomList(talker_email);
-			System.out.println("talker list : "+list);
+			List<ChatroomVo> list = chatroomService.getTalkerChatroomList(tk_email);
 			mv.addObject("chatroomList", list);
 		} else if(userType.equals("listener")) {
 			ListenerVo listener = (ListenerVo)session.getAttribute("authUser");
-			String listener_email = listener.getEmail();
-			
-			System.out.println("listener_email : "+listener_email);
-			
+			String ls_email = listener.getEmail();
 			
 			// 현재 리스너 모든 채팅방 가져오기
-	         List<ChatroomVo> list = chatroomService.getListenerChatroomList(listener_email);
-	         System.out.println("listener list : "+list);
+	         List<ChatroomVo> list = chatroomService.getListenerChatroomList(ls_email);
 	         mv.addObject("chatroomList", list);
 		}
 		
@@ -69,7 +78,8 @@ public class ChatController {
 	
 	@RequestMapping(value="/my_chat")
 	@ResponseBody
-	public Map<String, List<ChatVo>> my_chat(@RequestParam("chatroom_idx") int chatroom_idx, HttpServletRequest request) {
+	public Map<String, List<ChatVo>> my_chat(HttpServletRequest request,
+			@RequestParam("chatroom_idx") int chatroom_idx) {
 		Map<String, List<ChatVo>> map = new HashMap<>();
 		List<ChatVo> chatList = mongoDao.chat_select(chatroom_idx);
 		map.put("chat", chatList);

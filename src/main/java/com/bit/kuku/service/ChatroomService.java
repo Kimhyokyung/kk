@@ -1,6 +1,7 @@
 package com.bit.kuku.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +28,17 @@ public class ChatroomService {
 		return list;
 	}
 	
-	public List<ChatroomVo> getListenerChatroomList(String ls_email) {
-		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(ls_email);
+	public List<Map<String, Object>> getListenerRequestChatroom(String ls_email) {
+		List<Map<String, Object>> list = chatroomDao.selectListenerRequestChatroom(ls_email);
 		return list;
 	}
 	
-	public List<ChatroomVo> getListenerRequestChatroom(String ls_email) {
-		List<ChatroomVo> list = chatroomDao.selectListenerRequestChatroom(ls_email);
+	public void responseChatroom(String idx) {
+		chatroomDao.updateListenerResponse(idx);
+	}
+	
+	public List<ChatroomVo> getListenerChatroomList(String ls_email) {
+		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(ls_email);
 		return list;
 	}
 }

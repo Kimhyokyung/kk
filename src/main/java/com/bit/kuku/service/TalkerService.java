@@ -15,8 +15,6 @@ import com.sun.istack.internal.logging.Logger;
 @Service("talkerService")
 public class TalkerService {
 
-	Logger log = Logger.getLogger(this.getClass());
-
 	@Resource(name="listenerDAO")
 	private ListenerDao listenerDAO;
 	
@@ -51,5 +49,4 @@ public class TalkerService {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return dao.listSearchCount(cri);
 	}
-
 }

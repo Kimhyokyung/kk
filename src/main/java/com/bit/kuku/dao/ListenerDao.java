@@ -32,10 +32,10 @@ public class ListenerDao extends UserDao{
 	
 	public ListenerVo get(String email, String password) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "email", email );
-		map.put( "password", password );
+		map.put("email", email);
+		map.put("password", password);
 		System.out.println("input email : " + email + "password : " + password);
-		ListenerVo listenerVo = sqlSession.selectOne( "listener.selectByNoAndPassword", map );
+		ListenerVo listenerVo = sqlSession.selectOne("listener.selectByEmailAndPassword", map);
 
 		return listenerVo;
 	}
@@ -45,7 +45,7 @@ public class ListenerDao extends UserDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-    public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception{
+    public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception {
         return (List<Map<String, Object>>)selectList("listener.selectListenerList", map);
 	}
 
@@ -89,5 +89,4 @@ public class ListenerDao extends UserDao{
 		System.out.println("listSearchCount" + cri);
 		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
-
 }

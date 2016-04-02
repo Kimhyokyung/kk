@@ -234,15 +234,16 @@
 													</c:choose>
 												</div>
 											</div>
-											
-											<div class="conversation-new-message">
-												<div class="form-group">
-													<textarea id="chat" class="form-control" rows="2"
-														placeholder="Enter your message..."></textarea>
-												</div>
-												<div class="clearfix">
-													<button class="btn btn-info pull-right"
-														onclick="clickChat()">Send message</button>
+											<div id="chat-input" >
+												<div class="conversation-new-message">
+													<div class="form-group">
+														<textarea id="chat" class="form-control" rows="2"
+															placeholder="Enter your message..."></textarea>
+													</div>
+													<div class="clearfix">
+														<button class="btn btn-info pull-right"
+															onclick="clickChat()">Send message</button>
+													</div>
 												</div>
 											</div>
 										</div>

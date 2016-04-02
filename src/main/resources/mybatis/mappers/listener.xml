@@ -26,16 +26,7 @@
 		where email=#{email} and password=#{password}
 		]]>
 	</select>
-	
-<!-- 	<select id="selectByNoAndPassword" parameterType="map" resultType="ListenerVo"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		select IDX, EMAIL, NICKNAME -->
-<!-- 		  from tb_listener -->
-<!-- 		 where email = #{email } -->
-<!-- 		   and password = #{password } -->
-<!-- 		]]> -->
-<!-- 	</select> -->
-	
+
 	<select id="selectListenerList" parameterType="map" resultType="map">
 		<![CDATA[
 		select IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC from tb_listener;

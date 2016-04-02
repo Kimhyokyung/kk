@@ -52,7 +52,7 @@
 						<c:otherwise>
 							<ul class="nav navbar-nav navbar-center">
 								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
-								<li><a href="/kuku/listener/join_chatlist">요청 보기</a></li>
+								<li><a href="/kuku/listener/request_chatlist">요청 보기</a></li>
 								<li><a href="/kuku/listener/join_score">평가 보기</a></li>
 								<li><a href="#마이 페이지">마이 페이지</a></li>
 							</ul>

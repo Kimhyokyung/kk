@@ -1,6 +1,7 @@
 package com.bit.kuku.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,15 +44,17 @@ public class TalkerController {
 		
 	@RequestMapping(value = "/talker_listener_search", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
-		
 		model.addAttribute("list", talkerService.listSearchCriteria(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		
 		pageMaker.setTotalCount(talkerService.listSearchCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
+		
+		SessionHandler ssHandler = SessionHandler.getInstance();
+		Map<String, HttpSession> list = ssHandler.selectUserMap();
+		model.addAttribute("userMap", list);
 	}
 	
 	@RequestMapping(value="/createChatroom")

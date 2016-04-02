@@ -15,6 +15,11 @@ public class ChatroomDao {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	public ChatroomVo selectChatroom(String idx) {
+		ChatroomVo chatroom = sqlSession.selectOne("chatroom.selectByIdx", idx);
+		return chatroom;
+	}
+	
 	public ChatroomVo selectChatroom(String tk_email,  String ls_email) {
 		Map<String, Object> map = new HashMap<>();
 		
@@ -41,17 +46,17 @@ public class ChatroomDao {
 		return list;
 	}
 	
+	public List<Map<String, Object>> selectListenerRequestChatroom(String listener_email) {
+		List<Map<String, Object>> list = sqlSession.selectList("chatroom.selectListenerRequestChatroom", listener_email);
+		return list;
+	}
+	
+	public void updateListenerResponse(String idx) {
+		sqlSession.update("chatroom.updateListenerResponse",  idx);
+	}
+	
 	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
 		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectChatroomListByListener", listener_email);
 		return list;
-	}
-	
-	public List<ChatroomVo> selectListenerRequestChatroom(String listener_email) {
-		List<ChatroomVo> list = sqlSession.selectList("chatroom.selectListenerRequestChatroom", listener_email);
-		return list;
-	}
-	
-	public void updateListenerResponse(String chatroom_idx) {
-		sqlSession.update("chatroom.updateListenerResponse",  chatroom_idx);
 	}
 }

@@ -17,15 +17,6 @@
 		]]>
 	</insert>
 	
-<!-- 	<select id="selectByNoAndPassword" parameterType="map" resultType="TalkerVo"> -->
-<!-- 		<![CDATA[ -->
-<!-- 		select IDX, EMAIL, NICKNAME -->
-<!-- 		  from tb_talker -->
-<!-- 		 where email = #{email } -->
-<!-- 		   and password = #{password } -->
-<!-- 		]]> -->
-<!-- 	</select> -->
-	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="TalkerVo">
 		<![CDATA[
 		select *
