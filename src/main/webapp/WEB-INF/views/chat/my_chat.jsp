@@ -11,9 +11,18 @@
 	var receiver_nick;
 
 	sock_conn();
-	
-	if('${curChatroom}' != null) {
-		clickChatroom('${curChatroom.idx}', '${curChatroom.idx}');
+
+	// 현재 선택된 채팅방 정보 보여주기
+	if('${curChatroom}' == null || '${curChatroom}' == 'undefined' || '${curChatroom}' == '') {
+		// 현재 선택된 채팅방이 없다면 채팅 입력 숨기기
+		$('.conversation-new-message').hide();
+	} else {
+		// 현재 선택된 채팅방이 있다면 채팅 로그 정보 보여주기
+		if('${userType}' == 'talker') {
+			clickChatroom('${curChatroom.idx}', '${curChatroom.listener_email}', '${curChatroom.listener_nickname}');	
+		} else {
+			clickChatroom('${curChatroom.idx}', '${curChatroom.talker_email}', '${curChatroom.talker_nickname}');
+		}
 	}
 	
 	function sock_conn() {
@@ -33,9 +42,6 @@
 					createReceiveChat(chatArr[1], chatArr[2], null);
 				} else {
 					// 내가 보고 있지 않은 채팅방에 새로운 메세지가 도착
-					
-					
-					
 				}
 			};
 
@@ -62,21 +68,22 @@
 
 	// 채팅방 클릭 시 호출되는 함수
 	function clickChatroom(chatroom, email, nick) {
+		
 		chatroom_num = chatroom;
 		receiver_email = email;
 		receiver_nick = nick;
 
 		// 채팅창 입력 부분 보여주기
 		$('.conversation-new-message').show();
-
+		
 		// 현재 채팅방 선택 상태로 변경
-		$(document).ready(function() {
+		$("#table-example").ready(function() {
 			$("tr").click(function() {
-				$(this).closest("tr").siblings().removeClass("active");
-				$(this).toggleClass("active");
+				$(this).addClass('active');
+				$(this).siblings().removeClass('active');
 			})
 		});
-		
+
 		// 현재 채팅방 로그 정보 가져오기
 		$.ajax({
 			url : "/kuku/chat/my_chat?chatroom_num=" + chatroom_num,
@@ -113,7 +120,8 @@
 
 		createSendChat('${authUser.nickname}', chat, null);
 
-		var msg = 'chat/' + chatroom_num + '/' + '${authUser.email}' + '/' + receiver_email + '/' + chat;
+		var msg = 'chat/' + chatroom_num + '/' + '${authUser.email}' + '/'
+				+ receiver_email + '/' + chat;
 		sock.send(msg);
 		console.log('[Chat]');
 
@@ -137,10 +145,9 @@
 		while (str.length < length) {
 			str = '0' + str;
 		}
-		console.log(str);
 		return str;
 	}
-	
+
 	// 메세지 보낼 때 말풍선 생성
 	function createSendChat(sender, chat, time) {
 		var chatHtml;
@@ -214,22 +221,21 @@
 							<div class="col-lg-3 col-md-4 col-sm-4">
 								<div class="main-box clearfix">
 									<div class="main-box-body clearfix">
-										<div class="table-responsive" style="overflow: auto; height: 350px; overflow-X: hidden">
-											<table id="table-example"
-												class="table table-hover dataTable no-footer" role="grid">
+										<div class="table-responsive">
+											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
 													<c:choose>
 														<c:when test="${fn:length(chatroomList) > 0}">
 															<c:forEach items="${chatroomList}" var="chatroom">
 																<c:choose>
 																	<c:when test="${userType=='talker'}">
-																		<tr>
-																			<td><p onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">${chatroom.listener_nickname}</p></td>
+																		<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
+																			<td>${chatroom.listener_nickname}</td>
 																		</tr>
 																	</c:when>
 																	<c:otherwise>
-																		<tr>
-																			<td><p onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">${chatroom.talker_nickname}</p></td>
+																		<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
+																			<td>${chatroom.talker_nickname}</td>
 																		</tr>
 																	</c:otherwise>
 																</c:choose>
@@ -246,40 +252,13 @@
 								<div class="main-box clearfix">
 									<div class="tabs-wrapper profile-tabs">
 										<div class="conversation-wrapper">
-											<div class="conversation-content" id="divChatPanel"
-												style="overflow: auto; width: 100%; height: 350px; overflow-X: hidden">
+											<div class="conversation-content" id="divChatPanel" style="overflow: auto; width: 100%; height: 350px; overflow-X: hidden">
 												<div class="conversation-inner" id="chat-div"></div>
 												<div class="conversation-item item-left clearfix">
-													<c:choose>
-														<c:when test="${fn:length(chatList) > 0}">
-															<c:forEach items="${chatList}" var="chat">
-																<c:choose>
-																	<c:when test="${chat.sender_email==authUser.email}">
-																		<div class="conversation-item item-right clearfix">
-																			<div class="conversation-body">
-																				<div class="name">${chat.sender_email}</div>
-																				<div class="time hidden-xs">${chat.time}</div>
-																				<div class="text">${chat.chat}</div>
-																			</div>
-																		</div>
-																	</c:when>
-																	<c:otherwise>
-																		<div class="conversation-item item-left clearfix">
-																			<div class="conversation-body">
-																				<div class="name">${chat.sender_email}</div>
-																				<div class="time hidden-xs">${chat.time}</div>
-																				<div class="text">${chat.chat}</div>
-																			</div>
-																		</div>
-																	</c:otherwise>
-																</c:choose>
-															</c:forEach>
-														</c:when>
-													</c:choose>
 												</div>
 											</div>
 											<div id="chat-input">
-												<div class="conversation-new-message" hidden="true">
+												<div class="conversation-new-message" id="conversation-new-message">
 													<div class="form-group">
 														<textarea id="chat" class="form-control" rows="2"
 															placeholder="Enter your message..."></textarea>
