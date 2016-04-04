@@ -19,6 +19,14 @@
 		]]>
 	</insert>
 	
+	<update id="update" parameterType="ListenerVo">
+		<![CDATA[		
+		update tb_listener
+		set password=#{password}, nickname=#{nickname}, consulting_topic=#{consulting_topic}
+		where email=#{email}
+		]]>
+	</update>
+	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="ListenerVo">
 		<![CDATA[
 		select email, nickname

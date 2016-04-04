@@ -44,6 +44,11 @@ public class ListenerDao extends UserDao{
 		sqlSession.insert("listener.insert", vo);
 	}
 	
+	public ListenerVo update_listener(ListenerVo vo) {
+		sqlSession.update("listener.update", vo);
+		return vo;
+	}
+	
 	@SuppressWarnings("unchecked")
     public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception {
         return (List<Map<String, Object>>)selectList("listener.selectListenerList", map);

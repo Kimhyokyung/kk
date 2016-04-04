@@ -53,4 +53,14 @@ public class UserService {
 		} 		
 		return isExist;
 	}
+	
+	public TalkerVo update_talker( TalkerVo vo ) {
+		vo = talkerDao.update_talker( vo);
+		return vo;
+	}
+	
+	public ListenerVo update_listener( ListenerVo vo ) {
+		vo = listenerDao.update_listener( vo);
+		return vo;
+	}
 }

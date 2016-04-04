@@ -196,33 +196,33 @@ public class UserController {
 		return "main/index";
 	}
 	
-	@RequestMapping(value ="/Listener_Modify", method=RequestMethod.GET)
-	public String Listener_Modify() {
-		return "user/Listener_Modify";
+	@RequestMapping(value ="/modifyform")
+	public String modify() {
+		return "user/modifyform";
 	}
-
+	
 	//회원 정보 수정
-	@RequestMapping(value ="/update_user", method=RequestMethod.POST)
-	public String update_user(@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			@RequestParam("nickname") String nickname) {
+	@RequestMapping(value ="/update_user", method=RequestMethod.POST )
+	public String update_user( HttpSession session, 
+			@ModelAttribute TalkerVo talkerVo,
+			@ModelAttribute ListenerVo listenerVo) {
+		String userType = (String)session.getAttribute("userType");
+		System.out.println("update 컨트롤러 : " + userType);
 
-/*		
- * 		System.out.println("Listener_Modify"); 
-
-		UserVo user = new UserVo();
-		user.setEmail(email);
-		user.setPassword(password);
-		user.setNickname(nickname);
-
-		System.out.println(user.getEmail());
-		System.out.println(user.getPassword());
-		System.out.println(user.getNickname());
-
-		userService.update(user);
-*/
-
-		return "user/Listener_Modify"; 
+		if (userType.equals("talker")) {
+			TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
+			talkerVo.setEmail(authUser.getEmail());
+			authUser = userService.update_talker(talkerVo);
+			session.setAttribute("authUser", authUser);
+			// 인증 처리
+		} else {
+			ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
+			listenerVo.setEmail(authUser.getEmail());
+			authUser = userService.update_listener(listenerVo);
+			session.setAttribute("authUser", authUser);
+			// 인증 처리
+		}
+		return "main/index";
 	}
 	
 	@RequestMapping(value = "/sessionout_exitbrowser")

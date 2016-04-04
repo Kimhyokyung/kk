@@ -35,4 +35,9 @@ public class TalkerDao {
 	public void insert_talker(TalkerVo vo) {
 		sqlSession.insert("talker.insert", vo);
 	}
+	
+	public TalkerVo update_talker(TalkerVo vo) {
+		sqlSession.update("talker.update", vo);
+		return vo;
+	}
 }
