@@ -1,5 +1,9 @@
 package com.bit.kuku.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,29 +26,18 @@ public class MongoDao {
 		this.mongoTemplate = mongoTemplate;
 	}
 
-	public void chat_insert(ChatVo chat) {
-		
+	public void chat_insert(ChatVo chat) {		
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
 		mongoOperation.save(chat, "chatlog");
 	}
 
-	public List<ChatVo> chat_select(int chatroom_num) {
+	public List<Object> chat_select(String chatroom_num) {
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
-		List<ChatVo> list = mongoOperation.find(new Query(Criteria.where("chatroom_num").is(chatroom_num)), ChatVo.class, "chatlog");
-
 		
-		System.out.println(list.size());
-		/*for (int i = 0; i < list.size(); i++){
+		Query query = new Query();
+		query.addCriteria(Criteria.where("chatroom_num").is(chatroom_num));
 			
-			System.out.println(list.get(i).toString());
-		}*/
+		List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
 		return list;
-	}
-	
-	public void chat_selectOne(int chatroom_id) {
-		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
-		ChatVo chatvo = mongoOperation.findOne(new Query(Criteria.where("chatroom_id").is(chatroom_id)), ChatVo.class, "chatlog");
-	
-		System.out.println(chatvo.toString());
 	}
 }

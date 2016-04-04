@@ -78,10 +78,10 @@ public class ChatController {
 	
 	@RequestMapping(value="/my_chat")
 	@ResponseBody
-	public Map<String, List<ChatVo>> my_chat(HttpServletRequest request,
-			@RequestParam("chatroom_idx") int chatroom_idx) {
-		Map<String, List<ChatVo>> map = new HashMap<>();
-		List<ChatVo> chatList = mongoDao.chat_select(chatroom_idx);
+	public Map<String, List<Object>> my_chat(HttpServletRequest request,
+			@RequestParam("chatroom_num") String chatroom_num) {
+		Map<String, List<Object>> map = new HashMap<>();
+		List<Object> chatList = mongoDao.chat_select(chatroom_num);
 		map.put("chat", chatList);
 		return map;
 	}

@@ -1,5 +1,8 @@
 package com.bit.kuku.chat;
 
+import java.text.SimpleDateFormat;
+import java.time.Year;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,7 +53,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			String email = msgArr[1];
 			
 			if(users.containsKey(email)) {
-				System.out.println(email + " - 기존 유저 소켓 세션 리스트 삭제");
+				System.out.println(email + " - 기존 유저 소켓 세션  삭제");
 				users.remove(email);
 			}
 			users.put(email, session);
@@ -72,35 +75,51 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			
 			System.out.println("-------------------chat-------------------");
 			
+			//String chat = "chat/1/khk_tk/khk_ls/안녕";
+			
 			String chatroom_idx = msgArr[1];
 			String sender_email = msgArr[2];
 			String receiver_email = msgArr[3];
 			String chat = msgArr[4];
 			
+			// 기존 채팅 정보 저장 
 			ChatVo chatVo = new ChatVo();
 			chatVo.setChatroom_num(chatroom_idx);
 			chatVo.setSender_email(sender_email);
 			chatVo.setReceiver_email(receiver_email);
 			chatVo.setChat(chat);
 			
-			Date now = new Date();
-			chatVo.setTime(now.toString());
+			// 시간 정보 저장
+			Date now = Calendar.getInstance().getTime();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			chatVo.setTime(formatter.format(now).toString());
+			
+			
+			// ---------------------------------------------------------------------
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.DATE, -1);
+			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
+			String yesterDay = formatter1.format(cal.getTime());
+			System.out.println("어제일자 : " + yesterDay);
+			// ---------------------------------------------------------------------
 			
 			chatVo.setReceiver_response("false");
 			
 			// 몽고디비에 채팅 로그 저장
+			System.out.println(chatVo);
 			mongoDao.chat_insert(chatVo);
 			System.out.println("몽고 데이터베이스에 채팅 로그 저장"); 
 			
 			// 채팅 전송
-			TextMessage msg = new TextMessage(chat);
+			String sendChat = chatroom_idx + '/' + sender_email + '/' + chat;
+			String example = "1/khk_tk/안녕하세요";
+			TextMessage msg = new TextMessage(sendChat);
 			if(users.containsKey(receiver_email)) {
 				WebSocketSession recv_session = users.get(receiver_email);
 				recv_session.sendMessage(msg);
 				System.out.println(receiver_email + "에게 채팅 전송");
 			}
-			session.sendMessage(msg);
-			System.out		.println("------------------------------------------");
+			System.out.println("------------------------------------------");
 		}
 	}
 
