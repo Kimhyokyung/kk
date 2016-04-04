@@ -221,7 +221,7 @@
 							<div class="col-lg-3 col-md-4 col-sm-4">
 								<div class="main-box clearfix">
 									<div class="main-box-body clearfix">
-										<div class="table-responsive">
+										<div class="table-responsive" style="overflow: auto; height: 350px; overflow-X: hidden">
 											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
 													<c:choose>
