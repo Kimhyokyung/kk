@@ -59,4 +59,34 @@
 		where listener_email=#{listener_email} and listener_response=1
 		]]>
 	</select>
+	
+		<select id="listPage" resultType="map">
+		<![CDATA[
+			select tb_chatroom.IDX, tb_chatroom.TALKER_EMAIL, tb_chatroom.TALKER_NICKNAME, tb_chatroom.LISTENER_EMAIL, tb_chatroom.LISTENER_NICKNAME, tb_talker.CONSULTING_TOPIC
+			from tb_chatroom 
+			left outer join tb_talker on tb_chatroom.TALKER_EMAIL=tb_talker.EMAIL
+			where (tb_chatroom.LISTENER_EMAIL = #{listener_email} && listener_response=0)
+			limit #{page}, 10
+		]]>
+	</select>
+	
+	<select id="listCriteria" parameterType="map" resultType="map">
+		<![CDATA[
+			select tb_chatroom.IDX, tb_chatroom.TALKER_EMAIL, tb_chatroom.TALKER_NICKNAME, tb_chatroom.LISTENER_EMAIL, tb_chatroom.LISTENER_NICKNAME, tb_talker.CONSULTING_TOPIC
+			from tb_chatroom 
+			left outer join tb_talker on tb_chatroom.TALKER_EMAIL=tb_talker.EMAIL
+			where (tb_chatroom.LISTENER_EMAIL = #{listener_email} && listener_response=0)
+			limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="countPaging" parameterType="string" resultType="int">
+		<![CDATA[
+			select count(tb_chatroom.IDX)
+			from tb_chatroom 
+			left outer join tb_talker on tb_chatroom.TALKER_EMAIL=tb_talker.EMAIL
+			where (tb_chatroom.LISTENER_EMAIL = #{listener_email} && tb_chatroom.listener_response=0 && tb_chatroom.IDX > 0)
+		]]>
+	</select>
+	
 </mapper>

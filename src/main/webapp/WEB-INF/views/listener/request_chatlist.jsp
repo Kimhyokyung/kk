@@ -7,19 +7,33 @@
 <html>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js" ></script>
 <script type="text/javascript">
+
+	$(document).ready(
+			function() {
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+							self.location = "request_chatlist"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword=" + $('#keywordInput').val();
+						});
+			});
+
 	function clickRequest(idx) {
 		$.ajax({
 			url : "/kuku/listener/response_chat?idx=" + idx,
 			type : "get",
 			dataType : "json",
 			data : "",
-			success : function(response)  {
-				
+			success : function(response) {
+
 				console.log(response.response);
-				
+
 				var listenerEmail = document.getElementById('idx');
 				listenerEmail.value = idx;
-				
+
 				chatform = document.getElementById('request-form');
 				chatform.action = "/kuku/chat/my_chat_room";
 				chatform.submit();
@@ -55,8 +69,8 @@
 														</thead>
 														<tbody>
 															<c:choose>
-																<c:when test="${fn:length(requestChat) > 0 }">
-																	<c:forEach items="${requestChat}" var="request">
+																<c:when test="${fn:length(list) > 0 }">
+																	<c:forEach items="${list}" var="request">
 																		<tr>
 																			<td>${request.TALKER_NICKNAME}</td>
 																			<td>${request.CONSULTING_TOPIC}</td>
@@ -86,6 +100,24 @@
 													</table>
 													<input type="hidden" name="idx" id="idx">
 													</form>
+												</div>
+												<div class="table-responsive">
+													<ul class="pagination pull-right">
+														<c:if test="${pageMaker.prev }">
+															<li><a href="request_chatlist${pageMaker.makeQuery(pageMaker.startPage -1) }">&laquo;</a></li>
+														</c:if>
+
+														<c:forEach begin="${pageMaker.startPage }"
+															end="${pageMaker.endPage }" var="idx">
+															<li
+																<c:out value="${pageMaker.cri.page == idx?' class=active':''}" />>
+																<a href="request_chatlist${pageMaker.makeQuery(idx) }">${idx }</a>
+															</li>
+														</c:forEach>
+														<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+															<li><a href="request_chatlist${pageMaker.makeQuery(pageMaker.endPage +1) }">&raquo;</a></li>
+														</c:if>
+													</ul>
 												</div>
 											</div>
 										</div>

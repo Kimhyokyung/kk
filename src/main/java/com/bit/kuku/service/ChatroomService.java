@@ -41,4 +41,18 @@ public class ChatroomService {
 		List<ChatroomVo> list = chatroomDao.selectListenerChatroomList(ls_email);
 		return list;
 	}
+
+	public List<Map<String, Object>> listAll() throws Exception {
+		return chatroomDao.listAll();
+	} 
+	
+	public List<Map<String, Object>> listCriteria(Criteria cri, String ls_email) throws Exception {
+		
+		List<Map<String, Object>> list = chatroomDao.listCriteria(cri, ls_email);
+		return list;
+	} 
+	
+	public int listCountCriteria(String ls_email) throws Exception {
+		return chatroomDao.countPaging(ls_email);
+	}
 }
