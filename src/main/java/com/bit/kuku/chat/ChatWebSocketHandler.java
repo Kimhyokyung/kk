@@ -15,6 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.bit.kuku.dao.ChatroomDao;
 import com.bit.kuku.dao.MongoDao;
+import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.vo.ChatVo;
 import com.sun.jmx.snmp.Timestamp;
 
@@ -22,6 +23,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
 	@Autowired
 	MongoDao mongoDao;
+	
+	@Autowired
+	ChatroomService chatroomService;
 	
 	// 현재 접속자 세션 리스트
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<>();
@@ -94,21 +98,15 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			chatVo.setTime(formatter.format(now).toString());
 			
-			
-			// ---------------------------------------------------------------------
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, -1);
-			SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd");
-			String yesterDay = formatter1.format(cal.getTime());
-			System.out.println("어제일자 : " + yesterDay);
-			// ---------------------------------------------------------------------
-			
 			chatVo.setReceiver_response("false");
 			
 			// 몽고디비에 채팅 로그 저장
 			System.out.println(chatVo);
 			mongoDao.chat_insert(chatVo);
 			System.out.println("몽고 데이터베이스에 채팅 로그 저장"); 
+			
+			// 가장 최근 대화 시간 채팅방 데이터베이스에 저장
+			chatroomService.updateLastChatTime(chatroom_idx);
 			
 			// 채팅 전송
 			String sendChat = chatroom_idx + '/' + sender_email + '/' + chat;

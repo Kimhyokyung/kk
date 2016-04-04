@@ -89,4 +89,12 @@
 		]]>
 	</select>
 	
+	<update id="updateChatTime" parameterType="string">
+		<![CDATA[
+			update
+			tb_chatroom
+			set last_chat_time = CURRENT_TIMESTAMP
+			where idx=#{chatroom_idx}
+		]]>
+	</update>
 </mapper>

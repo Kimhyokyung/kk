@@ -60,7 +60,7 @@ public class ChatroomDao {
 	}
 	
 	public void updateListenerResponse(String idx) {
-		sqlSession.update("chatroom.updateListenerResponse",  idx);
+		sqlSession.update("chatroom.updateListenerResponse", idx);
 	}
 	
 	public List<ChatroomVo> selectListenerChatroomList(String listener_email) {
@@ -69,7 +69,7 @@ public class ChatroomDao {
 	}
 	
 	public List<Map<String, Object>> listAll() throws Exception{
-		return session.selectList("chatroom" + ".listAll");
+		return session.selectList("chatroom.listAll");
 	}
 	
 	public List<Map<String, Object>> listPage(int page) throws Exception {
@@ -77,7 +77,7 @@ public class ChatroomDao {
 			page = 1;
 		}
 		page = (page -1) * 10;
-		return session.selectList("chatroom" + ".listPage", page);
+		return session.selectList("chatroom.listPage", page);
 	}
 	
 	public List<Map<String, Object>> listCriteria(Criteria cri, String ls_email) throws Exception {
@@ -88,11 +88,11 @@ public class ChatroomDao {
 		
 		List<Map<String, Object>> list = session.selectList("chatroom.listCriteria", map);
 		System.out.println(list);
-		return session.selectList("chatroom"+".listCriteria", map);
+		return session.selectList("chatroom.listCriteria", map);
 	}
 	
 	public int countPaging(String ls_email) throws Exception {
-		return session.selectOne("chatroom"+".countPaging", ls_email);
+		return session.selectOne("chatroom.countPaging", ls_email);
 	}
 	
 	public List<Map<String, Object>> listSearch(SearchCriteria cri, String ls_email) throws Exception {
@@ -101,11 +101,15 @@ public class ChatroomDao {
 		map.put("perPageNum", cri.getPerPageNum());
 		map.put("listener_email", ls_email);
 		
-		return session.selectList("chatroom" + ".listSearch", map);
+		return session.selectList("chatroom.listSearch", map);
 	}
 
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		System.out.println("listSearchCount" + cri);
-		return session.selectOne("chatroom" + ".listSearchCount", cri);
+		return session.selectOne("chatroom.listSearchCount", cri);
+	}
+	
+	public void updateLastChatTime(String chatroom_idx) {
+		session.update("chatroom.updateChatTime", chatroom_idx);
 	}
 }

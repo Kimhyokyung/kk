@@ -8,6 +8,7 @@ public class ChatroomVo {
 	private String listener_email;
 	private String listener_nickname;
 	private boolean listener_response;
+	private String last_chat_time;
 	
 	public int getIdx() {
 		return idx;
@@ -45,11 +46,17 @@ public class ChatroomVo {
 	public void setListener_response(boolean listener_response) {
 		this.listener_response = listener_response;
 	}
+	public String getLast_chat_time() {
+		return last_chat_time;
+	}
+	public void setLast_chat_time(String last_chat_time) {
+		this.last_chat_time = last_chat_time;
+	}
 	
 	@Override
 	public String toString() {
 		return "ChatroomVo [idx=" + idx + ", talker_email=" + talker_email + ", talker_nickname=" + talker_nickname
 				+ ", listener_email=" + listener_email + ", listener_nickname=" + listener_nickname
-				+ ", listener_response=" + listener_response + "]";
+				+ ", listener_response=" + listener_response + ", last_chat_time=" + last_chat_time + "]";
 	}
 }

@@ -55,4 +55,8 @@ public class ChatroomService {
 	public int listCountCriteria(String ls_email) throws Exception {
 		return chatroomDao.countPaging(ls_email);
 	}
+	
+	public void updateLastChatTime(String chatroom_idx) {
+		chatroomDao.updateLastChatTime(chatroom_idx);
+	}
 }
