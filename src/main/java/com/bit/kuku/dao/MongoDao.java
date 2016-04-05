@@ -40,4 +40,18 @@ public class MongoDao {
 		List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
 		return list;
 	}
+	
+	public int receiver_response_count(String chatroom_num){
+		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("chatroom_num").is(chatroom_num).and("receiver_response").is("false"));
+			
+		List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
+		System.out.println("false인거 갯수 - MongoDao"+list.size());
+		
+		return list.size();
+		
+		
+	}
 }

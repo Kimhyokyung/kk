@@ -42,6 +42,7 @@
 					createReceiveChat(chatArr[1], chatArr[2], null);
 				} else {
 					// 내가 보고 있지 않은 채팅방에 새로운 메세지가 도착
+					setInterval(function(){reloadChatList()}, 500);
 				}
 			};
 
@@ -66,6 +67,10 @@
 		console.log('[Remove]');
 	}
 
+	function reloadChatList(){
+		$("#user-profile").load("my_chat.jsp #user-profile");	//ajax 유저테이블리스트 리로딩
+	}
+	
 	// 채팅방 클릭 시 호출되는 함수
 	function clickChatroom(chatroom, email, nick) {
 		
@@ -224,24 +229,30 @@
 										<div class="table-responsive">
 											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
-													<c:choose>
-														<c:when test="${fn:length(chatroomList) > 0}">
-															<c:forEach items="${chatroomList}" var="chatroom">
+															<c:forEach var="i" begin="1" end="${fn:length(chatroomList)}">
 																<c:choose>
 																	<c:when test="${userType=='talker'}">
-																		<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
-																			<td>${chatroom.listener_nickname}</td>
+																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].listener_email}','${chatroomList[i].listener_nickname}');">
+																			<td>${chatroomList[i].listener_nickname}</td>
+																			<c:choose>
+																			<c:when test = "${cntList[i] != 0}">
+																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
+																			</c:when>
+																			</c:choose>																
 																		</tr>
 																	</c:when>
 																	<c:otherwise>
-																		<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
-																			<td>${chatroom.talker_nickname}</td>
+																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].talker_email}','${chatroomList[i].talker_nickname}');">
+																			<td>${chatroomList[i].talker_nickname}</td>
+																			<c:choose>
+																			<c:when test = "${cntList[i] != 0}">
+																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
+																			</c:when>
+																			</c:choose>	
 																		</tr>
 																	</c:otherwise>
 																</c:choose>
 															</c:forEach>
-														</c:when>
-													</c:choose>
 												</tbody>
 											</table>
 										</div>
