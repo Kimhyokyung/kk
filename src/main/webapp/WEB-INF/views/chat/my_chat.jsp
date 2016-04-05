@@ -73,6 +73,7 @@
 	
 	// 채팅방 클릭 시 호출되는 함수
 	function clickChatroom(chatroom, email, nick) {
+		console.log("clickChatroom");
 		
 		chatroom_num = chatroom;
 		receiver_email = email;
@@ -96,6 +97,8 @@
 			dataType : "json",
 			data : "",
 			success : function(response) {
+				console.log(chatroom_num);	
+				console.log(response.chat);
 				var chatDiv = document.getElementById("chat-div");
 				chatDiv.innerHTML = '';
 
@@ -229,32 +232,32 @@
 										<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
 											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
-															<c:forEach var="i" begin="1" end="${fn:length(chatroomList)}">
-																<c:choose>
-																	<c:when test="${userType=='talker'}">
-																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].listener_email}','${chatroomList[i].listener_nickname}');">
-																			<td>${chatroomList[i].listener_nickname}</td>
-																			<td>${chatroomList[i].last_chat_time}</td>
-																			<c:choose>
-																			<c:when test = "${cntList[i] != 0}">
-																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
-																			</c:when>
-																			</c:choose>																
-																		</tr>
-																	</c:when>
-																	<c:otherwise>
-																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].talker_email}','${chatroomList[i].talker_nickname}');">
-																			<td>${chatroomList[i].talker_nickname}</td>
-																			<td>${chatroomList[i].last_chat_time}</td>
-																			<c:choose>
-																			<c:when test = "${cntList[i] != 0}">
-																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
-																			</c:when>
-																			</c:choose>	
-																		</tr>
-																	</c:otherwise>
-																</c:choose>
-															</c:forEach>
+													<c:forEach items="${chatroomList}" var="chatroom" varStatus="status">
+														<c:choose>
+															<c:when test="${userType=='talker'}">
+																<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
+																	<td>${chatroom.listener_nickname}</td>
+																	<td>${chatroom.last_chat_time}</td>
+																	<c:choose>
+																		<c:when test = "${cntList[status.index] != 0}">
+																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
+																		</c:when>
+																	</c:choose>													
+																</tr>
+															</c:when>
+															<c:otherwise>
+																<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
+																	<td>${chatroom.talker_nickname}</td>
+																	<td>${chatroom.last_chat_time}</td>
+																	<c:choose>
+																		<c:when test = "${cntList[status.index] != 0}">
+																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
+																		</c:when>
+																	</c:choose>	
+																</tr>
+															</c:otherwise>
+														</c:choose>
+													</c:forEach>
 												</tbody>
 											</table>
 										</div>
@@ -273,8 +276,8 @@
 											<div id="chat-input">
 												<div class="conversation-new-message" id="conversation-new-message">
 													<div class="form-group">
-														<textarea id="chat" class="form-control" rows="2"
-															placeholder="Enter your message..."></textarea>
+													<textarea id="chat" class="form-control" rows="2" style="overflow-Y:hidden"
+													placeholder="Enter your message..." onkeypress="if(event.keyCode==13){clickChat();return false; }"></textarea>
 													</div>
 													<div class="clearfix">
 														<button class="btn btn-info pull-right"
