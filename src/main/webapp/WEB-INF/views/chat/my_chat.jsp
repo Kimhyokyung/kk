@@ -226,7 +226,7 @@
 							<div class="col-lg-3 col-md-4 col-sm-4">
 								<div class="main-box clearfix">
 									<div class="main-box-body clearfix">
-										<div class="table-responsive">
+										<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
 											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
 															<c:forEach var="i" begin="1" end="${fn:length(chatroomList)}">
@@ -234,6 +234,7 @@
 																	<c:when test="${userType=='talker'}">
 																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].listener_email}','${chatroomList[i].listener_nickname}');">
 																			<td>${chatroomList[i].listener_nickname}</td>
+																			<td>${chatroomList[i].last_chat_time}</td>
 																			<c:choose>
 																			<c:when test = "${cntList[i] != 0}">
 																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
@@ -244,6 +245,7 @@
 																	<c:otherwise>
 																		<tr onclick="clickChatroom('${chatroomList[i].idx}','${chatroomList[i].talker_email}','${chatroomList[i].talker_nickname}');">
 																			<td>${chatroomList[i].talker_nickname}</td>
+																			<td>${chatroomList[i].last_chat_time}</td>
 																			<c:choose>
 																			<c:when test = "${cntList[i] != 0}">
 																			<td><span class="badge badge-danger">${cntList[i]}</span></td>	
