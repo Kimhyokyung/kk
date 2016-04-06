@@ -48,7 +48,7 @@ public class ChatController {
 		// 읽지 않은 메시지 갯수 (토커, 리스너)
 		List<Integer> cntList = new ArrayList<>();
 
-		if (userType.equals("talker")) {
+		if (userType.equals("talker")) {	//receiver가 talker
 			TalkerVo talker = (TalkerVo) session.getAttribute("authUser");
 			String tk_email = talker.getEmail();
 			String tk_nick = talker.getNickname();
@@ -70,7 +70,8 @@ public class ChatController {
 			mv.addObject("chatroomList", list);
 
 			for (int i = 0; i < list.size(); i++) {
-				cntList.add(mongoDao.receiver_response_count(String.valueOf(list.get(i).getIdx())));
+				cntList.add(mongoDao.receiver_response_count(String.valueOf(list.get(i).getIdx()), tk_email));
+				System.out.println(tk_email+"(receiver) => " +cntList.get(i));
 			}
 			mv.addObject("cntList", cntList);
 
@@ -83,8 +84,8 @@ public class ChatController {
 			mv.addObject("chatroomList", list);
 
 			for (int i = 0; i < list.size(); i++) {
-				cntList.add(mongoDao.receiver_response_count(String.valueOf(list.get(i).getIdx())));
-				System.out.println(cntList.get(i));
+				cntList.add(mongoDao.receiver_response_count(String.valueOf(list.get(i).getIdx()),ls_email));
+				System.out.println(ls_email+"(receiver) => " +cntList.get(i));
 			}
 			mv.addObject("cntList", cntList);
 		}

@@ -90,7 +90,7 @@
 			where (tb_chatroom.LISTENER_EMAIL = #{listener_email} && tb_chatroom.listener_response=0 && tb_chatroom.IDX > 0)
 		]]>
 	</select>
-	
+		
 	<update id="updateChatTime" parameterType="string">
 		<![CDATA[
 			update

@@ -62,6 +62,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			}
 			users.put(email, session);
 			System.out.println(email + " - 유저 소켓 세션 리스트 추가");
+			System.out.println("users in add "+ users);
 			System.out.println("------------------------------------------");
 			
 		} else if(func.equals("remove")) {
@@ -72,6 +73,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			if(users.containsKey(email)) {
 				users.remove(email);
 				System.out.println(email + " - 유저 소켓 세션 리스트 삭제");
+				System.out.println("users in remove "+ users);
 			}
 			System.out.println("------------------------------------------");
 			
@@ -84,18 +86,20 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			String chatroom_idx = msgArr[1];
 			String sender_email = msgArr[2];
 			String receiver_email = msgArr[3];
-			String chat = msgArr[4];
+			String userType = msgArr[4];
+			String chat = msgArr[5];
 			
 			// 기존 채팅 정보 저장 
 			ChatVo chatVo = new ChatVo();
 			chatVo.setChatroom_num(chatroom_idx);
 			chatVo.setSender_email(sender_email);
 			chatVo.setReceiver_email(receiver_email);
+			chatVo.setUser_type(userType);
 			chatVo.setChat(chat);
 			
 			// 시간 정보 저장
 			Date now = Calendar.getInstance().getTime();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			chatVo.setTime(formatter.format(now).toString());
 			
 			chatVo.setReceiver_response("false");
@@ -111,12 +115,25 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			// 채팅 전송
 			String sendChat = chatroom_idx + '/' + sender_email + '/' + chat;
 			String example = "1/khk_tk/안녕하세요";
+			System.out.println("sendChat : "+sendChat);
+			System.out.println("users in chat "+ users+"///"+receiver_email);
 			TextMessage msg = new TextMessage(sendChat);
 			if(users.containsKey(receiver_email)) {
+				System.out.println("if진입");
 				WebSocketSession recv_session = users.get(receiver_email);
 				recv_session.sendMessage(msg);
 				System.out.println(receiver_email + "에게 채팅 전송");
 			}
+			System.out.println("------------------------------------------");
+		} else if(func.equals("read")) {
+			
+			System.out.println("------------------read------------------");
+			System.out.println("읽음");
+			String chatroom_idx = msgArr[1];
+			String receiver_email = msgArr[2];
+			
+			mongoDao.receiver_response_read(chatroom_idx, receiver_email);	
+
 			System.out.println("------------------------------------------");
 		}
 	}

@@ -11,6 +11,7 @@
 	var receiver_nick;
 
 	sock_conn();
+	var timerId = 0;
 
 	// 현재 선택된 채팅방 정보 보여주기
 	if('${curChatroom}' == null || '${curChatroom}' == 'undefined' || '${curChatroom}' == '') {
@@ -18,7 +19,7 @@
 		$('.conversation-new-message').hide();
 	} else {
 		// 현재 선택된 채팅방이 있다면 채팅 로그 정보 보여주기
-		if('${userType}' == 'talker') {
+		if('${userType}' == 'talker') {	//talker가 sender일 때!
 			clickChatroom('${curChatroom.idx}', '${curChatroom.listener_email}', '${curChatroom.listener_nickname}');	
 		} else {
 			clickChatroom('${curChatroom.idx}', '${curChatroom.talker_email}', '${curChatroom.talker_nickname}');
@@ -29,7 +30,7 @@
 		if (sock == null) {
 			sock = new SockJS('/kuku/chat');
 
-			sock.onopen = function() {
+			sock.onopen = function() {	//ChatWebHandler에서 afterConnectionEstablised
 				console.log('[Connect]');
 				addUser();
 			};
@@ -40,9 +41,12 @@
 				var chatArr = chat.split('/');
 				if (chatArr[0] == chatroom_num) {
 					createReceiveChat(chatArr[1], chatArr[2], null);
+					readMsg();
 				} else {
 					// 내가 보고 있지 않은 채팅방에 새로운 메세지가 도착
-					setInterval(function(){reloadChatList()}, 500);
+					console.log("안 읽은 메시지 도착");
+					//setInterval(function(){reloadChatList();}, 2500);
+					reloadChatList();
 				}
 			};
 
@@ -68,7 +72,12 @@
 	}
 
 	function reloadChatList(){
-		$("#user-profile").load("my_chat.jsp #user-profile");	//ajax 유저테이블리스트 리로딩
+		//var ajaxDiv = document.getElementById("ajax-div");
+		console.log('before reload '+chatroom_num);
+		//$('#ajax-div').click(function(){console.log("ajax-div find");});
+		$('#ajax-div').load('/kuku/chat/my_chat_room #ajax-div');	//ajax 유저테이블리스트 리로딩
+		console.log('after reload'+chatroom_num);
+		
 	}
 	
 	// 채팅방 클릭 시 호출되는 함수
@@ -79,6 +88,9 @@
 		receiver_email = email;
 		receiver_nick = nick;
 
+		// 채팅창 상대방 닉네임 보여주기
+		showReceiverNickname(receiver_nick);
+		
 		// 채팅창 입력 부분 보여주기
 		$('.conversation-new-message').show();
 		
@@ -114,6 +126,23 @@
 				}
 			}
 		});
+		readMsg();
+	}
+	
+	function showReceiverNickname(nickname){
+		var newHtml;
+
+		newHtml = "<div style=\"padding:10px\"><h2>"+nickname+"</h2></div>"
+
+		var senderNicDiv = document.getElementById("sender-nickname-div");
+		senderNicDiv.innerHTML = newHtml;
+	}
+	
+	function readMsg(){
+		var msg = 'read/' + chatroom_num + '/' + '${authUser.email}';
+		sock.send(msg);
+		console.log('[Update]');
+		reloadChatList();
 	}
 
 	// 채팅 버튼 클릭 시 호출되는 함수
@@ -129,11 +158,13 @@
 		createSendChat('${authUser.nickname}', chat, null);
 
 		var msg = 'chat/' + chatroom_num + '/' + '${authUser.email}' + '/'
-				+ receiver_email + '/' + chat;
+				+ receiver_email + '/' + '${userType}' + '/' + chat;
 		sock.send(msg);
 		console.log('[Chat]');
 
 		document.getElementById('chat').value = '';
+		
+		reloadChatList();
 	}
 
 	// 메세지 보낼 때나 받을 때 현재 시간 설정
@@ -143,10 +174,9 @@
 		var MM = pad(now.getMonth() + 1, 2);
 		var dd = pad(now.getDate(), 2);
 		var hh = pad(now.getHours(), 2);
-		var mm = pad(now.getHours(), 2);
-		var ss = pad(now.getSeconds(), 2);
+		var mm = pad(now.getMinutes(), 2);
 
-		return yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm + ":" + ss;
+		return yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm;
 	}
 	function pad(number, length) {
 		var str = '' + number;
@@ -228,13 +258,13 @@
 						<div class="row" id="user-profile">
 							<div class="col-lg-3 col-md-4 col-sm-4">
 								<div class="main-box clearfix">
-									<div class="main-box-body clearfix">
+									<div class="main-box-body clearfix" id="ajax-div">
 										<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
 											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
 													<c:forEach items="${chatroomList}" var="chatroom" varStatus="status">
 														<c:choose>
-															<c:when test="${userType=='talker'}">
+															<c:when test="${userType=='talker'}">	<!-- talker가 sender일 때! -->
 																<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
 																	<td>${chatroom.listener_nickname}</td>
 																	<td>${chatroom.last_chat_time}</td>
@@ -242,7 +272,10 @@
 																		<c:when test = "${cntList[status.index] != 0}">
 																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
 																		</c:when>
-																	</c:choose>													
+																		<c:otherwise>
+																			<td></td>
+																		</c:otherwise>
+																	</c:choose>
 																</tr>
 															</c:when>
 															<c:otherwise>
@@ -253,6 +286,7 @@
 																		<c:when test = "${cntList[status.index] != 0}">
 																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
 																		</c:when>
+																		
 																	</c:choose>	
 																</tr>
 															</c:otherwise>
@@ -266,9 +300,11 @@
 							</div>
 							<div class="col-lg-9 col-md-8 col-sm-8">
 								<div class="main-box clearfix">
+										<header class="main-box-header clearfix" id="sender-nickname-div">
+										</header>
 									<div class="tabs-wrapper profile-tabs">
 										<div class="conversation-wrapper">
-											<div class="conversation-content" id="divChatPanel" style="overflow: auto; width: 100%; height: 350px; overflow-X: hidden">
+											<div class="conversation-content" id="divChatPanel" style="overflow: auto; width: 100%; height: 500px; overflow-X: hidden">
 												<div class="conversation-inner" id="chat-div"></div>
 												<div class="conversation-item item-left clearfix">
 												</div>
