@@ -63,4 +63,12 @@ public class UserService {
 		vo = listenerDao.update_listener( vo);
 		return vo;
 	}
+	public TalkerVo delete_talker(TalkerVo vo) {
+		vo = talkerDao.delete_talker(vo);
+		return vo;
+	}
+	public ListenerVo delete_listener( ListenerVo vo ) {
+		vo = listenerDao.delete_listener( vo);
+		return vo;
+	}
 }

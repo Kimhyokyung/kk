@@ -225,6 +225,31 @@ public class UserController {
 		return "main/index";
 	}
 	
+	//회원 탈퇴
+	@RequestMapping(value ="/delete_user", method=RequestMethod.POST )
+	public String delete_user( HttpSession session, 
+			@ModelAttribute TalkerVo talkerVo,
+			@ModelAttribute ListenerVo listenerVo) {
+		String userType = (String)session.getAttribute("userType");
+		System.out.println("delete 컨트롤러 : " + userType);
+
+		if (userType.equals("talker")) {
+			TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
+			talkerVo.setEmail(authUser.getEmail());
+			authUser = userService.delete_talker(talkerVo);
+			session.setAttribute("authUser", authUser);
+			// 인증 처리
+		} else {
+			ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
+			listenerVo.setEmail(authUser.getEmail());
+			authUser = userService.delete_listener(listenerVo);
+			session.setAttribute("authUser", authUser);
+			// 인증 처리
+		}
+		session.invalidate();
+		return "main/index";
+	}
+	
 	@RequestMapping(value = "/sessionout_exitbrowser")
 	@ResponseBody
 	public Object sessionout_exitbrowser( HttpServletRequest request) {

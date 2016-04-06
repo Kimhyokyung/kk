@@ -95,6 +95,11 @@
 																		</tr>
 																	</c:forEach>
 																</c:when>
+																<c:otherwise> 	<!-- 조회된 결과가 없을때(0일때) 이 쪽으로 옴! -->
+																	<tr>
+																		<td colspan="4">조회된 결과가 없습니다.</td>
+																	</tr>
+																</c:otherwise>
 															</c:choose>
 														</tbody>
 													</table>

@@ -87,4 +87,8 @@ public class TalkerController {
 		
 		return mv;
 	}
+	@RequestMapping(value="/my_kuku_stat2")
+	public String register_first() {
+		return "talker/my_kuku_stat2";
+	}
 }

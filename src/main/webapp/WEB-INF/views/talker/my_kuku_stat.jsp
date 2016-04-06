@@ -40,7 +40,7 @@
 								</div>
 
 								<div class="profile-message-btn center-block text-center">
-									<a href="#" class="btn btn-info"> <i
+									<a href="/kuku/talker/my_kuku_stat2" class="btn btn-info"> <i
 										class="fa fa-bar-chart-o"></i> 감정그래프 보기
 									</a>
 								</div>

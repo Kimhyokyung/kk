@@ -44,6 +44,13 @@
 			updateform.submit();
 		}
 	}
+	
+	function deleteChkBox(button) {
+		var updateform = document.getElementById('update-form');
+		console.log('deleteChkBox called');
+		updateform.action = "delete_user";
+		updateform.submit();
+	}
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
@@ -112,6 +119,11 @@
 																	class="btn btn-primary col-xs-12 btn-facebook"
 																	onClick="selectChkBox(this)" value="updateUser">
 																	회원정보수정
+																</button>
+																<button
+																	class="btn btn-danger col-xs-12"
+																	onClick="deleteChkBox(this)" value="deleteUser">
+																	회원탈퇴
 																</button>
 															</div>
 														</div>

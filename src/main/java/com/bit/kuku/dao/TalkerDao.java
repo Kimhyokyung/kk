@@ -40,4 +40,8 @@ public class TalkerDao {
 		sqlSession.update("talker.update", vo);
 		return vo;
 	}
+	public TalkerVo delete_talker(TalkerVo vo) {
+		sqlSession.delete("talker.delete", vo);
+		return vo;
+	}
 }

@@ -49,6 +49,11 @@ public class ListenerDao extends UserDao{
 		return vo;
 	}
 	
+	public ListenerVo delete_listener(ListenerVo vo) {
+		sqlSession.delete("listener.delete", vo);
+		return vo;
+	}
+	
 	@SuppressWarnings("unchecked")
     public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception {
         return (List<Map<String, Object>>)selectList("listener.selectListenerList", map);

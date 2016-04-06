@@ -27,6 +27,13 @@
 		]]>
 	</update>
 	
+	<delete id="delete" parameterType="TalkerVo">
+		<![CDATA[		
+		delete from tb_listener
+		where email=#{email}
+		]]>
+	</delete>
+	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="ListenerVo">
 		<![CDATA[
 		select email, nickname
