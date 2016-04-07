@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 
 public class SessionHandler {
 	private static SessionHandler instance;
+	
+	//로그인을하면 userMap추가. 로그아웃하면 userMap삭제
 	Map<String, HttpSession> userMap = new HashMap<String, HttpSession>();
 	
 	private SessionHandler(){
@@ -20,6 +22,8 @@ public class SessionHandler {
 	
 	public void add(String email, HttpSession session) {
 		userMap.put(email, session);
+		System.out.println("email : "+ email);
+		System.out.println("session : "+ session);
 		System.out.println("added : "+ userMap);
 	}
 	

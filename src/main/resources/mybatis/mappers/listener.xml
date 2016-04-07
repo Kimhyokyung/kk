@@ -83,11 +83,9 @@
 			select * from tb_listener
 			where idx > 0
 			]]>
-			
 		<include refid="search"></include>
-				
+		<include refid="search_score"></include>	
 		<![CDATA[
-			order by idx desc
 			limit #{pageStart}, #{perPageNum}
 		]]>
 	</select>
@@ -97,15 +95,49 @@
 			select count(idx)
 			from tb_listener
 			where idx > 0
-		]]>
+			]]>
 		<include refid="search"></include>
 	</select>
 	
 	
 	<sql id="search">
 		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', #{keyword}, '%')
+			<!-- 상담주제 -->
+			<if test="searchType == 'job'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '직장문제', '%')
+			</if>
+			<if test="searchType == 'school'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '학교문제', '%')
+			</if>
+			<if test="searchType == 'course'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '진로상담', '%')
+			</if>
+			<if test="searchType == 'smoke'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '금주/금연', '%')
+			</if>
+			<if test="searchType == 'finance'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '재정문제', '%')
+			</if>
+			<if test="searchType == 'diet'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '다이어트', '%')
+			</if>
+			<if test="searchType == 'reason'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '이성문제', '%')
+			</if>
+			<if test="searchType == 'etc'.toString()">
+				and CONSULTING_TOPIC like CONCAT('%', '기타', '%')
+			</if>
+		</if>
+	</sql>
+	
+	<sql id="search_score">
+		<if test="searchType_score != null">
+			<!-- 평점 -->
+			<if test="searchType_score == 'high'.toString()">
+				order by score desc
+			</if>
+			<if test="searchType_score == 'low'.toString()">
+				order by score asc
 			</if>
 		</if>
 	</sql>

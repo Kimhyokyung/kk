@@ -3,7 +3,7 @@ package com.bit.kuku.service;
 public class SearchCriteria extends Criteria {
 	
 	private String searchType;
-	private String keyword;
+	private String searchType_score;
 	
 	public String getSearchType() {
 		return searchType;
@@ -11,15 +11,14 @@ public class SearchCriteria extends Criteria {
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
 	}
-	public String getKeyword() {
-		return keyword;
+	public String getSearchType_score() {
+		return searchType_score;
 	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
+	public void setSearchType_score(String searchType_score) {
+		this.searchType_score = searchType_score;
 	}
-	
 	@Override
 	public String toString() {
-		return super.toString() + "SearchCriteria " + "[searchType=" + searchType + ", keyword=" + keyword + "]";
+		return "SearchCriteria [searchType=" + searchType + ", searchType_score=" + searchType_score + "]";
 	}
 }

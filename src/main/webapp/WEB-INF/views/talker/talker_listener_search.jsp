@@ -14,7 +14,7 @@
 									+ '${pageMaker.makeQuery(1)}'
 									+ "&searchType="
 									+ $("select option:selected").val()
-									+ "&keyword=" + $('#keywordInput').val();
+									+ "&searchType_score=" + $('#searchType_score').val();
 						});
 			});
 
@@ -46,25 +46,38 @@
 									<!--정렬추가부분 -->
 									<div class="row">
 										<div class="form-group col-xs-12 col-md-4 col-lg-4 col-xl-4">
-											<label class="sr-only" for="expertise">Category</label> <select
-												name="searchType" id="expertise"
-												class="form-control form-control-sm">
+											<label class="sr-only" for="expertise">Category</label>
+											<select	name="searchType" id="expertise" class="form-control form-control-sm">
 												<option value="n"
-													<c:out value="${cri.searchType == null?'selected':''}"/>>---</option>
-												<option value="t"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>상담주제</option>
+													<c:out value="${cri.searchType == null?'selected':''}"/>>--상담주제--</option>
+												<option value="job"
+													<c:out value="${cri.searchType eq 'job'?'selected':''}"/>>직장문제</option>
+												<option value="school"
+													<c:out value="${cri.searchType eq 'school'?'selected':''}"/>>학교문제</option>
+												<option value="course"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>진로상담</option>
+												<option value="smoke"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>금주/금연</option>
+												<option value="finance"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>재정문제</option>
+												<option value="diet"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>다이어트</option>
+												<option value="reason"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>이성문제</option>
+												<option value="etc"
+													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>기타</option>
 											</select>
 										</div>
+										
 										<div class="form-group col-xs-12 col-md-4 col-lg-4 col-xl-4">
-											<select name="keyword" id="keywordInput" class="form-control">
-												<option value="직장문제">직장문제</option>
-												<option value="학교문제">학교문제</option>
-												<option value="진로상담">진로상담</option>
-												<option value="금주/금연">금주/금연</option>
-												<option value="재정문제">재정문제</option>
-												<option value="다이어트">다이어트</option>
-												<option value="이성문제">이성문제</option>
-												<option value="기타">기타</option>
+											<label class="sr-only" for="expertise">Category</label>
+											<select	name="searchType_score" id="searchType_score" class="form-control form-control-sm">
+												<option value="n"
+													<c:out value="${cri.searchType_score == null?'selected':''}"/>>--평점--</option>
+												<option value="high"
+													<c:out value="${cri.searchType_score eq 'high'?'selected':''}"/>>높은 순</option>
+												<option value="low"
+													<c:out value="${cri.searchType_score eq 'low'?'selected':''}"/>>낮은 순</option>
 											</select>
 										</div>
 										<button id='searchBtn' class="btn btn-success">Search</button>
@@ -83,7 +96,7 @@
 															<th><span>닉네임</span></th>
 															<th><span>상담 주제</span></th>
 															<th class="text-center"><span>접속 상태</span></th>
-															<th><span>이메일</span></th>
+															<th><span>점수</span></th>
 															<th>채팅하기</th>
 														</tr>
 													</thead>
@@ -109,7 +122,7 @@
 																				<span class="label label-default">비접속</span>
 																			</c:if>
 																		</td>
-																		<td>${listener.email}</td>
+																		<td>${listener.score}</td>
 																		<td style="width: 20%;">
 																			<span class="fa-stack">
 																				<i class="fa fa-square fa-stack-2x"></i> 
