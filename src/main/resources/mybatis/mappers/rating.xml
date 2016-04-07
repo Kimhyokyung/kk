@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rating">
+	<insert id="insert" parameterType="RatingVo">
+		<![CDATA[ 
+		insert 
+		into tb_rating
+		(talker_email, listener_email, helpness, professionalism, sympathy, responsibility)
+		values ( #{talker_email}, #{listener_email}, #{helpness}, #{professionalism}, #{sympathy}, #{responsibility} )
+		]]>
+	</insert>
+	
+	<select id="selectByTalkerAndListener" parameterType="map" resultType="RatingVo">
+		<![CDATA[ 
+		select * 
+		from tb_rating
+		where talker_email=#{talker_email} and listener_email=#{listener_email}
+		]]>
+	</select>
+	
+	<select id="selectByListener" parameterType="String" resultType="RatingVo">
+		select *
+		from tb_rating
+		where listener_email=#{listener_email}
+	</select>
+</mapper>

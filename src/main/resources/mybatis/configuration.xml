@@ -6,10 +6,12 @@
 		<typeAlias alias="ListenerVo" type="com.bit.kuku.vo.ListenerVo" />
 		<typeAlias alias="ChatroomVo" type="com.bit.kuku.vo.ChatroomVo"/>
 		<typeAlias alias="Criteria" type="com.bit.kuku.service.Criteria"/>
+		<typeAlias alias="RatingVo" type="com.bit.kuku.vo.RatingVo"/>
    	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/listener.xml" />
 		<mapper resource="mybatis/mappers/talker.xml" />
 		<mapper resource="mybatis/mappers/chatroom.xml"/>
+		<mapper resource="mybatis/mappers/rating.xml"/>
 	</mappers>
 </configuration>
