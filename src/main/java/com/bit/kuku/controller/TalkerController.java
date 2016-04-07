@@ -1,13 +1,12 @@
 package com.bit.kuku.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.jasper.tagplugins.jstl.core.ForEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +14,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bit.kuku.service.ChatroomService;
+import com.bit.kuku.dao.MongoDao;
+import com.bit.kuku.service.RatingService;
 import com.bit.kuku.service.SearchCriteria;
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.session.SessionHandler;
-import com.bit.kuku.vo.ChatroomVo;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.PageMaker;
-import com.bit.kuku.vo.TalkerVo;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory.Default;
+import com.bit.kuku.vo.RatingVo;
 
 @Controller
 @RequestMapping("/talker")
@@ -37,15 +35,23 @@ public class TalkerController {
 	
 	@Autowired
 	private TalkerService talkerService;
-		
+	
 	@Autowired
-	private ChatroomService chatroomService;
+	private RatingService ratingService;
+	
+	@Autowired
+	private MongoDao mongoDao;
 
 	@RequestMapping(value="/my_kuku_stat")
 	public String my_kuku_stat() {
 		return "talker/my_kuku_stat";
 	}
-		
+	
+	@RequestMapping(value="/my_kuku_stat2")
+	public String register_first() {
+		return "talker/my_kuku_stat2";
+	}
+	
 	@RequestMapping(value = "/talker_listener_search", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model,
 			@RequestParam(value="onlineType", required = false) String onlineType) throws Exception {
@@ -103,38 +109,26 @@ public class TalkerController {
 		}
 	}
 	
-	@RequestMapping(value="/createChatroom")
-	public ModelAndView createChatroom(HttpServletRequest request, 
-			@RequestParam(value="listener_email") String ls_email,
-			@RequestParam(value="listener_nickname") String ls_nick) throws Exception {
+	@RequestMapping(value = "/check_rating")
+	@ResponseBody
+	public Map<String, Boolean> check_rating(
+			@RequestParam("chatroom_num") String chatroom_num,
+			@RequestParam("talker_email") String tk_email,
+			@RequestParam("listener_email") String ls_email) {
+		Map<String, Boolean> map = new HashMap<>();
 		
-		ModelAndView mv = new ModelAndView("/chat/my_chat");
+		boolean isShow = false;
 		
-		// 로그인 정보 가져오기
-		HttpSession session = request.getSession();
-		TalkerVo talker = (TalkerVo)session.getAttribute("authUser");
-		String tk_email = talker.getEmail();
-		String tk_nick = talker.getNickname();
-		
-		// 채팅방 존재유무 체크
-		ChatroomVo chatroom = chatroomService.getChatroom(tk_email, ls_email);
-		if(chatroom == null) {
-			// 새로운 채팅방 만들기
-			chatroomService.createChatroom(tk_email, tk_nick, ls_email, ls_nick);
+		RatingVo ratingVo = ratingService.getRating(tk_email, ls_email);
+		// 만약 기존 평가가 존재하지 않는다면
+		if(ratingVo == null) {
+			int chatCnt = mongoDao.chatroom_chat_count(chatroom_num);
+			if(chatCnt >= 1) {
+				isShow = true;
+			}
 		}
 		
-		// 현재 토커와 리스너의 채팅방 가져오기
-		chatroom = chatroomService.getChatroom(tk_email, ls_email);
-		mv.addObject("curChatroom", chatroom);
-		
-		// 현재 토커의 모든 채팅방 가져오기
-		List<ChatroomVo> list = chatroomService.getTalkerChatroomList(tk_email);
-		mv.addObject("chatroomList", list);
-		
-		return mv;
-	}
-	@RequestMapping(value="/my_kuku_stat2")
-	public String register_first() {
-		return "talker/my_kuku_stat2";
+		map.put("show", isShow);
+		return map;
 	}
 }
