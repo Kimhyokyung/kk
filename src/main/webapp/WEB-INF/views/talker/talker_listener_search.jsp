@@ -14,7 +14,8 @@
 									+ '${pageMaker.makeQuery(1)}'
 									+ "&searchType="
 									+ $("select option:selected").val()
-									+ "&searchType_score=" + $('#searchType_score').val();
+									+ "&searchType_score=" + $('#searchType_score').val()
+									+ "&onlineType=" + $('#onlineType').val();
 						});
 			});
 
@@ -45,7 +46,7 @@
 									<h4 class="text-center" style="color: #000; font-size: 1.5rem;">누구와 이야기를 나누고 싶으십니까?</h4>
 									<!--정렬추가부분 -->
 									<div class="row">
-										<div class="form-group col-xs-12 col-md-4 col-lg-4 col-xl-4">
+										<div class="form-group col-xs-12 col-md-3 col-lg-3 col-xl-3">
 											<label class="sr-only" for="expertise">Category</label>
 											<select	name="searchType" id="expertise" class="form-control form-control-sm">
 												<option value="n"
@@ -55,21 +56,21 @@
 												<option value="school"
 													<c:out value="${cri.searchType eq 'school'?'selected':''}"/>>학교문제</option>
 												<option value="course"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>진로상담</option>
+													<c:out value="${cri.searchType eq 'course'?'selected':''}"/>>진로상담</option>
 												<option value="smoke"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>금주/금연</option>
+													<c:out value="${cri.searchType eq 'smoke'?'selected':''}"/>>금주/금연</option>
 												<option value="finance"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>재정문제</option>
+													<c:out value="${cri.searchType eq 'finance'?'selected':''}"/>>재정문제</option>
 												<option value="diet"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>다이어트</option>
+													<c:out value="${cri.searchType eq 'diet'?'selected':''}"/>>다이어트</option>
 												<option value="reason"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>이성문제</option>
+													<c:out value="${cri.searchType eq 'reason'?'selected':''}"/>>이성문제</option>
 												<option value="etc"
-													<c:out value="${cri.searchType eq 't'?'selected':''}"/>>기타</option>
+													<c:out value="${cri.searchType eq 'etc'?'selected':''}"/>>기타</option>
 											</select>
 										</div>
 										
-										<div class="form-group col-xs-12 col-md-4 col-lg-4 col-xl-4">
+										<div class="form-group col-xs-12 col-md-3 col-lg-3 col-xl-3">
 											<label class="sr-only" for="expertise">Category</label>
 											<select	name="searchType_score" id="searchType_score" class="form-control form-control-sm">
 												<option value="n"
@@ -80,7 +81,21 @@
 													<c:out value="${cri.searchType_score eq 'low'?'selected':''}"/>>낮은 순</option>
 											</select>
 										</div>
-										<button id='searchBtn' class="btn btn-success">Search</button>
+										
+										<div class="form-group col-xs-12 col-md-3 col-lg-3 col-xl-3">
+											<label class="sr-only" for="expertise">Category</label>
+											<select	name="onlineType" id="onlineType" class="form-control form-control-sm">
+												<option value="n"
+													<c:out value="${cri.onlineType == null?'selected':''}"/>>--접속상태--</option>
+												<option value="online"
+													<c:out value="${cri.onlineType eq 'online'?'selected':''}"/>>접속</option>
+												<option value="offline"
+													<c:out value="${cri.onlineType eq 'offline'?'selected':''}"/>>비접속</option>
+											</select>
+										</div>
+										<div class="form-group col-xs-12 col-md-3 col-lg-3 col-xl-3">
+											<button id='searchBtn' class="btn btn-success">Search</button>
+										</div>
 									</div>
 								</div>
 							</div>
