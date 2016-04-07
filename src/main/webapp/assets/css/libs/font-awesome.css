@@ -202,7 +202,8 @@
   content: "\f005";
 }
 .fa-star-o:before {
-  content: "\f006";
+  content: "\f005";
+  color: #ddd; 
 }
 .fa-user:before {
   content: "\f007";

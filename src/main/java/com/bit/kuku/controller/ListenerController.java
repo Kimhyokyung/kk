@@ -1,5 +1,6 @@
 package com.bit.kuku.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.service.Criteria;
+import com.bit.kuku.service.RatingService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ChatVo;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.PageMaker;
+import com.bit.kuku.vo.RatingVo;
 
 @Controller
 @RequestMapping("/listener")
@@ -32,6 +35,9 @@ public class ListenerController {
 	
 	@Autowired
 	private ChatroomService chatroomService;
+	
+	@Autowired
+	RatingService ratingService;
 
 	@RequestMapping(value="/request_chatlist")
 	public void my_kuku_stat(HttpServletRequest request, Criteria cri, Model model) throws Exception {
@@ -63,8 +69,36 @@ public class ListenerController {
 	}
 	
 	@RequestMapping(value="/join_score")
-	public String talker_listener_search() {
+	public ModelAndView talker_listener_search(HttpServletRequest request) {
+		/////여기다
+		ModelAndView mv = new ModelAndView("listener/join_score");
+		ListenerVo listener = (ListenerVo) request.getSession().getAttribute("authUser");
+		String ls_email = listener.getEmail();
 		
-		return "listener/join_score";
+		List<RatingVo> list = ratingService.getListenerRating(ls_email);
+		
+		int rateNum = list.size();
+		int helpness = 0;
+		int professionalism = 0;
+		int sympathy = 0;
+		int responsibility = 0;
+		int total_avg = 0;
+		for(int i=0;i<rateNum;i++){
+			helpness += list.get(i).getHelpness();
+			professionalism += list.get(i).getProfessionalism();
+			sympathy += list.get(i).getSympathy();
+			responsibility += list.get(i).getResponsibility();
+			total_avg += list.get(i).getTotal_avg();
+		}
+		Map<String, Integer> calculatedScore = new HashMap<>();
+		calculatedScore.put("rateNum", rateNum);
+		calculatedScore.put("helpness", Math.round(helpness/rateNum));
+		calculatedScore.put("professionalism", Math.round(professionalism/rateNum));
+		calculatedScore.put("sympathy", Math.round(sympathy/rateNum));
+		calculatedScore.put("responsibility", Math.round(responsibility/rateNum));
+		calculatedScore.put("total_avg", Math.round(total_avg/rateNum));
+		
+		mv.addObject("calculatedScore", calculatedScore);
+		return mv;
 	}
 }

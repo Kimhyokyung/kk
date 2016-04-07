@@ -25,11 +25,11 @@
 									class="profile-img img-responsive center-block">
 
 								<div class="profile-stars">
+									<i class="fa fa-star-half"></i> 
 									<i class="fa fa-star"></i> 
-									<i class="fa fa-star"></i> 
-									<i class="fa fa-star"></i> 
-									<i class="fa fa-star"></i> 
-									<i class="fa fa-star-o"></i></br><span>내 쿠크 점수</span>
+									<i class="fa fa-star">mmkmkmkm</i> 
+									<i class="fa fa-star-o"></i> 
+									<i class="fa fa-star:before"></i></br><span>내 쿠크 점수</span>
 								</div>
 								<div class="profile-details">
 									<ul class="fa-ul">
