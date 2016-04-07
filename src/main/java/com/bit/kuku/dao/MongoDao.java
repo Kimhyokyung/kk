@@ -67,4 +67,15 @@ public class MongoDao {
 		
 		//List<Object> list = mongoOperation.findAndModify(query, update, Object.class, "chatlog");
 	}
+	
+	public int chatroom_chat_count(String chatroom_num) {
+		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("chatroom_num").is(chatroom_num));
+		int chatroomCnt = mongoOperation.find(query, Object.class, "chatlog").size();
+		System.out.println(chatroom_num + "번 채팅방 채팅 갯수 : " + chatroomCnt);
+		
+		return chatroomCnt;
+	}
 }

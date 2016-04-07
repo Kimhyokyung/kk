@@ -42,4 +42,18 @@
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
 	<![endif]-->
+	
+	<!-- global scripts -->
+	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/jquery.nanoscroller.min.js"></script>
+	
+	<!-- this page specific scripts -->
+	<script src="${pageContext.request.contextPath}/assets/js/modernizr.custom.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/classie.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/modalEffects.js"></script>
+
+	<!-- theme scripts -->
+	<script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/pace.min.js"></script>
 </head>

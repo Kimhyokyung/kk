@@ -2,8 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/rate.css" />
+<script src="${pageContext.request.contextPath}/assets/js/modernizr.custom.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/classie.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/modalEffects.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+
 <script type="text/javascript">
 	var sock;
 	var chatroom_num;
@@ -13,6 +19,13 @@
 	sock_conn();
 	var timerId = 0;
 
+	$("#chat-table").ready(function() {
+		$("tr").click(function() {
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		})
+	});
+	
 	// 현재 선택된 채팅방 정보 보여주기
 	if('${curChatroom}' == null || '${curChatroom}' == 'undefined' || '${curChatroom}' == '') {
 		// 현재 선택된 채팅방이 없다면 채팅 입력 숨기기
@@ -72,35 +85,23 @@
 	}
 
 	function reloadChatList(){
-		//var ajaxDiv = document.getElementById("ajax-div");
-		console.log('before reload '+chatroom_num);
-		//$('#ajax-div').click(function(){console.log("ajax-div find");});
 		$('#ajax-div').load('/kuku/chat/my_chat_room #ajax-div');	//ajax 유저테이블리스트 리로딩
-		console.log('after reload'+chatroom_num);
-		
 	}
 	
 	// 채팅방 클릭 시 호출되는 함수
 	function clickChatroom(chatroom, email, nick) {
-		console.log("clickChatroom");
-		
 		chatroom_num = chatroom;
 		receiver_email = email;
 		receiver_nick = nick;
 
+		// 토커 평가 조건 확인
+		checkRating(chatroom_num);
+		
 		// 채팅창 상대방 닉네임 보여주기
 		showReceiverNickname(receiver_nick);
 		
 		// 채팅창 입력 부분 보여주기
 		$('.conversation-new-message').show();
-		
-		// 현재 채팅방 선택 상태로 변경
-		$("#table-example").ready(function() {
-			$("tr").click(function() {
-				$(this).addClass('active');
-				$(this).siblings().removeClass('active');
-			})
-		});
 
 		// 현재 채팅방 로그 정보 가져오기
 		$.ajax({
@@ -109,8 +110,6 @@
 			dataType : "json",
 			data : "",
 			success : function(response) {
-				console.log(chatroom_num);	
-				console.log(response.chat);
 				var chatDiv = document.getElementById("chat-div");
 				chatDiv.innerHTML = '';
 
@@ -178,6 +177,7 @@
 
 		return yyyy + "-" + MM + "-" + dd + " " + hh + ":" + mm;
 	}
+	
 	function pad(number, length) {
 		var str = '' + number;
 		while (str.length < length) {
@@ -239,10 +239,128 @@
 			divChatPanel.scrollTop = divChatPanel.scrollHeight;
 		}
 	}
+	
+	// 리스너 평가 조건 확인
+	function checkRating(chatroom_num) {
+		// 현재 로그인 유저가 토커인지 확인
+		if('${userType}' != 'talker')
+			return;
+		
+		$.ajax({
+			url : "/kuku/talker/check_rating?chatroom_num=" + chatroom_num + "&talker_email=" + '${authUser.email}' + "&listener_email="+receiver_email,
+			type : "get",
+			dataType : "json",
+			data : "",
+			success : function(response) {
+				if(response.show) {
+					console.log('show rating btn');
+					$('#listener_rating').show();
+				} else {
+					console.log('hide rating btn');
+					$('#listener_rating').hide();
+				}
+			}
+		});
+	}
 </script>
 <html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body onbeforeunload="return removeUser()">
+	<div class="container">
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button class="md-close close">&times;</button>
+						<h4 class="modal-title" align="center">리스너 평가하기</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+							<div class="form-inline">
+								<div class="form-group">
+									<label>도움성</label>
+								</div>
+								<div class="form-group">
+									<fieldset class="rating" id="helpness">
+										 <input type="radio" id="help_start5" name="helpness" value="5" />
+										 <label class="full" for="help_start5"></label>
+										 <input type="radio" id="help_star4" name="helpness" value="4" /> 
+										 <label class="full" for="help_star4"></label> 
+										 <input type="radio" id="help_star3" name="helpness" value="3" /> 
+										 <label class="full" for="help_star3"></label> 
+										 <input type="radio" id="help_star2" name="helpness" value="2" /> 
+										 <label class="full" for="help_star2"></label> 
+										 <input type="radio" id="help_star1" name="rating" value="1" /> 
+										 <label class="full" for="help_star1"></label>
+									</fieldset>
+								</div>
+							</div>
+							<div class="form-inline">
+								<div class="form-group">
+									<label>전문성</label>
+								</div>
+								<div class="form-group">
+									<fieldset class="rating" id="professionalism">
+										 <input type="radio" id="prof_start5" name="professionalism" value="5" />
+										 <label class="full" for="prof_start5"></label>
+										 <input type="radio" id="prof_star4" name="professionalism" value="4" /> 
+										 <label class="full" for="prof_star4"></label> 
+										 <input type="radio" id="prof_star3" name="professionalism" value="3" /> 
+										 <label class="full" for="prof_star3"></label> 
+										 <input type="radio" id="prof_star2" name="professionalism" value="2" /> 
+										 <label class="full" for="prof_star2"></label> 
+										 <input type="radio" id="prof_star1" name="professionalism" value="1" /> 
+										 <label class="full" for="prof_star1"></label>
+									</fieldset>
+								</div>
+							</div>
+							<div class="form-inline">
+								<div class="form-group">
+									<label>공감성</label>
+								</div>
+								<div class="form-group">
+									<fieldset class="rating" id="sympathy">
+										 <input type="radio" id="sym_start5" name="sympathy" value="5" />
+										 <label class="full" for="sym_start5"></label>
+										 <input type="radio" id="sym_star4" name="sympathy" value="4" /> 
+										 <label class="full" for="sym_star4"></label> 
+										 <input type="radio" id="sym_star3" name="sympathy" value="3" /> 
+										 <label class="full" for="sym_star3"></label> 
+										 <input type="radio" id="sym_star2" name="sympathy" value="2" /> 
+										 <label class="full" for="sym_star2"></label> 
+										 <input type="radio" id="sym_star1" name="sympathy" value="1" /> 
+										 <label class="full" for="sym_star1"></label>
+									</fieldset>
+								</div>
+							</div>
+							<div class="form-inline">
+								<div class="form-group">
+									<label>응답성</label>
+								</div>
+								<div class="form-group">
+									<fieldset class="rating" id="responsibility">
+										 <input type="radio" id="res_start5" name="responsibility" value="5" />
+										 <label class="full" for="res_start5"></label>
+										 <input type="radio" id="res_star4" name="responsibility" value="4" /> 
+										 <label class="full" for="res_star4"></label> 
+										 <input type="radio" id="res_star3" name="responsibility" value="3" /> 
+										 <label class="full" for="res_star3"></label> 
+										 <input type="radio" id="res_star2" name="responsibility" value="2" /> 
+										 <label class="full" for="res_star2"></label> 
+										 <input type="radio" id="res_star1" name="responsibility" value="1" /> 
+										 <label class="full" for="res_star1"></label>
+									</fieldset>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">제출하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
@@ -260,7 +378,7 @@
 								<div class="main-box clearfix">
 									<div class="main-box-body clearfix" id="ajax-div">
 										<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
-											<table id="table-example" class="table table-hover dataTable no-footer" role="grid">
+											<table id="chat-table" class="table table-hover dataTable no-footer" role="grid">
 												<tbody>
 													<c:forEach items="${chatroomList}" var="chatroom" varStatus="status">
 														<c:choose>
@@ -310,14 +428,14 @@
 												</div>
 											</div>
 											<div id="chat-input">
-												<div class="conversation-new-message" id="conversation-new-message">
+												<div class="conversation-new-message" id="conversation-new-message" hidden="hidden">
 													<div class="form-group">
 													<textarea id="chat" class="form-control" rows="2" style="overflow-Y:hidden"
 													placeholder="Enter your message..." onkeypress="if(event.keyCode==13){clickChat();return false; }"></textarea>
 													</div>
 													<div class="clearfix">
-														<button class="btn btn-info pull-right"
-															onclick="clickChat()">Send message</button>
+														<button type="button" class="btn btn-info pull-left" data-toggle="modal" data-target="#myModal" id="listener_rating">리스너 평가하기</button>
+														<button class="btn btn-info pull-right" onclick="clickChat()">메세지 전송</button>
 													</div>
 												</div>
 											</div>
@@ -331,5 +449,5 @@
 			</div>
 		</div>
 	</div>
-</body>
+	</body>
 </html>
