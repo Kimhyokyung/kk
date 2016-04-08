@@ -22,10 +22,9 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-xs-12">
-									<div style="width: 510px; height: 420px; margin-left: 550; margin-top: 70;">
 										<div id="login-box2">
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-xs-12">
 													<header id="login-header">
 														<div id="login-logo">
 															<img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="" />
@@ -115,7 +114,6 @@
 										</div>
 									</div>
 								</div>
-							</div>
 						</div>
 					</div>
 				</div>

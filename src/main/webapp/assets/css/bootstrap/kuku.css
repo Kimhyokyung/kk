@@ -3066,12 +3066,12 @@ input[type="radio"] {
 }
 
 #login-box2 {
-  max-width: 1000px;
-  min-width: 1000px;
- /*  margin: 60px auto 20px; */
+  max-width: 500px;
+  min-width: 300px;
+  margin: 60px auto 20px;
   overflow: hidden;
   border-radius: 3px 3px 0 0;
-  /* background-clip: padding-box; */
+  background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
 }
 
