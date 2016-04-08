@@ -11,7 +11,9 @@
 			<div class="row">
 				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
 				<div id="content-wrapper">
-					<div id="login-full-wrapper"></div>
+					<div id="login-full-wrapper">
+						
+					</div>
 				</div>
 			</div>
 		</div>

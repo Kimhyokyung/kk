@@ -36,7 +36,7 @@
 	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="ListenerVo">
 		<![CDATA[
-		select email, nickname
+		select email, nickname, password
 		from tb_listener
 		where email=#{email} and password=#{password}
 		]]>

@@ -68,6 +68,10 @@ public class UserController {
 		return map;
 	}
 	
+	
+
+	
+	
 	@RequestMapping(value="/joinform")
 	public String joinform() {
 		return "user/joinform";
@@ -130,6 +134,46 @@ public class UserController {
 	public String login(Locale locale, Model model) {
 
 		return "user/loginform";
+	}
+	
+
+	@RequestMapping(value="/modify_check")
+	@ResponseBody
+	public Object check_modify(@RequestParam("modify_pw") String modify_pw,
+			HttpServletRequest request){
+		
+		HttpSession session = request.getSession();
+		String userType = (String)session.getAttribute("userType");
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(userType.equals("talker")){
+			TalkerVo authUser = (TalkerVo)session.getAttribute("authUser");
+			String authPw = authUser.getPassword();
+			if(authPw.equals(modify_pw)){
+				map.put("isEqual", true);
+				System.out.println("equal");
+			}else{
+				map.put("isEqual", false);
+				System.out.println("not equal");
+			}
+			
+		}else if (userType.equals("listener")){
+			ListenerVo authUser = (ListenerVo)session.getAttribute("authUser");
+			String authPw = authUser.getPassword();
+			if(authPw.equals(modify_pw)){
+				map.put("isEqual", true);
+				System.out.println("equal");
+			}else{
+				map.put("isEqual", false);
+				System.out.println("not equal");
+			}
+		}else{
+			map.put("isEqual", false);
+			
+		}
+		
+		return map;
 	}
 	
 	@RequestMapping(value = "/login", method=RequestMethod.POST )
@@ -196,9 +240,17 @@ public class UserController {
 		return "main/index";
 	}
 	
+	
+	
+	
 	@RequestMapping(value ="/modifyform")
 	public String modify() {
 		return "user/modifyform";
+	}
+	
+	@RequestMapping(value ="/modify_lock")
+	public String modify_lock() {
+		return "user/modify_lock";
 	}
 	
 	//회원 정보 수정
