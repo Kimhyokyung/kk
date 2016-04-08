@@ -30,9 +30,40 @@
 		chatform.action = "/kuku/chat/my_chat_room";
 		chatform.submit();
 	}
+	
+	function callModal(email, nick){
+		var listenerEmail = document.getElementById('listener_email');
+		listenerEmail.value = email;
+		
+		var listenerNick = document.getElementById('listener_nick');
+		listenerNick.value = nick;
+		
+		//$("#myModal").val(listenerEmail.value, listenerNick.value);
+		$("#modalbody").empty();
+		$("#modalbody").append(
+				"현재 리스너가 비접속 상태입니다.<br>채팅을 계속 진행하시겠습니까?<br>"+listenerEmail.value+" "+ listenerNick.value);
+		  $('#gochat').on('click', function () {
+			  clickChat(listenerEmail.value, listenerNick.value);
+		  })
+		$("#myModal").modal();
+	}
+	
+	
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
+	<div class="modal fade" id="myModal" role="alertdialog" align="center">
+		<div class="modal-alert">
+			<div class="modal-content">
+					<div class="modal-body" align="center" id="modalbody">
+					</div>
+					<div class="modal-button" id="modalbutton">
+						<button type="button" class="btn btn-default" data-dismiss="modal">안해안해</button>
+						<button type="button" class="btn btn-primary" id="gochat">채팅고고</button>
+					</div>
+			</div>s
+		</div>
+	</div>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
@@ -140,8 +171,18 @@
 																		<td>${listener.score}</td>
 																		<td style="width: 20%;">
 																			<span class="fa-stack">
-																				<i class="fa fa-square fa-stack-2x"></i> 
-																				<i class="fa fa-comment fa-stack-1x fa-inverse" onclick="clickChat('${listener.email}', '${listener.nickname}');"></i>
+																					<c:choose>
+																					<c:when test="${isDoing}">
+																						<!-- 비접속임 알려줘야함. modal -->
+																						<i class="fa fa-square fa-stack-2x"></i> 
+																						<i class="fa fa-comment fa-stack-1x fa-inverse" onclick="callModal('${listener.email}', '${listener.nickname}');"></i>
+																					<!-- 	<i class="fa fa-comment fa-stack-1x fa-inverse" data-toggle="modal" data-target="#myModal" id="unactive_alert"></i> -->
+																					</c:when>
+																					<c:otherwise>
+																						<i class="fa fa-square fa-stack-2x"></i> 
+																						<i class="fa fa-comment fa-stack-1x fa-inverse" onclick="clickChat('${listener.email}', '${listener.nickname}');"></i>
+																					</c:otherwise>
+																				</c:choose>
 																			</span>
 																		</td>
 																	</tr>
@@ -187,5 +228,16 @@
 			</div>
 		</div>
 	</div>
+	<script id="template" type="text/x-handlebars-template">
+		<span>{{lsemail}}</span>
+		<span>{{lsnick}}</span>	
+	</script>
+	<script>
+		var source = $("#template").html();
+		var template = Handlebars.compile(source);
+		var data = {lsemail:"", lsnick:""};
+		
+		$("#myModal").html(template(data));
+	</script>
 </body>
 </html>

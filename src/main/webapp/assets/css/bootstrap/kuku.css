@@ -7898,3 +7898,45 @@ a.list-group-item.active:focus {
     background-color: #1abc9c;
   }
 }
+
+.modal-alert {
+  position: relative;
+  width: 400px;
+  height:600px;
+  margin: 10px;
+}
+.modal.fade .modal-alert {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.modal.in .modal-alert {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
+.modal-button {
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+.modal-button:before, .modal-button:after {
+  content: " ";
+  display: table;
+}
+.modal-button:after {
+  clear: both;
+}
+.modal-button .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+.modal-button .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.modal-button .btn-block + .btn-block {
+  margin-left: 0;
+}

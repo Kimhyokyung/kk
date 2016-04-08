@@ -8,6 +8,7 @@
 	
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/kuku.css" />
 	
 	<!-- RTL support - for demo only -->
 	<script src="${pageContext.request.contextPath}/assets/js/demo-rtl.js"></script>
