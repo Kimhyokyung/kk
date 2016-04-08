@@ -38,7 +38,6 @@
 		var listenerNick = document.getElementById('listener_nick');
 		listenerNick.value = nick;
 		
-		//$("#myModal").val(listenerEmail.value, listenerNick.value);
 		$("#modalbody").empty();
 		$("#modalbody").append(
 				"현재 리스너가 비접속 상태입니다.<br>채팅을 계속 진행하시겠습니까?<br>"+listenerEmail.value+" "+ listenerNick.value);
@@ -228,16 +227,5 @@
 			</div>
 		</div>
 	</div>
-	<script id="template" type="text/x-handlebars-template">
-		<span>{{lsemail}}</span>
-		<span>{{lsnick}}</span>	
-	</script>
-	<script>
-		var source = $("#template").html();
-		var template = Handlebars.compile(source);
-		var data = {lsemail:"", lsnick:""};
-		
-		$("#myModal").html(template(data));
-	</script>
 </body>
 </html>
