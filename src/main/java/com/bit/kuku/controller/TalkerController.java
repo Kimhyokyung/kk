@@ -131,4 +131,13 @@ public class TalkerController {
 		map.put("show", isShow);
 		return map;
 	}
+	
+	@RequestMapping(value = "/saveEmotionImage")
+	@ResponseBody
+	public Map<String, Boolean> saveEmotionImage(@RequestParam("fileName") String fileName) {
+		
+		mongoDao.saveEmotionImage(fileName);
+		Map<String, Boolean> map = new HashMap<>();
+		return map;
+	}
 }
