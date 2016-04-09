@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/rate.css" />
 <script src="${pageContext.request.contextPath}/assets/js/modernizr.custom.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/classie.js"></script>
@@ -137,7 +140,7 @@
 		senderNicDiv.innerHTML = newHtml;
 	}
 	
-	function readMsg(){
+	function readMsg() {
 		var msg = 'read/' + chatroom_num + '/' + '${authUser.email}';
 		sock.send(msg);
 		console.log('[Update]');
@@ -164,6 +167,7 @@
 		document.getElementById('chat').value = '';
 		
 		reloadChatList();
+		checkRating(chatroom_num);
 	}
 
 	// 메세지 보낼 때나 받을 때 현재 시간 설정
@@ -254,32 +258,66 @@
 			success : function(response) {
 				if(response.show) {
 					console.log('show rating btn');
-					$('#listener_rating').show();
+					$('#lsratingbtn').show();
 				} else {
 					console.log('hide rating btn');
-					$('#listener_rating').hide();
+					$('#lsratingbtn').hide();
 				}
 			}
 		});
 	}
+	
+	function callModal(){
+		
+		$('#submitbtn').on('click', function () {
+			submitClick();
+		  })
+		$("#myModal").modal();
+	}
+	
+	function submitClick(){
+		
+		$( "#listener_email" ).val( receiver_email );
+		
+		 var params = jQuery("#Evaluation").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
+		    jQuery.ajax({
+		        url: '/kuku/listener/evaluation_listener',
+		        type: 'POST',
+		        data:params,
+		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+		        dataType: 'json',
+		        success: function (response) {
+		        	console.log(response+""+response.lsemail);
+		            if (response){
+		            	 $("#myModal").modal("hide");
+		            	 console.log(response.lsemail+""+receiver_email);
+		            	 if(response.lsemail==receiver_email){
+		            		 $('#lsratingbtn').hide();
+		            		 //$("#lsratingbtn").attr('disabled',true);
+		            	 }
+		            }
+		        }
+		    });
+	}
 </script>
-<html>
+</head>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body onbeforeunload="return removeUser()">
 	<div class="container">
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button class="md-close close">&times;</button>
+						<button class="close" data-dismiss="modal" aria-label="Close" id="modalclose">&times;</button>
 						<h4 class="modal-title" align="center">리스너 평가하기</h4>
 					</div>
-					<div class="modal-body">
-						<form role="form">
+					<div class="modal-body" id="modalbody">
+						<form id="Evaluation" name="Evaluation" method="POST">
 							<div class="form-inline">
 								<div class="form-group">
 									<label>도움성</label>
 								</div>
+								
 								<div class="form-group">
 									<fieldset class="rating" id="helpness">
 										 <input type="radio" id="help_start5" name="helpness" value="5" />
@@ -290,7 +328,7 @@
 										 <label class="full" for="help_star3"></label> 
 										 <input type="radio" id="help_star2" name="helpness" value="2" /> 
 										 <label class="full" for="help_star2"></label> 
-										 <input type="radio" id="help_star1" name="rating" value="1" /> 
+										 <input type="radio" id="help_star1" name="helpness" value="1" /> 
 										 <label class="full" for="help_star1"></label>
 									</fieldset>
 								</div>
@@ -352,10 +390,12 @@
 									</fieldset>
 								</div>
 							</div>
+							<input type="hidden" name="talker_email" id="talker_email" value ='${authUser.email}'/>
+							<input type="hidden" name="listener_email" id="listener_email" />
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">제출하기</button>
+						<button type="button" class="btn btn-primary" id="submitbtn">제출하기</button>
 					</div>
 				</div>
 			</div>
@@ -404,7 +444,6 @@
 																		<c:when test = "${cntList[status.index] != 0}">
 																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
 																		</c:when>
-																		
 																	</c:choose>	
 																</tr>
 															</c:otherwise>
@@ -424,8 +463,7 @@
 										<div class="conversation-wrapper">
 											<div class="conversation-content" id="divChatPanel" style="overflow: auto; width: 100%; height: 500px; overflow-X: hidden">
 												<div class="conversation-inner" id="chat-div"></div>
-												<div class="conversation-item item-left clearfix">
-												</div>
+												<div class="conversation-item item-left clearfix"></div>
 											</div>
 											<div id="chat-input">
 												<div class="conversation-new-message" id="conversation-new-message" hidden="hidden">
@@ -434,8 +472,8 @@
 													placeholder="Enter your message..." onkeypress="if(event.keyCode==13){clickChat();return false; }"></textarea>
 													</div>
 													<div class="clearfix">
-														<button type="button" class="btn btn-info pull-left" data-toggle="modal" data-target="#myModal" id="listener_rating">리스너 평가하기</button>
-														<button class="btn btn-info pull-right" onclick="clickChat()">메세지 전송</button>
+														<button class="btn btn-info pull-left" onclick="callModal();" id="lsratingbtn">리스너 평가하기</button>
+														<button class="btn btn-info pull-right" onclick="clickChat();">메세지 전송</button>
 													</div>
 												</div>
 											</div>

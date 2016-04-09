@@ -7940,3 +7940,21 @@ a.list-group-item.active:focus {
 .modal-button .btn-block + .btn-block {
   margin-left: 0;
 }
+.modal-show {
+  position: relative;
+  width: 540px;
+  height:600px;
+  margin: 10px;
+}
+.modal.fade .modal-show {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.modal.in .modal-show {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}

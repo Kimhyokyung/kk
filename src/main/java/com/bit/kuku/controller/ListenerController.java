@@ -10,7 +10,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -66,10 +68,9 @@ public class ListenerController {
 		return map;
 	}
 
-	@RequestMapping(value = "/join_score")
+	@RequestMapping(value = "/listener_score")
 	public ModelAndView talker_listener_search(HttpServletRequest request) {
-		///// 여기다
-		ModelAndView mv = new ModelAndView("listener/join_score");
+		ModelAndView mv = new ModelAndView("listener/listener_score");
 		ListenerVo listener = (ListenerVo) request.getSession().getAttribute("authUser");
 		String ls_email = listener.getEmail();
 
@@ -105,5 +106,35 @@ public class ListenerController {
 		}
 		mv.addObject("calculatedScore", calculatedScore);
 		return mv;
+	}
+	
+	@RequestMapping(value = "/evaluation_listener", method=RequestMethod.POST )
+	@ResponseBody
+	public Object evaluation_talker(HttpServletRequest request, @ModelAttribute RatingVo ratingVo)
+	{
+		// 새로운 평가 입력
+		System.out.println(ratingVo);
+		ratingService.ratingListener(ratingVo);
+		
+		// 리스너의 평점 계산
+		String ls_email = ratingVo.getListener_email();
+		List<RatingVo> list = ratingService.getListenerRating(ls_email);
+		
+		System.out.println("리스너 평점 갯수 : " + list.size());
+		System.out.println("리스너 평점 리스트 : " + list);
+		
+		int ratingAVG = 0;
+		for(int i=0; i<list.size(); i++) {
+			RatingVo ls_rating = list.get(i);
+			ratingAVG += ls_rating.getTotal_avg();
+		}
+		
+		ratingAVG = Math.round(ratingAVG/list.size());
+		System.out.println(ratingAVG);
+		userService.update_score(ls_email, ratingAVG);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("lsemail", ls_email);
+		return map;
 	}
 }

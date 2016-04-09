@@ -7,7 +7,7 @@
 <header class="navbar" id="header-navbar">
    <div class="container">
       <a href="/kuku/main" id="logo" class="navbar-brand"> <img
-         src="${pageContext.request.contextPath}/assets/img/logo.png" alt="" class="normal-logo logo-white" /> <img
+         src="${pageContext.request.contextPath}/assets/img/kukumain.png" alt="" class="normal-logo logo-white" /> <img
          src="${pageContext.request.contextPath}/assets/img/logo-black.png" alt="" class="normal-logo logo-black" /> <img
          src="${pageContext.request.contextPath}/assets/img/logo-small.png" alt=""
          class="small-logo hidden-xs hidden-sm hidden" />
@@ -26,8 +26,7 @@
 					<c:set var="userType" value="${userType}"/>
 					<c:choose>
 						<c:when test="${empty authUser}">
-							<li class="dropdown profile-dropdown"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
+							<li class="dropdown profile-dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img
 									src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png"
 									alt="" /> <span class="hidden-xs">게스트님 안녕하세요 </li>
 							</span>
@@ -53,7 +52,7 @@
 							<ul class="nav navbar-nav navbar-center">
 								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
 								<li><a href="/kuku/listener/request_chatlist">요청 보기</a></li>
-								<li><a href="/kuku/listener/join_score">평가 보기</a></li>
+								<li><a href="/kuku/listener/listener_score">평가 보기</a></li>
 								<li><a href="/kuku/user/modify_lock">마이 페이지</a></li>
 								<!-- <li><a href="/kuku/user/modifyform">마이 페이지</a></li> -->
 							</ul>
@@ -71,4 +70,3 @@
 		</div>
    </div>
 </header>
-

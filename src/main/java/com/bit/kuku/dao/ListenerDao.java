@@ -99,4 +99,12 @@ public class ListenerDao extends UserDao{
 		System.out.println("listSearchCount" + cri);
 		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
+	
+	public ListenerVo updateScore(String email, int score) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("email", email);
+		map.put("score", score);
+		ListenerVo listenerVo = sqlSession.selectOne("listener.update_score", map);
+		return listenerVo;
+	}
 }

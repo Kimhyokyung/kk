@@ -57,7 +57,6 @@ public class TalkerController {
 			@RequestParam(value="onlineType", required = false) String onlineType) throws Exception {
 		
 		System.out.println("onlineType :" + onlineType);
-		// model.addAttribute("list", talkerService.listSearchCriteria(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

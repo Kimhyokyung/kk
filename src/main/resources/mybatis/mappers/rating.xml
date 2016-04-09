@@ -6,8 +6,9 @@
 		<![CDATA[ 
 		insert 
 		into tb_rating
-		(talker_email, listener_email, helpness, professionalism, sympathy, responsibility)
-		values ( #{talker_email}, #{listener_email}, #{helpness}, #{professionalism}, #{sympathy}, #{responsibility} )
+		(talker_email, listener_email, helpness, professionalism, sympathy, responsibility, total_avg)
+		values ( #{talker_email}, #{listener_email}, #{helpness}, #{professionalism}, #{sympathy}, #{responsibility},
+		 ROUND(#{helpness} + #{professionalism} + #{sympathy} + #{responsibility})/4)
 		]]>
 	</insert>
 	

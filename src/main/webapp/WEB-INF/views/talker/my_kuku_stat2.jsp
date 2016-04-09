@@ -31,11 +31,17 @@
 			}
 		});
 		
-		var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/graph_image/' + fileName + '.png>';
-		console.log(html);
-
+		var html2 = '<img src=" '+ '${pageContext.request.contextPath}'+'/assets/graph_image/' + fileName + '.png" onerror="this.src=\''+'${pageContext.request.contextPath}'+'/assets/img/samples/14.png\'" >';
+		console.log(html2);
+		console.log(fileName);
 		var graphDiv = document.getElementById("kukugraph");
-		graphDiv.innerHTML = html;
+		graphDiv.innerHTML = html2;
+		
+		// var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/graph_image/' + fileName + '.png>';
+		// console.log(html);
+
+/* 		var graphDiv = document.getElementById("kukugraph");
+		graphDiv.innerHTML = html; */
 	}
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -53,7 +59,6 @@
                            style="padding: 10px">
                            <input type="date" id="datePicker">
                         </div>
-
                         <div class="btn-group pagination pull-right"
                            style="padding: 10px">
                            <button class="btn btn-outline btn-primary btn-xs"

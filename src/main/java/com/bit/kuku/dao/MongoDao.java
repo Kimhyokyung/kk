@@ -1,5 +1,6 @@
 package com.bit.kuku.dao;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -79,9 +80,14 @@ public class MongoDao {
 	}
 	
 	public void saveEmotionImage(String fileName) {
+		System.out.println("파일 저장 함수 호출");
 		try {
 			GridFS gridFs = new GridFS(mongoTemplate.getDb(), "photo");
 		    GridFSDBFile outputImageFile = gridFs.findOne(fileName);
+		    
+		    String filePath = new File(".").getAbsolutePath();
+		    System.out.println(filePath);
+		    
 		    String imageLocation = "C://Users//HK-PC//git//kk//src//main//webapp//assets//graph_image//" + fileName + ".png";
 		    System.out.println(imageLocation);
 		    outputImageFile.writeTo(imageLocation);

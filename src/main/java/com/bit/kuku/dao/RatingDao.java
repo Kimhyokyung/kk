@@ -17,7 +17,8 @@ public class RatingDao {
 	SqlSessionTemplate sqlSession;
 	
 	public void insert_Rating(RatingVo vo) {
-		sqlSession.insert("rating.insert");
+		System.out.println(vo.getTalker_email());
+		sqlSession.insert("rating.insert", vo);
 	}
 	
 	public RatingVo selectRating(String tk_email, String ls_email) {

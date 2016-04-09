@@ -46,21 +46,19 @@
 		  })
 		$("#myModal").modal();
 	}
-	
-	
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div class="modal fade" id="myModal" role="alertdialog" align="center">
 		<div class="modal-alert">
 			<div class="modal-content">
-					<div class="modal-body" align="center" id="modalbody">
-					</div>
-					<div class="modal-button" id="modalbutton">
-						<button type="button" class="btn btn-default" data-dismiss="modal">안해안해</button>
-						<button type="button" class="btn btn-primary" id="gochat">채팅고고</button>
-					</div>
-			</div>s
+				<div class="modal-body" align="center" id="modalbody">
+				</div>
+				<div class="modal-button" id="modalbutton">
+					<button type="button" class="btn btn-default" data-dismiss="modal">안해안해</button>
+					<button type="button" class="btn btn-primary" id="gochat">채팅고고</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="theme-wrapper">
@@ -204,7 +202,6 @@
 													<c:if test="${pageMaker.prev }">
 														<li><a href="talker_listener_search${pageMaker.makeSearch(pageMaker.startPage -1) }">&laquo;</a></li>
 													</c:if>
-
 													<c:forEach begin="${pageMaker.startPage }"
 														end="${pageMaker.endPage }" var="idx">
 														<li

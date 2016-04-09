@@ -71,4 +71,10 @@ public class UserService {
 		vo = listenerDao.delete_listener( vo);
 		return vo;
 	}
+	
+	public ListenerVo update_score(String ls_email, int ratingAVG) {
+		ListenerVo listenerVo = listenerDao.updateScore(ls_email, ratingAVG);
+		return listenerVo;
+		
+	}
 }

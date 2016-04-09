@@ -142,4 +142,12 @@
 		</if>
 	</sql>
 	
+	<update id="update_score" parameterType="map">
+		<![CDATA[		
+		update tb_listener
+		set score=#{score}
+		where email=#{email}
+		]]>
+	</update>
+	
 </mapper>
