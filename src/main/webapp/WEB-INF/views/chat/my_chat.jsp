@@ -1,18 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/rate.css" />
 <script src="${pageContext.request.contextPath}/assets/js/modernizr.custom.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/classie.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/modalEffects.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	var sock;
 	var chatroom_num;
@@ -20,8 +15,7 @@
 	var receiver_nick;
 
 	sock_conn();
-	var timerId = 0;
-
+	
 	$("#chat-table").ready(function() {
 		$("tr").click(function() {
 			$(this).addClass('active');
@@ -101,7 +95,7 @@
 		checkRating(chatroom_num);
 		
 		// 채팅창 상대방 닉네임 보여주기
-		showReceiverNickname(receiver_nick);
+		showReceiverNickname(receiver_email, receiver_nick);
 		
 		// 채팅창 입력 부분 보여주기
 		$('.conversation-new-message').show();
@@ -131,16 +125,14 @@
 		readMsg();
 	}
 	
-	function showReceiverNickname(nickname){
-		var newHtml;
-
-		newHtml = "<div style=\"padding:10px\"><h2>"+nickname+"</h2></div>"
+	function showReceiverNickname(email, nickname){
+		var newHtml1 = "<div style=\"padding:10px\"><h2>"+nickname+"</h2></div>";
 
 		var senderNicDiv = document.getElementById("sender-nickname-div");
-		senderNicDiv.innerHTML = newHtml;
+		senderNicDiv.innerHTML = newHtml1;
 	}
 	
-	function readMsg() {
+	function readMsg(){
 		var msg = 'read/' + chatroom_num + '/' + '${authUser.email}';
 		sock.send(msg);
 		console.log('[Update]');
@@ -167,7 +159,6 @@
 		document.getElementById('chat').value = '';
 		
 		reloadChatList();
-		checkRating(chatroom_num);
 	}
 
 	// 메세지 보낼 때나 받을 때 현재 시간 설정
@@ -258,66 +249,90 @@
 			success : function(response) {
 				if(response.show) {
 					console.log('show rating btn');
-					$('#lsratingbtn').show();
+					$('#listener_rating').show();
 				} else {
 					console.log('hide rating btn');
-					$('#lsratingbtn').hide();
+					$('#listener_rating').hide();
 				}
 			}
 		});
 	}
 	
-	function callModal(){
+	function callModal() {
+		var email = receiver_email;
+		var nick = receiver_nick;
 		
-		$('#submitbtn').on('click', function () {
-			submitClick();
-		  })
-		$("#myModal").modal();
+		var now = new Date();
+		var month = (now.getMonth() + 1);
+		var day = now.getDate();
+		if (month < 10)
+			month = "0" + month;
+		if (day < 10)
+			day = "0" + day;
+	
+		var today = now.getFullYear() + '-' + month + '-' + day;
+		$('#datePicker').val(today);
+		
+		$("#modalHeader").empty();
+		$("#modalHeader").append("<button class=\"md-close close\" id=\"lsModalClose\">&times;</button>"+nick+"님 감정그래프<br>");
+		
+		$("#kukugraph").empty();
+		
+  		$('#lsModalClose').on('click', function () {
+			  $("#lsModal").modal("hide");
+	  	})
+	  	
+		$('#clickbargraph').on('click', function () {
+			console.log(this);
+			click_graph(this, email);
+		})
+		
+		$('#clickpiegraph').on('click', function () {
+			console.log(this);
+			click_graph(this, email);
+  		})
+	  	
+		$("#lsModal").modal({backdrop:false});
 	}
 	
-	function submitClick(){
+	function click_graph(button, email) {
+		var kukuday = $('#datePicker').val();
+		var fileName = email + kukuday + button.value + '_graph';
 		
-		$( "#listener_email" ).val( receiver_email );
+		// 현재 채팅방 로그 정보 가져오기
+		$.ajax({
+			url : "/kuku/talker/saveEmotionImage?fileName=" + fileName,
+			type : "get",
+			dataType : "json",
+			data : "",
+			success : function(response) {
+			}
+		});
 		
-		 var params = jQuery("#Evaluation").serialize(); // serialize() : 입력된 모든Element(을)를 문자열의 데이터에 serialize 한다.
-		    jQuery.ajax({
-		        url: '/kuku/listener/evaluation_listener',
-		        type: 'POST',
-		        data:params,
-		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
-		        dataType: 'json',
-		        success: function (response) {
-		        	console.log(response+""+response.lsemail);
-		            if (response){
-		            	 $("#myModal").modal("hide");
-		            	 console.log(response.lsemail+""+receiver_email);
-		            	 if(response.lsemail==receiver_email){
-		            		 $('#lsratingbtn').hide();
-		            		 //$("#lsratingbtn").attr('disabled',true);
-		            	 }
-		            }
-		        }
-		    });
+		var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/graph_image/' + fileName + '.png>';
+		console.log(html);
+
+		var graphDiv = document.getElementById("kukugraph");
+		graphDiv.innerHTML = html;
 	}
 </script>
-</head>
+<html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body onbeforeunload="return removeUser()">
 	<div class="container">
-		<div class="modal fade" id="myModal" role="dialog" data-backdrop="false">
+		<div class="modal fade" id="tkModal" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button class="close" data-dismiss="modal" aria-label="Close" id="modalclose">&times;</button>
+						<button class="md-close close">&times;</button>
 						<h4 class="modal-title" align="center">리스너 평가하기</h4>
 					</div>
-					<div class="modal-body" id="modalbody">
-						<form id="Evaluation" name="Evaluation" method="POST">
+					<div class="modal-body">
+						<form role="form">
 							<div class="form-inline">
 								<div class="form-group">
 									<label>도움성</label>
 								</div>
-								
 								<div class="form-group">
 									<fieldset class="rating" id="helpness">
 										 <input type="radio" id="help_start5" name="helpness" value="5" />
@@ -328,7 +343,7 @@
 										 <label class="full" for="help_star3"></label> 
 										 <input type="radio" id="help_star2" name="helpness" value="2" /> 
 										 <label class="full" for="help_star2"></label> 
-										 <input type="radio" id="help_star1" name="helpness" value="1" /> 
+										 <input type="radio" id="help_star1" name="rating" value="1" /> 
 										 <label class="full" for="help_star1"></label>
 									</fieldset>
 								</div>
@@ -390,12 +405,30 @@
 									</fieldset>
 								</div>
 							</div>
-							<input type="hidden" name="talker_email" id="talker_email" value ='${authUser.email}'/>
-							<input type="hidden" name="listener_email" id="listener_email" />
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="submitbtn">제출하기</button>
+						<button type="button" class="btn btn-primary">제출하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="lsModal" role="dialog" align="center">
+			<div class="modal-show">
+				<div class="modal-content">
+					<div class="modal-header" id="modalHeader">
+					</div>
+					<div class="modal-body" align="center" id="modalbody">
+						 <div class="main-box clearfix">
+							<div class="btn-group pagination pull-left" style="padding: 10px">
+								<input type="date" id="datePicker">
+							</div>
+							<div class="btn-group pagination pull-right" style="padding: 10px">
+							   <button class="btn btn-outline btn-primary btn-xs" value="bar" id="clickbargraph">bar grape</button>
+							   <button class="btn btn-outline btn-primary btn-xs" value="pie" id="clickpiegraph">pie graph</button>
+							</div>
+							<div id="kukugraph"></div>
+						 </div>
 					</div>
 				</div>
 			</div>
@@ -405,7 +438,7 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				
+				<div id="content-wrapper">
 					<div id="page-wrapper" class="container">
 						<div class="row">
 							<div class="col-lg-12">
@@ -462,17 +495,25 @@
 										<div class="conversation-wrapper">
 											<div class="conversation-content" id="divChatPanel" style="overflow: auto; width: 100%; height: 500px; overflow-X: hidden">
 												<div class="conversation-inner" id="chat-div"></div>
-												<div class="conversation-item item-left clearfix"></div>
+												<div class="conversation-item item-left clearfix">
+												</div>
 											</div>
 											<div id="chat-input">
 												<div class="conversation-new-message" id="conversation-new-message" hidden="hidden">
 													<div class="form-group">
-													<textarea id="chat" class="form-control" rows="2" style="overflow-Y:hidden"
-													placeholder="Enter your message..." onkeypress="if(event.keyCode==13){clickChat();return false; }"></textarea>
+														<textarea id="chat" class="form-control" rows="2" style="overflow-Y:hidden"
+														placeholder="Enter your message..." onkeypress="if(event.keyCode==13){clickChat();return false; }"></textarea>
 													</div>
 													<div class="clearfix">
-														<button class="btn btn-info pull-left" onclick="callModal();" id="lsratingbtn">리스너 평가하기</button>
-														<button class="btn btn-info pull-right" onclick="clickChat();">메세지 전송</button>
+														<c:choose>
+															<c:when test="${userType=='talker'}">	<!-- talker가 sender일 때! -->
+																<button type="button" class="btn btn-info pull-left" data-toggle="modal" data-target="#tkModal" id="listener_rating">리스너 평가하기</button>
+															</c:when>
+															<c:otherwise>
+																<button type="button" class="btn btn-info pull-left" onclick="callModal();">토커 감정그래프</button>
+															</c:otherwise>
+														</c:choose>
+														<button class="btn btn-info pull-right" onclick="clickChat()">메세지 전송</button>
 													</div>
 												</div>
 											</div>
