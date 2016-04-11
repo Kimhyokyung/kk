@@ -3,46 +3,89 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#bar').hide();
+		
+		$('#bar').on('click', function(){
+			$('#circle').show();
+			$('#bar').hide();
+		})
+		$('#circle').on('click', function(){
+			document.getElementById("bar").innerHTML= "bar grape 변경"; 
+			$('#bar').show();
+			$('#circle').hide();
+		})
+		var now = new Date();
+		var month = (now.getMonth() + 1);
+		var day = now.getDate();
+		if (month < 10)
+			month = "0" + month;
+		if (day < 10)
+			day = "0" + day;
+		var today = now.getFullYear() + '-' + month + '-' + day;
+		$('#datePicker').val(today);
+
+		var kukuday = $('#datePicker').val();
+		
+		click_graph();
+		
+	});
+
+	function click_graph(button) {
+		var kukuday = $('#datePicker').val();
+		var fileName;
+		if(button == null) {
+			fileName = '${sessionScope.authUser.email}' + kukuday + 'bar_graph';
+		} else {
+			fileName = '${sessionScope.authUser.email}' + kukuday + button.value + '_graph';
+		} 
+		
+		// 현재 채팅방 로그 정보 가져오기
+		$.ajax({
+			url : "saveEmotionImage?fileName=" + fileName,
+			type : "get",
+			dataType : "json",
+			data : "",
+			success : function(response) {
+
+			}
+		});
+		
+		var html2 = '<img style="max-width:500px; height:500px;" src=" '+ '${pageContext.request.contextPath}'+'/assets/graph_image/' + fileName + '.png" onerror="this.src=\''+'${pageContext.request.contextPath}'+'/assets/img/samples/nodata.png\'" >';
+		console.log(html2);
+		console.log(fileName);
+		var graphDiv = document.getElementById("kukugraph");
+		graphDiv.innerHTML = html2;
+	}
+</script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-<body>
+<body id="login-page">
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				
-					<div class="row" id="user-profile">
-						<div class="main-box clearfix">
-							<header class="main-box-header clearfix">
-								<h1>${sessionScope.authUser.nickname}</h1>
-							</header>
-							<div class="main-box-body clearfix">
-								<div class="profile-status">
-									<i class="fa fa-circle"></i> Online
-								</div>
+				<div class="row" id="user-profile">
+					<div class="main-box clearfix">
+						<div>
+							<div>
+								<div align="center">
+									<div class="btn-group pagination"
+										style="padding: 10px">
+										<input type="date" id="datePicker" style="text-align:center">
+									</div>
 
-								<img src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png" alt=""
-									class="profile-img img-responsive center-block">
-
-								<div class="profile-stars">
-									<i class="fa fa-star-half"></i> 
-									<i class="fa fa-star"></i> 
-									<i class="fa fa-star"></i> 
-									<i class="fa fa-star-o"></i> 
-									<i class="fa fa-star:before"></i></br><span>내 쿠크 점수</span>
+									<div class="btn-group pagination" style="padding:10px">
+										<button class="btn btn-outline btn-primary btn-xs" onclick="click_graph(this)" value="bar" id="bar">bar grape 변경</button>
+										
+										<button class="btn btn-outline btn-primary btn-xs" onclick="click_graph(this)" value="circle" id="circle">pie graph 변경</button>
+									</div>
 								</div>
-								<div class="profile-details">
-									<ul class="fa-ul">
-										<li><i class="fa-li fa fa-user"></i>팔로우 수: <span> 3</span></li>
-										<li><i class="fa-li fa fa-comment"></i>대화 창 수: <span> 2</span></li>
-										<li><i class="fa-li fa fa-arrow-left"></i>전 방문 일자: <span> 2016-03-22</span></li>
-									</ul>
-								</div>
-
-								<div class="profile-message-btn center-block text-center">
-									<a href="/kuku/talker/my_kuku_stat2" class="btn btn-info"> <i
-										class="fa fa-bar-chart-o"></i> 감정그래프 보기
-									</a>
-								</div>
+							</div>
+							
+							<div align="center" style="height:80%">
+								<div id="kukugraph"></div>
 							</div>
 						</div>
 					</div>

@@ -96,7 +96,7 @@
 							<div id="login-box-footer">
 								<div class="row">
 									<div class="col-xs-12">
-										계정이 없으십니까 ? <a href="/kuku/user/joinform">
+										계정이 없으십니까 ? <a href="/kuku/user/select_join_type">
 											지금 당장 가입하세요! </a>
 									</div>
 								</div>

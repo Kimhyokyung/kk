@@ -77,11 +77,11 @@ public class ListenerController {
 		List<RatingVo> list = ratingService.getListenerRating(ls_email);
 
 		int rateNum = list.size();
-		int helpness = 0;
-		int professionalism = 0;
-		int sympathy = 0;
-		int responsibility = 0;
-		int total_avg = 0;
+		double helpness = 0;
+		double professionalism = 0;
+		double sympathy = 0;
+		double responsibility = 0;
+		double total_avg = 0;
 		for (int i = 0; i < rateNum; i++) {
 			helpness += list.get(i).getHelpness();
 			professionalism += list.get(i).getProfessionalism();
@@ -92,11 +92,11 @@ public class ListenerController {
 		Map<String, Integer> calculatedScore = new HashMap<>();
 		calculatedScore.put("rateNum", rateNum);
 		if (rateNum != 0) {
-			calculatedScore.put("helpness", Math.round(helpness / rateNum));
-			calculatedScore.put("professionalism", Math.round(professionalism / rateNum));
-			calculatedScore.put("sympathy", Math.round(sympathy / rateNum));
-			calculatedScore.put("responsibility", Math.round(responsibility / rateNum));
-			calculatedScore.put("total_avg", Math.round(total_avg / rateNum));
+			calculatedScore.put("helpness", (int)(Math.round(helpness / rateNum)));
+	         calculatedScore.put("professionalism", (int)(Math.round(professionalism / rateNum)));
+	         calculatedScore.put("sympathy", (int)(Math.round(sympathy / rateNum)));
+	         calculatedScore.put("responsibility", (int)(Math.round(responsibility / rateNum)));
+	         calculatedScore.put("total_avg", (int)(Math.round(total_avg / rateNum)));
 		} else{
 			calculatedScore.put("helpness", 0);
 			calculatedScore.put("professionalism", 0);

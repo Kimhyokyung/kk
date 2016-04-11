@@ -47,11 +47,6 @@ public class TalkerController {
 		return "talker/my_kuku_stat";
 	}
 	
-	@RequestMapping(value="/my_kuku_stat2")
-	public String register_first() {
-		return "talker/my_kuku_stat2";
-	}
-	
 	@RequestMapping(value = "/talker_listener_search", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model,
 			@RequestParam(value="onlineType", required = false) String onlineType) throws Exception {
