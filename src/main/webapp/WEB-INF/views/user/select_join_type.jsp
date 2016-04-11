@@ -54,10 +54,11 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
-				<div id="content-wrapper">
+				
 					<div id="login-full-wrapper">
-						<div class="container">
+						<div id="login-box">
+							<div id="login-box-holder">
+					<!-- 	<div class="container"> -->
 							<div class="row">
 								<div class="col-xs-12">
 										<div id="login-box1">

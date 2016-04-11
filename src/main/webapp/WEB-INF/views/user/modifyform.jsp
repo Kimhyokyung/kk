@@ -58,8 +58,7 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
-				<div id="content-wrapper">
+				
 					<div id="login-full-wrapper">
 						<div class="container">
 							<div class="row">

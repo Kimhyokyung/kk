@@ -47,21 +47,23 @@
 <!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>
-	<![endif]-->d
-<script type="text/javascript"	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+	<![endif]-->
+d
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
-function Rradio_OnOff(id) {
-	document.getElementById('next').disabled = false; 
-	if (id == "Rradio_On") {
-		alert("정답입니다. 다음 화면(Next)을 선택해주세요.");
-		document.getElementById('next').disabled = false; 
-	} else {
-		alert("정답이 아닙니다. 다시 선택해주세요");
-		document.getElementById('next').disabled = true; 
-	} 
-}
+	function Rradio_OnOff(id) {
+		document.getElementById('next').disabled = false;
+		if (id == "Rradio_On") {
+			alert("정답입니다. 다음 화면(Next)을 선택해주세요.");
+			document.getElementById('next').disabled = false;
+		} else {
+			alert("정답이 아닙니다. 다시 선택해주세요");
+			document.getElementById('next').disabled = true;
+		}
+	}
 
-// function 
+	// function
 </script>
 </head>
 <body>
@@ -69,9 +71,8 @@ function Rradio_OnOff(id) {
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
-				<div id="content-wrapper">
-				<form id="join_listener" name="join_listener" method="POST" action="join_success2">
+				<form id="join_listener" name="join_listener" method="POST"
+					action="join_success2">
 					<div id="myWizard" class="wizard">
 						<div class="wizard-inner">
 							<ul class="steps">
@@ -90,15 +91,15 @@ function Rradio_OnOff(id) {
 								<li data-target="#step7"><span class="badge">7</span>Step 7<span
 									class="chevron"></span></li>
 							</ul>
-<!---------------- 버튼------------------------------------------------------------------------------------------------------------------->
+							<!---------------- 버튼------------------------------------------------------------------------------------------------------------------->
 							<div class="actions">
-								<button type="button" class="btn btn-success btn-mini btn-next"	name="next" id="next" data-last="Finish"
-								disabled="disabled">
+								<button type="button" class="btn btn-success btn-mini btn-next"
+									name="next" id="next" data-last="Finish" disabled="disabled">
 									Next<i class="icon-arrow-right"></i>
 								</button>
 							</div>
 						</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+						<!------------------------------------------------------------------------------------------------------------------------------------->
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="main-box clearfix" style="min-height: 820px;">
@@ -125,14 +126,13 @@ function Rradio_OnOff(id) {
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios1"
-														id="optionsRadios1_3"
-														Onclick="Rradio_OnOff('Rradio_On');" value="option3">
-													<label for="optionsRadios1_3">스피커에게 당신이 경청하고 있고, 더
-														많은 이야기를 끌어내려고 한다는 것을 보여주기 위해 </label>
+														id="optionsRadios1_3" Onclick="Rradio_OnOff('Rradio_On');"
+														value="option3"> <label for="optionsRadios1_3">스피커에게
+														당신이 경청하고 있고, 더 많은 이야기를 끌어내려고 한다는 것을 보여주기 위해 </label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step2">
 											<br />
 											<div class="alert alert-success fade in"
@@ -143,30 +143,34 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios2"
-														id="optionsRadios2_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios2_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios2_1">"나는 당신이 언젠가는 직업을 찾을 것이라고
 														생각한다."</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios2"
-														id="optionsRadios2_2" value="option2" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios2_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios2_2">"만약 내가 한동안 직장을 찾지 못하고 미래가
 														불확실하다고 느낀다면 무섭고 좌절할 것이다"</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios2"
-														id="optionsRadios2_3" value="option3" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios2_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios2_3">"내가 직장을 갖지 않았을 때도 이렇게까지 화나지
 														않았다."</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios2"
-														id="optionsRadios2_4" value="option4" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios2_4" value="option4"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios2_4">위의 모든 답.</label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step3">
 											<br />
 											<div class="alert alert-success fade in"
@@ -176,25 +180,28 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios3"
-														id="optionsRadios3_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios3_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios3_1">중요한 이야기를 기억하고, 다음의 대화에서 그것에
 														대해 묻는다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios3"
-														id="optionsRadios3_2" value="option2" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios3_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios3_2">상담자의 선택에 대해 개인적인 판단을 하거나
 														견해를 제공한다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios3"
-														id="optionsRadios3_3" value="option3" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios3_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios3_3">상담자가 슬픈 상황에 대해 이야기할 때, 연민을
 														가지고 반응한다. </label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step4">
 											<br />
 											<div class="alert alert-success fade in"
@@ -204,24 +211,27 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios4_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
-														for="optionsRadios4_1">당신이 다른 상담자들과 이야기한 것을 말하지 않도록
-														조심한다.</label>
+														id="optionsRadios4_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														for="optionsRadios4_1">당신이 다른 상담자들과 이야기한 것을 말하지
+														않도록 조심한다.</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios4_2" value="option2" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios4_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios4_2">당신이 상담자들과 이야기한 것을 기록한다.</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios4_3" value="option3" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios4_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios4_3">다른 리스너와 상담할 때 개인 정보를 발설하지
 														않는다.</label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step5">
 											<br />
 											<div class="alert alert-success fade in"
@@ -232,25 +242,28 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios5_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
-														for="optionsRadios5_1">경이는 영희에게 반드시 그녀의 어머니에게 이 상황을
-														말하도록 말해야한다.</label>
+														id="optionsRadios5_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														for="optionsRadios5_1">경이는 영희에게 반드시 그녀의 어머니에게 이
+														상황을 말하도록 말해야한다.</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios5_2" value="option2" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios5_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios5_2">경이는 영희의 이야기를 듣고 반드시
 														한국성폭력상담소(www.sisters.or.kr)에 알린다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios5_3" value="option3" Onclick="Rradio_OnOff('Rradio_Off');"> <label
-														for="optionsRadios5_3">경이는 영희의 이야기를 더 듣고 그녀의 기분이 나아질
-														수 있도록 돕는다.</label>
+														id="optionsRadios5_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														for="optionsRadios5_3">경이는 영희의 이야기를 더 듣고 그녀의 기분이
+														나아질 수 있도록 돕는다.</label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step6">
 											<br />
 											<div class="alert alert-success fade in"
@@ -263,25 +276,28 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios6_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios6_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios6_1">은이는 휴와 그의 이별에 대해 이야기하고, 그에게
 														헤어짐을 극복하는 방법에 대해 조언한다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios6_2" value="option2" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios6_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios6_2">은이는 그녀가 더 이상 이야기를 나눌 수 없다고
 														말해야 한다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios6_3" value="option3" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios6_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios6_3">은이는 그에게 보다 전문적인 상담을 권하고 생명의
 														전화를 추천해준다. </label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 										<div class="step-pane" id="step7">
 											<br />
 											<div class="alert alert-success fade in"
@@ -291,38 +307,42 @@ function Rradio_OnOff(id) {
 
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios7_1" value="option1" Onclick="Rradio_OnOff('Rradio_Off');"> <label
-														for="optionsRadios7_1">그 사람이 진짜로 도움을 원하는 것인지 깨달을 때까지
-														따뜻하고 조심스러운 매너의 채팅을 진행한다. </label>
+														id="optionsRadios7_1" value="option1"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														for="optionsRadios7_1">그 사람이 진짜로 도움을 원하는 것인지 깨달을
+														때까지 따뜻하고 조심스러운 매너의 채팅을 진행한다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios7_2" value="option2" Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														id="optionsRadios7_2" value="option2"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
 														for="optionsRadios7_2">Kuku에 report한다.</label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios7_3" value="option3" Onclick="Rradio_OnOff('Rradio_Off');"> <label
-														for="optionsRadios7_3">모욕적이고 성적으로 대하는 것이 절대 괜찮지 않다는
-														것을 경고한다. </label>
+														id="optionsRadios7_3" value="option3"
+														Onclick="Rradio_OnOff('Rradio_Off');"> <label
+														for="optionsRadios7_3">모욕적이고 성적으로 대하는 것이 절대 괜찮지
+														않다는 것을 경고한다. </label>
 												</div>
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
-														id="optionsRadios7_4" value="option4" Onclick="Rradio_OnOff('Rradio_On');"> <label
+														id="optionsRadios7_4" value="option4"
+														Onclick="Rradio_OnOff('Rradio_On');"> <label
 														for="optionsRadios7_4">위의 모든 답.</label>
 												</div>
 											</div>
 										</div>
-<!------------------------------------------------------------------------------------------------------------------------------------->
+										<!------------------------------------------------------------------------------------------------------------------------------------->
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					</form>
-				</div>
+				</form>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!-- global scripts -->
 	<script

@@ -9,8 +9,7 @@
 			<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 			<div id="page-wrapper" class="container">
 				<div class="row">
-					<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
-					<div id="content-wrapper">
+					
 					회원 가입 되었습니다	
 					</div>
 				</div>
