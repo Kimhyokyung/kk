@@ -1,12 +1,15 @@
 package com.bit.kuku.dao;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -84,13 +87,50 @@ public class MongoDao {
 		try {
 			GridFS gridFs = new GridFS(mongoTemplate.getDb(), "photo");
 		    GridFSDBFile outputImageFile = gridFs.findOne(fileName);
+		    System.out.println("몽고다오:"+fileName);
+		    System.out.println(outputImageFile);
 		    
-		    String filePath = new File(".").getAbsolutePath();
-		    System.out.println(filePath);
+		    //윈도우
+		    //String graph_image_path = "C://Users//bit-user//git//kk//src//main//webapp//assets//graph_image//";
+		    //리눅스
+		    String graph_image_path = "//usr//local//tomcat8//webapps//kuku//assets//graph_image//";;
+		    String imageLocation = graph_image_path + fileName + ".png";
 		    
-		    String imageLocation = "C://Users//HK-PC//git//kk//src//main//webapp//assets//graph_image//" + fileName + ".png";
-		    System.out.println(imageLocation);
-		    outputImageFile.writeTo(imageLocation);
+		    try {
+		    	File file = new File(imageLocation);
+		    	FileInputStream fis = new FileInputStream(file);
+		    } catch(NullPointerException nullExcp) {
+		    	nullExcp.printStackTrace();
+		    } catch(FileNotFoundException fileExcp) {
+		    	
+		    	try {
+			    	// 새로운 감정분석 이미지 저장
+			    	outputImageFile.writeTo(imageLocation);
+			    	
+			    	// 3초 동안 무조건 타임슬립 코드(3초 이상 걸릴 경우 작동 제대로 안함)
+				    long time = 5;
+			    	TimeUnit.SECONDS.sleep(time);
+			    	System.out.println("3초간 타임슬립");
+		    	} catch(InterruptedException e) {
+		    		
+		    	}
+		    }
+		    
+		    /*System.out.println("파일 저장 체크 while문 진입");
+		    boolean isSaved = false;
+		    File file = null;
+		    while(!isSaved) {
+				try {
+					file = new File(imageLocation);
+					System.out.println(file);
+				} catch(NullPointerException e) {
+					System.out.println("파일 아직 저장 안됨");
+					continue;
+				}
+				System.out.println("파일 저장 완료");
+				isSaved = true;
+		    }
+		    System.out.println("파일 저장 체크 while문 벗어남");	*/	
 		} catch (IOException e) {
 			
 		}

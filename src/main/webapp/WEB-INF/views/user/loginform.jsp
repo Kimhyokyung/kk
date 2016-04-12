@@ -3,8 +3,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
-
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
+$(document).ready(function(){
+    // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+    console.log(email);
+    var email = getCookie("email");
+    console.log(email);
+    $("input[name='email']").val(email); 
+    if($("input[name='email']").val() != "" || $("input[name='email']").val() != 'undefined'){ // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+        $("#remember-me").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+    }
+});
+ 
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+ 
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+ 
+function getCookie(cookieName){
+    var cookieValue=null;
+    if(document.cookie){
+        var array=document.cookie.split((escape(cookieName)+'=')); 
+        if(array.length >= 2){
+            var arraySub=array[1].split(';');
+            cookieValue=unescape(arraySub[0]);
+        }
+    }
+    return cookieValue;
+}
+	
 	function clickLogin(loginBtn) {
 		if(loginBtn.value == "talker") {
 			console.log("talker click");
@@ -15,6 +52,16 @@
 		}
 		
 		console.log(document.getElementById('userType').value);
+		
+		// 로그인 이메일 쿠키 설정
+    	if($("#remember-me").is(":checked")) {
+        	var email = $("#email").val();
+            setCookie("email", email, 7);
+            console.log("set cookie");
+        } else { 	
+            deleteCookie("email");
+            console.log("delete cookie");
+        }
 		
 		var loginform = document.getElementById('loginform');
 		loginform.action="login";
@@ -44,7 +91,7 @@
 												<div class="input-group">
 													<span class="input-group-addon"><i
 														class="fa fa-user"></i></span> <input class="form-control"
-														type="text" placeholder="email" name="email">
+														type="text" placeholder="email" name="email" id="email">
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-key"></i></span>
@@ -73,7 +120,7 @@
 															class="btn btn-primary col-xs-12 btn-facebook"
 															onclick="clickLogin(this)"
 															value="talker">
-															TALKER로 로그인
+															</i> TALKER로 로그인
 														</button>
 													</div>
 													<div class="col-xs-12 col-sm-6">
@@ -81,7 +128,7 @@
 															class="btn btn-primary col-xs-12 btn-twitter"
 															onclick="clickLogin(this)"
 															value="listener">
-															LISTENER로 로그인
+															</i> LISTENER로 로그인
 														</button>
 													</div>
 													<input type="hidden" id="userType" name="userType"/>

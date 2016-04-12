@@ -3,19 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
 		$('#bar').hide();
-		
-		$('#bar').on('click', function(){
-			$('#circle').show();
+
+		$('#bar').on('click', function() {
+			$('#pie').show();
 			$('#bar').hide();
 		})
-		$('#circle').on('click', function(){
-			document.getElementById("bar").innerHTML= "bar grape 변경"; 
+		$('#pie').on('click', function() {
+			document.getElementById("bar").innerHTML = "bar graph 변경";
 			$('#bar').show();
-			$('#circle').hide();
+			$('#pie').hide();
 		})
 		var now = new Date();
 		var month = (now.getMonth() + 1);
@@ -28,36 +30,55 @@
 		$('#datePicker').val(today);
 
 		var kukuday = $('#datePicker').val();
-		
-		click_graph();
-		
+
+		//click_graph();
+
 	});
 
 	function click_graph(button) {
 		var kukuday = $('#datePicker').val();
 		var fileName;
-		if(button == null) {
+		if (button == null) {
 			fileName = '${sessionScope.authUser.email}' + kukuday + 'bar_graph';
 		} else {
-			fileName = '${sessionScope.authUser.email}' + kukuday + button.value + '_graph';
-		} 
-		
-		// 현재 채팅방 로그 정보 가져오기
-		$.ajax({
-			url : "saveEmotionImage?fileName=" + fileName,
-			type : "get",
-			dataType : "json",
-			data : "",
-			success : function(response) {
+			fileName = '${sessionScope.authUser.email}' + kukuday
+					+ button.value + '_graph';
+		}
 
-			}
-		});
-		
-		var html2 = '<img style="max-width:500px; height:500px;" src=" '+ '${pageContext.request.contextPath}'+'/assets/graph_image/' + fileName + '.png" onerror="this.src=\''+'${pageContext.request.contextPath}'+'/assets/img/samples/nodata.png\'" >';
+		// 현재 채팅방 로그 정보 가져오기
+		$
+				.ajax({
+					beforeSend : function() {
+						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/img/loading.gif>';
+						var graphDiv = document.getElementById("kukugraph");
+						graphDiv.innerHTML = html;
+					},
+					/* complete: function(){
+						$("#loading-excel").remove();
+					}, */
+					error : function() {
+						alert("이 날의 데이터가 없습니다!");
+						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/img/samples/nodata.png>';
+						var graphDiv = document.getElementById("kukugraph");
+						graphDiv.innerHTML = html;
+					},
+					url : "saveEmotionImage?fileName=" + fileName,
+					type : "get",
+					dataType : "json",
+					data : "",
+					success : function(response) {
+						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/graph_image/' + fileName + '.png>';
+						var graphDiv = document.getElementById("kukugraph");
+						graphDiv.innerHTML = html;
+					}
+				});
+
+		/* var html2 = '<img src=" '+ '${pageContext.request.contextPath}'+'/assets/graph_image/' + fileName + '.png"  onerror="this.src=\''+'${pageContext.request.contextPath}'+'/assets/img/loading.gif\'" >';
 		console.log(html2);
 		console.log(fileName);
 		var graphDiv = document.getElementById("kukugraph");
-		graphDiv.innerHTML = html2;
+		graphDiv.innerHTML = html2; */
+
 	}
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
@@ -71,20 +92,23 @@
 						<div>
 							<div>
 								<div align="center">
-									<div class="btn-group pagination"
-										style="padding: 10px">
-										<input type="date" id="datePicker" style="text-align:center">
+									<div class="btn-group pagination" style="padding: 10px">
+										<input type="date" id="datePicker" style="text-align: center">
 									</div>
 
-									<div class="btn-group pagination" style="padding:10px">
-										<button class="btn btn-outline btn-primary btn-xs" onclick="click_graph(this)" value="bar" id="bar">bar grape 변경</button>
-										
-										<button class="btn btn-outline btn-primary btn-xs" onclick="click_graph(this)" value="circle" id="circle">pie graph 변경</button>
+									<div class="btn-group pagination" style="padding: 10px">
+										<button class="btn btn-outline btn-primary btn-xs"
+											onclick="click_graph(this)" value="bar" id="bar">bar
+											graph 변경</button>
+
+										<button class="btn btn-outline btn-primary btn-xs"
+											onclick="click_graph(this)" value="pie" id="pie">pie
+											graph 변경</button>
 									</div>
 								</div>
 							</div>
-							
-							<div align="center" style="height:80%">
+
+							<div align="center" style="height: 80%">
 								<div id="kukugraph"></div>
 							</div>
 						</div>
