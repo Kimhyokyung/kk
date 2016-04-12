@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,18 +11,12 @@ import org.springframework.stereotype.Repository;
 import com.bit.kuku.service.Criteria;
 import com.bit.kuku.service.SearchCriteria;
 import com.bit.kuku.vo.ListenerVo;
-import com.bit.kuku.vo.TalkerVo;
 
 @Repository("listenerDAO")
 public class ListenerDao extends UserDao{
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
-	@Autowired
-	private SqlSession session;
-	
-	private static String namespace = "listener";
 	
 	public ListenerVo get(String email) {
 		ListenerVo listenerVo = sqlSession.selectOne("listener.selectByEmail", email);
@@ -34,7 +27,6 @@ public class ListenerDao extends UserDao{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("email", email);
 		map.put("password", password);
-		System.out.println("input email : " + email + "password : " + password);
 		ListenerVo listenerVo = sqlSession.selectOne("listener.selectByEmailAndPassword", map);
 
 		return listenerVo;
@@ -49,55 +41,40 @@ public class ListenerDao extends UserDao{
 		return vo;
 	}
 	
-	public ListenerVo delete_listener(ListenerVo vo) {
-		sqlSession.delete("listener.delete", vo);
-		return vo;
-	}
-	
-	@SuppressWarnings("unchecked")
-    public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception {
-        return (List<Map<String, Object>>)selectList("listener.selectListenerList", map);
-	}
-
-	public ListenerVo read(Integer IDX) throws Exception {
-		return session.selectOne(namespace+".selectListenerList", IDX);
+	public void delete_listener(String email) {
+		sqlSession.delete("listener.delete", email);
 	}
 	 
 	public List<ListenerVo> listAll() throws Exception {
-		return session.selectList(namespace + ".listAll");
+		return sqlSession.selectList("listener.listAll");
 	}
 	
 	public List<ListenerVo> listPage(int page) throws Exception {
 		if (page <= 0) {
 			page = 1;
 		}
-		
 		page = (page - 1) * 10;
 		
-		return session.selectList(namespace + ".listPage", page);
+		return sqlSession.selectList("listener.listPage", page);
 	}
 	
 	public List<ListenerVo> listCriteria(Criteria cri) throws Exception {
-		System.out.println("<2>BoardDAOImpl:listCriteria called");
-		System.out.println(cri);
-		List<ListenerVo> list = session.selectList("listener.listCriteria", cri);
-		
-		System.out.println(list);
-		return session.selectList(namespace+".listCriteria", cri);
+		List<ListenerVo> list = sqlSession.selectList("listener.listCriteria", cri);
+		return sqlSession.selectList("listener.listCriteria", cri);
 	}
 
 	public int countPaging(Criteria cri) throws Exception {
-		return session.selectOne(namespace+".countPaging", cri);
+		return sqlSession.selectOne("listener.countPaging", cri);
 	}
 
 	public List<ListenerVo> listSearch(SearchCriteria cri) throws Exception {
 		System.out.println("listSearch" + cri);
-		return session.selectList(namespace + ".listSearch", cri);
+		return sqlSession.selectList("listener.listSearch", cri);
 	}
 
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		System.out.println("listSearchCount" + cri);
-		return session.selectOne(namespace + ".listSearchCount", cri);
+		return sqlSession.selectOne("listener.listSearchCount", cri);
 	}
 	
 	public ListenerVo updateScore(String email, int score) {

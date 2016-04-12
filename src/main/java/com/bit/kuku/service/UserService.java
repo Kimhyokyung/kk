@@ -10,6 +10,7 @@ import com.bit.kuku.vo.TalkerVo;
 
 @Service
 public class UserService {
+	
 	@Autowired
 	TalkerDao talkerDao;
 	
@@ -36,45 +37,40 @@ public class UserService {
 	
 	public boolean checkEmail(String email, String userType) {
 		boolean isExist = false;
-		
 		if(userType.equals("talker")) {
 			
 			TalkerVo talkerVo = talkerDao.get(email);
-			System.out.println(talkerVo);
 			if(talkerVo != null)
 				isExist = true;
 		} else if(userType.equals("listener")) {
 			
 			ListenerVo listenerVo = listenerDao.get(email);
-			System.out.println(listenerVo);
-			
 			if(listenerVo != null)
 				isExist = true;
-		} 		
+		}
+		
 		return isExist;
 	}
 	
-	public TalkerVo update_talker( TalkerVo vo ) {
-		vo = talkerDao.update_talker( vo);
-		return vo;
+	public void update_talker(TalkerVo vo) {
+		talkerDao.update_talker(vo);
 	}
 	
 	public ListenerVo update_listener( ListenerVo vo ) {
 		vo = listenerDao.update_listener( vo);
 		return vo;
 	}
-	public TalkerVo delete_talker(TalkerVo vo) {
-		vo = talkerDao.delete_talker(vo);
-		return vo;
+	
+	public void delete_talker(String email) {
+		talkerDao.delete_talker(email);
 	}
-	public ListenerVo delete_listener( ListenerVo vo ) {
-		vo = listenerDao.delete_listener( vo);
-		return vo;
+	
+	public void delete_listener(String email) {
+		listenerDao.delete_listener(email);
 	}
 	
 	public ListenerVo update_score(String ls_email, int ratingAVG) {
 		ListenerVo listenerVo = listenerDao.updateScore(ls_email, ratingAVG);
 		return listenerVo;
-		
 	}
 }

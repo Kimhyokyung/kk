@@ -3,46 +3,40 @@
 
 <mapper namespace="talker">
 	<select id="selectByEmail" parameterType="string" resultType="TalkerVo">
-		<![CDATA[
-			select email
-			from tb_talker
-		    where email = #{email}
-		]]>
+	<![CDATA[
+		select email
+		from tb_talker
+	    where email = #{email}
+	]]>
 	</select>
 	
-	<insert id="insert" parameterType="TalkerVo">
-		<![CDATA[		
-		insert into tb_talker (email, password, nickname, stress_degree, consulting_topic)
-		     values ( #{email}, #{password }, #{nickname}, #{stress_degree}, #{consulting_topic} )	
-		]]>
-	</insert>
-	
-	<update id="update" parameterType="TalkerVo">
-		<![CDATA[		
-		update tb_talker
-		set password=#{password}, nickname=#{nickname}, consulting_topic=#{consulting_topic}
-		where email=#{email}
-		]]>
-	</update>
-	
-	<delete id="delete" parameterType="TalkerVo">
-		<![CDATA[		
-		delete from tb_talker
-		where email=#{email}
-		]]>
-	</delete>
-	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="TalkerVo">
-		<![CDATA[
+	<![CDATA[
 		select email, nickname, password
 		from tb_talker
 		where email=#{email} and password=#{password}
 		]]>
 	</select>
 	
-	<select id="selectListenerList" parameterType="map" resultType="map">
-		<![CDATA[
-		select * from tb_listener;
-			]]>
-	</select>
+	<insert id="insert" parameterType="TalkerVo">
+	<![CDATA[		
+		insert into tb_talker
+		(email, password, nickname, stress_degree, consulting_topic)
+		values (#{email}, #{password }, #{nickname}, #{stress_degree}, #{consulting_topic})	
+	]]>
+	</insert>
+	
+	<update id="update" parameterType="TalkerVo">
+	<![CDATA[		
+		update tb_talker
+		set password=#{password}, nickname=#{nickname}, consulting_topic=#{consulting_topic}
+		where email=#{email}
+	]]>
+	</update>
+	
+	<delete id="delete" parameterType="String">
+	<![CDATA[
+		delete from tb_talker where email=#{email}
+	]]>
+	</delete>
 </mapper>

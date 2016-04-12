@@ -132,7 +132,6 @@ public class UserController {
 		return "user/loginform";
 	}
 	
-
 	@RequestMapping(value="/modify_check")
 	@ResponseBody
 	public Object check_modify(@RequestParam("modify_pw") String modify_pw,
@@ -236,9 +235,6 @@ public class UserController {
 		return "main/index";
 	}
 	
-	
-	
-	
 	@RequestMapping(value ="/modifyform")
 	public String modify() {
 		return "user/modifyform";
@@ -255,46 +251,33 @@ public class UserController {
 			@ModelAttribute TalkerVo talkerVo,
 			@ModelAttribute ListenerVo listenerVo) {
 		String userType = (String)session.getAttribute("userType");
-		System.out.println("update 컨트롤러 : " + userType);
-
 		if (userType.equals("talker")) {
-			TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
-			talkerVo.setEmail(authUser.getEmail());
-			authUser = userService.update_talker(talkerVo);
+			TalkerVo authUser = (TalkerVo)session.getAttribute("authUser");
+			userService.update_talker(talkerVo);
 			session.setAttribute("authUser", authUser);
-			// 인증 처리
 		} else {
-			ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
+			ListenerVo authUser = (ListenerVo)session.getAttribute("authUser");
 			listenerVo.setEmail(authUser.getEmail());
 			authUser = userService.update_listener(listenerVo);
 			session.setAttribute("authUser", authUser);
-			// 인증 처리
 		}
+		
 		return "main/index";
 	}
 	
 	//회원 탈퇴
 	@RequestMapping(value ="/delete_user", method=RequestMethod.POST )
-	public String delete_user( HttpSession session, 
-			@ModelAttribute TalkerVo talkerVo,
-			@ModelAttribute ListenerVo listenerVo) {
+	public String delete_user(HttpSession session) {
 		String userType = (String)session.getAttribute("userType");
-		System.out.println("delete 컨트롤러 : " + userType);
-
 		if (userType.equals("talker")) {
 			TalkerVo authUser = (TalkerVo) session.getAttribute("authUser");
-			talkerVo.setEmail(authUser.getEmail());
-			authUser = userService.delete_talker(talkerVo);
-			session.setAttribute("authUser", authUser);
-			// 인증 처리
+			userService.delete_talker(authUser.getEmail());
 		} else {
 			ListenerVo authUser = (ListenerVo) session.getAttribute("authUser");
-			listenerVo.setEmail(authUser.getEmail());
-			authUser = userService.delete_listener(listenerVo);
-			session.setAttribute("authUser", authUser);
-			// 인증 처리
+			userService.delete_listener(authUser.getEmail());
 		}
 		session.invalidate();
+		
 		return "main/index";
 	}
 	

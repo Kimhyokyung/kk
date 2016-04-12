@@ -20,20 +20,12 @@ public class TalkerService {
 	
 	@Autowired
 	private ListenerDao dao;
-	
-	public List<Map<String, Object>> selectListenerList(Map<String, Object> map) throws Exception {
-        return listenerDAO.selectListenerList(map);
-    }
 
 	public List<ListenerVo> listAll() throws Exception {
 		return dao.listAll();
 	}
 
 	public List<ListenerVo> listCriteria(Criteria cri) throws Exception {
-		System.out.println("<1>TalkerServiceImpl:listCriteria Call");
-		System.out.println(dao);
-		System.out.println(cri);
-		
 		List<ListenerVo> list = dao.listCriteria(cri);
 		return list;
 	}

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="listener">
+
 	<select id="selectByEmail" parameterType="string" resultType="ListenerVo">
 	<![CDATA[
 		select email
@@ -10,122 +11,105 @@
 	]]>
 	</select>
 	
-	<insert id="insert" parameterType="ListenerVo">
-		<![CDATA[		
-		insert 
-		into tb_listener
-		(email, password, nickname, consulting_topic)
-		values (#{email}, #{password}, #{nickname}, #{consulting_topic})	
-		]]>
-	</insert>
-	
-	<update id="update" parameterType="ListenerVo">
-		<![CDATA[		
-		update tb_listener
-		set password=#{password}, nickname=#{nickname}, consulting_topic=#{consulting_topic}
-		where email=#{email}
-		]]>
-	</update>
-	
-	<delete id="delete" parameterType="TalkerVo">
-		<![CDATA[		
-		delete from tb_listener
-		where email=#{email}
-		]]>
-	</delete>
-	
 	<select id="selectByEmailAndPassword" parameterType="map" resultType="ListenerVo">
-		<![CDATA[
+	<![CDATA[
 		select email, nickname, password
 		from tb_listener
 		where email=#{email} and password=#{password}
-		]]>
+	]]>
 	</select>
+	
+	<insert id="insert" parameterType="ListenerVo">
+	<![CDATA[		
+		insert
+		into tb_listener
+		(email, password, nickname, consulting_topic)
+		values (#{email}, #{password}, #{nickname}, #{consulting_topic})	
+	]]>
+	</insert>
+	
+	<update id="update" parameterType="ListenerVo">
+	<![CDATA[		
+		update tb_listener
+		set password=#{password}, nickname=#{nickname}, consulting_topic=#{consulting_topic}
+		where email=#{email}
+	]]>
+	</update>
+	
+	<delete id="delete" parameterType="String">
+	<![CDATA[		
+		delete from tb_listener
+		where email=#{email}
+	]]>
+	</delete>
 
-	<select id="selectListenerList" parameterType="map" resultType="map">
-		<![CDATA[
-		select IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC from tb_listener;
-			]]>
-	</select>
-	
-	<select id="read" resultType="ListenerVo">
-		<![CDATA[
-		select IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC from tb_listener where IDX = #{IDX};
-			]]>
-	</select>
-	
 	<select id="listPage" resultType="ListenerVo">
-		<![CDATA[
-		select IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC from tb_listener where IDX > 0 order by IDX desc, NICKNAME desc limit #{page}, 10;
-			]]>
+	<![CDATA[
+		select email, nickname, consulting_topic
+		from tb_listener
+		where nickname limit #{page}, 10
+	]]>
 	</select>
 	
 	<select id="listCriteria" parameterType="Criteria" resultType="ListenerVo">
-		<![CDATA[
-			select
-				IDX, EMAIL, NICKNAME, PASSWORD, CONSULTING_TOPIC
-			from
-				tb_listener
-			where IDX > 0
-			order by IDX desc, NICKNAME desc
-			limit #{pageStart}, #{perPageNum}
-		]]>
+	<![CDATA[
+		select email, nickname, consulting_topic
+		from tb_listener
+		order by nickname desc
+		limit #{pageStart}, #{perPageNum}
+	]]>
 	</select>
 	
 	<select id="countPaging" resultType="int">
-		<![CDATA[
-		select count(IDX) from tb_listener where IDX > 0
-		]]>
+	<![CDATA[
+		select count(EMAIL) from tb_listener
+	]]>
 	</select>
 	
 	<select id="listSearch" resultType="ListenerVo">
-		<![CDATA[
-			select * from tb_listener
-			where idx > 0
-			]]>
-		<include refid="search"></include>
-		<include refid="search_score"></include>	
-		<![CDATA[
-			limit #{pageStart}, #{perPageNum}
-		]]>
+	<![CDATA[
+		select * from tb_listener
+	]]>
+	<include refid="search"></include>
+	<include refid="search_score"></include>	
+	<![CDATA[
+		limit #{pageStart}, #{perPageNum}
+	]]>
 	</select>
 	
 	<select id="listSearchCount" resultType="int">
-		<![CDATA[
-			select count(idx)
-			from tb_listener
-			where idx > 0
-			]]>
-		<include refid="search"></include>
+	<![CDATA[
+		select count(EMAIL) from tb_listener
+	]]>
+	<include refid="search"></include>
 	</select>
-	
-	
+
 	<sql id="search">
 		<if test="searchType != null">
 			<!-- 상담주제 -->
 			<if test="searchType == 'job'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '직장문제', '%')
+				where consulting_topic like CONCAT('%', '직장문제', '%')
 			</if>
 			<if test="searchType == 'school'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '학교문제', '%')
+				where consulting_topic like CONCAT('%', '학교문제', '%')
 			</if>
 			<if test="searchType == 'course'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '진로상담', '%')
+				where consulting_topic like CONCAT('%', '진로상담', '%')
 			</if>
 			<if test="searchType == 'smoke'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '금주/금연', '%')
+				where consulting_topic like CONCAT('%', '금주/금연', '%')
 			</if>
 			<if test="searchType == 'finance'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '재정문제', '%')
+				where consulting_topic like CONCAT('%', '재정문제', '%')
 			</if>
 			<if test="searchType == 'diet'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '다이어트', '%')
+				where consulting_topic like CONCAT('%', '다이어트', '%')
 			</if>
 			<if test="searchType == 'reason'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '이성문제', '%')
+				where consulting_topic like CONCAT('%', '이성문제', '%')
 			</if>
 			<if test="searchType == 'etc'.toString()">
-				and CONSULTING_TOPIC like CONCAT('%', '기타', '%')
+				where consulting_topic like CONCAT('%', '기타', '%')
 			</if>
 		</if>
 	</sql>
@@ -143,11 +127,10 @@
 	</sql>
 	
 	<update id="update_score" parameterType="map">
-		<![CDATA[		
+		<![CDATA[
 		update tb_listener
 		set score=#{score}
 		where email=#{email}
 		]]>
 	</update>
-	
 </mapper>

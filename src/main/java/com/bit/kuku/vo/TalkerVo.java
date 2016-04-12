@@ -2,19 +2,12 @@ package com.bit.kuku.vo;
 
 public class TalkerVo {
 	
-	private int idx;
 	private String email;
 	private String password;
 	private String nickname;
 	private String stress_degree;
 	private String consulting_topic;
 	
-	public int getIdx() {
-		return idx;
-	}
-	public void setIdx(int idx) {
-		this.idx = idx;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -45,9 +38,10 @@ public class TalkerVo {
 	public void setConsulting_topic(String consulting_topic) {
 		this.consulting_topic = consulting_topic;
 	}
+	
 	@Override
 	public String toString() {
-		return "TalkerVo [idx=" + idx + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", stress_degree=" + stress_degree + ", consulting_topic=" + consulting_topic + "]";
+		return "TalkerVo [email=" + email + ", password=" + password + ", nickname=" + nickname + ", stress_degree="
+				+ stress_degree + ", consulting_topic=" + consulting_topic + "]";
 	}
 }
