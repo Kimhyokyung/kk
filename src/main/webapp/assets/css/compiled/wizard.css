@@ -110,13 +110,14 @@
 }
 .wizard .step-content .active {
   display: block;
+  align: center;
 }
 .wizard .step-content .active .btn-group .active {
   display: inline-block;
 }
 
 .rtl .wizard .wizard-inner .actions {
-  float: left;
+  float: center;
   left: 0;
   right: auto;
 }

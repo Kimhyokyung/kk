@@ -2,12 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <html>
 <head>
 <title>kukuMental</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+
 <script type="text/javascript">
 	//이메일 중복확인
 	$(function() {
@@ -90,7 +90,7 @@
 		}
 	}
 </script>
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+</head>
 <body>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
@@ -174,7 +174,7 @@
 																	class="btn btn-primary col-xs-12 btn-facebook"
 																	onClick="selectChkBox(this)" value="next"
 																	disabled="disabled" id="btn_next">
-																	</i> 다음으로
+																	다음으로
 																</button>
 															</div>
 														</div>
@@ -190,6 +190,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

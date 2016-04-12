@@ -2,15 +2,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <html>
 <head>
-<meta charset="euc-kr">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<title>토커 회원가입</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+	//회원가입 성공 처리
+	function selectChkBox(button) {
+		var joinform = document.getElementById('join-form');
+		
+		if (joinform.stress_degree.value == "") {
+			alert("스트레스 정도를 선택해주세요.")
+			joinform.stress_degree.focus()
+			return;
+		} else {
+			var userType = "${sessionScope.userType}";
+			console.log(userType);
+				alert("ㅊㅋㅊㅋ회원 가입 되었습니다!");
+				joinform.action = "join_success";
+				joinform.submit();
+		}
+	}
+</script>
 </head>
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
@@ -21,7 +36,6 @@
 						<div class="container">
 							<div class="row">
 								<div class="col-xs-12">
-									<div style="width: 510px; height: 420px; margin-left: 550; margin-top: 70;">
 										<div id="login-box2">
 											<div class="row">
 												<div class="col-md-12">
@@ -31,7 +45,7 @@
 														</div>
 													</header>
 													<div id="login-box-inner">
-														<form id="join-form" name="joinForm" method="post" action="join_success">
+														<form id="join-form" name="joinForm" method="post">
 															<h1 align="center">스트레스 정도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
 															<h3></h3>
 															&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio"
@@ -51,8 +65,8 @@
 															<div style="width: 340px; height: 80px; margin: auto">
 																<br>
 																<button type="submit"
-																	class="btn btn-primary col-xs-12 btn-facebook">
-																	</i> 회원가입완료
+																	class="btn btn-primary col-xs-12 btn-facebook" onClick="selectChkBox(this)">
+																	회원가입완료
 																</button>
 															</div>
 														</form>
@@ -67,7 +81,5 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 </body>
 </html>

@@ -15,7 +15,7 @@
 			alt="" class="small-logo hidden-xs hidden-sm hidden" />
 		</a>
 		<div class="clearfix">
-			<div clasas="nav-no-collapse pull-right" id="header-nav">
+			<div class="nav-no-collapse pull-right" id="header-nav">
 				<button type="button" class="navbar-toggle" data-toggle="collapse"
 					data-target=".navbar-collapse">
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
@@ -30,11 +30,8 @@
 						<c:when test="${empty authUser}">
 							<li><a href="/kuku/user/select_join_type">회원가입</a></li>
 							<li><a href="/kuku/user/loginform">로그인</a></li>
-							<li class="dropdown profile-dropdown"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
-									src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png"
-									alt="" /> <span class="hidden-xs">게스트님 안녕하세요 </span></li>
-							</a>
+							<li class="dropdown profile-dropdown">
+							<a><span class="hidden-xs">게스트님 안녕하세요</span></a></li>
 							<b class="caret"></b>
 
 						</c:when>
@@ -47,13 +44,9 @@
 								<li><a href="/kuku/user/modify_lock">마이 페이지</a></li>
 								<li><a href="/kuku/user/logout">로그아웃</a></li>
 							</ul>
-							<li class="dropdown profile-dropdown"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
-									src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png"
-									alt="" /> <span class="hidden-xs">${sessionScope.authUser.nickname}님안녕하세요</li>
-							</span>
+							<li class="dropdown profile-dropdown">
+							<a><span class="hidden-xs"><B>${sessionScope.authUser.nickname}</B>님안녕하세요</span></a></li>
 							<b class="caret"></b>
-							</a>
 						</c:when>
 						<c:when test="${userType eq 'listener' }">
 							<ul class="nav navbar-nav navbar-center">
@@ -63,13 +56,9 @@
 								<li><a href="/kuku/user/modify_lock">마이 페이지</a></li>
 								<li><a href="/kuku/user/logout">로그아웃</a></li>
 							</ul>
-							<li class="dropdown profile-dropdown"><a href="#"
-								class="dropdown-toggle" data-toggle="dropdown"> <img
-									src="${pageContext.request.contextPath}/assets/img/samples/scarlet-159.png"
-									alt="" /> <span class="hidden-xs">${sessionScope.authUser.nickname}님안녕하세요</li>
-							</span>
+							<li class="dropdown profile-dropdown">
+							<a><span class="hidden-xs"><B>${sessionScope.authUser.nickname}</B>님안녕하세요</span></a></li>
 							<b class="caret"></b>
-							</a>
 						</c:when>
 					</c:choose>
 				</ul>

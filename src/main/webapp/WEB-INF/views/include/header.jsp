@@ -46,7 +46,7 @@
 	
 	<!-- global scripts -->
 	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/jquery.nanoscroller.min.js"></script>
 	
 	<!-- this page specific scripts -->

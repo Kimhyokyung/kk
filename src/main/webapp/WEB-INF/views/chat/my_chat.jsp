@@ -3,11 +3,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/rate.css" />
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+<style type="text/css">
+   ::-webkit-scrollbar {width: 12px; height: 8px; border: 3px solid #fff; }
+   ::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 10px; background: url('./images/bg.png') #efefef}
+   ::-webkit-scrollbar-track {background: #efefef; -webkit-border-radius: 10px; border-radius:10px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.2)}
+   ::-webkit-scrollbar-thumb {height: 50px; width: 50px; background: rgba(0,0,0,.2); -webkit-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: inset 0 0 4px rgba(0,0,0,.1)}}
+</style>
+
 <script src="${pageContext.request.contextPath}/assets/js/modernizr.custom.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/classie.js"></script>
 <script src="${pageContext.request.contextPath}/assets/js/modalEffects.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.0.3/sockjs.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
 	var sock;
 	var chatroom_num;
@@ -317,7 +324,6 @@
 	}
 </script>
 <html>
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body onbeforeunload="return removeUser()">
 	<div class="container">
 		<div class="modal fade" id="tkModal" role="dialog">
@@ -343,7 +349,7 @@
 										 <label class="full" for="help_star3"></label> 
 										 <input type="radio" id="help_star2" name="helpness" value="2" /> 
 										 <label class="full" for="help_star2"></label> 
-										 <input type="radio" id="help_star1" name="rating" value="1" /> 
+										 <input type="radio" id="help_star1" name="helpness" value="1" /> 
 										 <label class="full" for="help_star1"></label>
 									</fieldset>
 								</div>

@@ -67,11 +67,7 @@ public class UserController {
 		
 		return map;
 	}
-	
-	
-
-	
-	
+		
 	@RequestMapping(value="/joinform")
 	public String joinform() {
 		return "user/joinform";
@@ -111,7 +107,7 @@ public class UserController {
 		talkerVo.setConsulting_topic(talkerVo.getConsulting_topic());
 		System.out.println("fwd2 : " +talkerVo);
 		userService.join_talker(talkerVo);
-		return "user/join_success";
+		return "main/index";
 	}
 	
 	@RequestMapping(value ="/join_success2")
@@ -127,7 +123,7 @@ public class UserController {
 		listenerVo.setConsulting_topic(listenerVo.getConsulting_topic());
 
 		userService.join_listener(listenerVo);
-		return "user/join_success";
+		return "main/index";
 	}
 	
 	@RequestMapping(value = "/loginform")

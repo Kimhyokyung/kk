@@ -74,16 +74,12 @@
 															<div class="row">
 																<div align="center" style="height:40px">쿠크맨탈 회원가입</div>
 																<div class="col-xs-12 col-sm-6">
-																	<input type="button"
-																		class="btn btn-primary col-xs-12 btn-facebook"
-																		value="talker"
-																		id="btn_talker">
+																	<button class="btn btn-primary col-xs-12 btn-facebook"
+																		value="talker" id="btn_talker">TALKER</button>
 																</div>
 																<div class="col-xs-12 col-sm-6">
-																	<input type="button"
-																		class="btn btn-primary col-xs-12 btn-twitter"
-																		value="listener"
-																		id="btn_listener">
+																	<button class="btn btn-primary col-xs-12 btn-twitter"
+																		value="listener" id="btn_listener">LISTENER</button>
 																</div>
 															</div>
 														</form>

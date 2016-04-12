@@ -60,8 +60,6 @@
 																	Remember me </label>
 															</div>
 														</div>
-														<a href="forgot-password.html" id="login-forget-link"
-															class="col-xs-6"> Forgot password? </a>
 													</div>
 												</div>
 												<div class="row">
@@ -75,7 +73,7 @@
 															class="btn btn-primary col-xs-12 btn-facebook"
 															onclick="clickLogin(this)"
 															value="talker">
-															</i> TALKER로 로그인
+															TALKER로 로그인
 														</button>
 													</div>
 													<div class="col-xs-12 col-sm-6">
@@ -83,7 +81,7 @@
 															class="btn btn-primary col-xs-12 btn-twitter"
 															onclick="clickLogin(this)"
 															value="listener">
-															</i> LISTENER로 로그인
+															LISTENER로 로그인
 														</button>
 													</div>
 													<input type="hidden" id="userType" name="userType"/>

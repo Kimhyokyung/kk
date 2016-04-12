@@ -1,57 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page contentType="text/html;charset=utf-8"%>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-<title>Centaurus - Bootstrap Admin Template</title>
-
-<!-- bootstrap -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css" />
-
-<!-- RTL support - for demo only -->
-<script src="js/demo-rtl.js"></script>
-<!-- 
-	If you need RTL support just include here RTL CSS file <link rel="stylesheet" type="text/css" href="css/libs/bootstrap-rtl.min.css" />
-	And add "rtl" class to <body> element - e.g. <body class="rtl"> 
-	-->
-<!-- libraries -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/libs/font-awesome.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/libs/nanoscroller.css" />
-
-<!-- global styles -->
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/assets/css/compiled/theme_styles.css" />
+<html>
+<head>
+<title>리스너 회원가입</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 
 <!-- this page specific styles -->
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/assets/css/compiled/wizard.css">
+<!-- this page specific scripts -->
+<script src="${pageContext.request.contextPath}/assets/js/wizard.js"></script>
 
-<!-- Favicon -->
-<link type="image/x-icon" href="favicon.png" rel="shortcut icon" />
-
-<!-- google font libraries -->
-<link
-	href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700,300|Titillium+Web:200,300,400'
-	rel='stylesheet' type='text/css'>
-
-<!--[if lt IE 9]>
-		<script src="js/html5shiv.js"></script>
-		<script src="js/respond.min.js"></script>
-	<![endif]-->
-d
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
 <script type="text/javascript">
+
 	function Rradio_OnOff(id) {
 		document.getElementById('next').disabled = false;
 		if (id == "Rradio_On") {
@@ -63,7 +27,6 @@ d
 		}
 	}
 
-	// function
 </script>
 </head>
 <body>
@@ -71,8 +34,7 @@ d
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<form id="join_listener" name="join_listener" method="POST"
-					action="join_success2">
+				<form id="join_listener" name="joinListener" method="post">
 					<div id="myWizard" class="wizard">
 						<div class="wizard-inner">
 							<ul class="steps">
@@ -97,6 +59,10 @@ d
 									name="next" id="next" data-last="Finish" disabled="disabled">
 									Next<i class="icon-arrow-right"></i>
 								</button>
+<!-- 								<button type="button" class="btn btn-success btn-mini btn-next"
+									name="next" id="next" data-last="Finish" disabled="disabled">
+									Next<i class="icon-arrow-right"></i>
+								</button> -->
 							</div>
 						</div>
 						<!------------------------------------------------------------------------------------------------------------------------------------->
@@ -343,39 +309,5 @@ d
 			</div>
 		</div>
 	</div>
-	</div>
-	<!-- global scripts -->
-	<script
-		src="${pageContext.request.contextPath}/assets/js/demo-skin-changer.js"></script>
-	<!-- only for demo -->
-
-	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.nanoscroller.min.js"></script>
-
-	<script src="${pageContext.request.contextPath}/assets/js/demo.js"></script>
-	<!-- only for demo -->
-
-	<!-- this page specific scripts -->
-	<script src="${pageContext.request.contextPath}/assets/js/wizard.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/assets/js/jquery.maskedinput.min.js"></script>
-
-	<!-- theme scripts -->
-	<script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
-	<script src="${pageContext.request.contextPath}/assets/js/pace.min.js"></script>
-
-	<!-- this page specific inline scripts -->
-	<script>
-		$(function() {
-			$('#myWizard').wizard();
-
-			//masked inputs
-			$("#maskedDate").mask("99/99/9999");
-			$("#maskedPhone").mask("(999) 999-9999");
-			$("#maskedPhoneExt").mask("(999) 999-9999? x99999");
-		});
-	</script>
 </body>
 </html>
