@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.session.SessionHandler;
@@ -31,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	ChatroomService chatroomService;
 	
 	@RequestMapping(value="/select_join_type")
 	public String register_first() {
@@ -147,10 +151,8 @@ public class UserController {
 			String authPw = authUser.getPassword();
 			if(authPw.equals(modify_pw)){
 				map.put("isEqual", true);
-				System.out.println("equal");
 			}else{
 				map.put("isEqual", false);
-				System.out.println("not equal");
 			}
 			
 		}else if (userType.equals("listener")){
@@ -158,10 +160,8 @@ public class UserController {
 			String authPw = authUser.getPassword();
 			if(authPw.equals(modify_pw)){
 				map.put("isEqual", true);
-				System.out.println("equal");
 			}else{
 				map.put("isEqual", false);
-				System.out.println("not equal");
 			}
 		}else{
 			map.put("isEqual", false);
@@ -247,20 +247,34 @@ public class UserController {
 	
 	//회원 정보 수정
 	@RequestMapping(value ="/update_user", method=RequestMethod.POST )
-	public String update_user( HttpSession session, 
+	public String update_user(HttpSession session, 
 			@ModelAttribute TalkerVo talkerVo,
 			@ModelAttribute ListenerVo listenerVo) {
 		String userType = (String)session.getAttribute("userType");
+		String userEmail;
+		String userNick;
+		
 		if (userType.equals("talker")) {
 			TalkerVo authUser = (TalkerVo)session.getAttribute("authUser");
+			talkerVo.setEmail(authUser.getEmail());
 			userService.update_talker(talkerVo);
-			session.setAttribute("authUser", authUser);
+			
+			userEmail = talkerVo.getEmail();
+			userNick = talkerVo.getNickname();
+			
+			session.setAttribute("authUser", talkerVo);
 		} else {
 			ListenerVo authUser = (ListenerVo)session.getAttribute("authUser");
 			listenerVo.setEmail(authUser.getEmail());
-			authUser = userService.update_listener(listenerVo);
-			session.setAttribute("authUser", authUser);
+			userService.update_listener(listenerVo);
+			
+			userEmail = listenerVo.getEmail();
+			userNick = listenerVo.getNickname();
+			
+			session.setAttribute("authUser", listenerVo);
 		}
+		
+		chatroomService.updateUserNickname(userType, userEmail, userNick);
 		
 		return "main/index";
 	}
@@ -283,7 +297,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/sessionout_exitbrowser")
 	@ResponseBody
-	public Object sessionout_exitbrowser( HttpServletRequest request) {
+	public Object sessionout_exitbrowser(HttpServletRequest request) {
 
 		// 회원가입 유저 타입 저장(토커, 리스너)
 		HttpSession session = request.getSession();

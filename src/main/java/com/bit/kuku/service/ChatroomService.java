@@ -59,4 +59,8 @@ public class ChatroomService {
 	public void updateLastChatTime(String chatroom_idx) {
 		chatroomDao.updateLastChatTime(chatroom_idx);
 	}
+	
+	public void updateUserNickname(String userType, String userEmail, String userNick) {
+		chatroomDao.updateUserNickname(userType, userEmail, userNick);
+	}
 }

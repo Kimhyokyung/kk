@@ -46,8 +46,7 @@
 		}
 
 		// 현재 채팅방 로그 정보 가져오기
-		$
-				.ajax({
+		$.ajax({
 					beforeSend : function() {
 						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/img/loading.gif>';
 						var graphDiv = document.getElementById("kukugraph");
@@ -58,7 +57,7 @@
 					}, */
 					error : function() {
 						alert("이 날의 데이터가 없습니다!");
-						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/img/samples/nodata.png>';
+						var html = '<img src=' + '${pageContext.request.contextPath}' + '/assets/img/empty_data.png>';
 						var graphDiv = document.getElementById("kukugraph");
 						graphDiv.innerHTML = html;
 					},

@@ -99,4 +99,23 @@
 			where idx=#{chatroom_idx}
 		]]>
 	</update>
+	
+	<update id="updateChatUserNick" parameterType="map">
+		<![CDATA[
+			update
+			tb_chatroom
+		]]>
+		<include refid="userType"></include>
+	</update>
+	
+	<sql id="userType">
+		<if test="userType == 'talker'.toString()">
+			set talker_nickname = #{talker_nickname}
+			where talker_email = #{talker_email}
+		</if>
+		<if test="userType == 'listener'.toString()">
+			set listener_nickname = #{listener_nickname}
+			where listener_email = #{listener_email}
+		</if>
+	</sql>
 </mapper>
