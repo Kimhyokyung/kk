@@ -3,7 +3,94 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-
+<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$.ajax({
+		url : "/kuku/main/nav_headbar",
+		type : "post",
+		dataType : "json",
+		data : "",
+		success : function(response) {	
+			console.log(response);
+			console.log(window.location.href);
+			//location.href = window.location.href;
+			if('${authUser}' == null || '${authUser}' == '' || '${authUser}' == 'undefined') {
+				return;
+			}
+			
+			if('${userType}' == 'talker') {
+				$('#aaa').load(window.location.href + ' #tk-msg-cnt');
+				var msg_div = document.getElementById('tk-msg-cnt');
+				
+				if(response.messageCount != 0) {
+					msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\">" + response.messageCount + "</span></a>";	
+				} else {
+					msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\"></span></a>";
+				}
+			} else if('${userType}' == 'listener') {
+				$('#aaa').load(window.location.href + ' #ls-msg-cnt');
+				var msg_div = document.getElementById('ls-msg-cnt');
+				$('#aaa').load(window.location.href + ' #ls-req-cnt');
+				var req_div = document.getElementById('ls-req-cnt');
+				if(response.messageCount != 0){
+					msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\">" + response.messageCount + "</span></a>";	
+				} else{
+					 msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\"></span></a>";
+				}
+				if(response.requestCount != 0){
+				 	req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\">" + response.requestCount + "</span></a>";	
+				} else{
+					req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\"></span></a>";
+				}
+			}
+		}
+	});
+	
+		setInterval(function() {
+			$.ajax({
+				url : "/kuku/main/nav_headbar",
+				type : "post",
+				dataType : "json",
+				data : "",
+				success : function(response) {	
+					console.log(response);
+					console.log(window.location.href);
+					//location.href = window.location.href;
+					if('${authUser}' == null || '${authUser}' == '' || '${authUser}' == 'undefined') {
+						return;
+					}
+					
+					if('${userType}' == 'talker') {
+						$('#aaa').load(window.location.href + ' #tk-msg-cnt');
+						var msg_div = document.getElementById('tk-msg-cnt');
+						
+						if(response.messageCount != 0) {
+							msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\">" + response.messageCount + "</span></a>";	
+						} else {
+							msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\"></span></a>";
+						}
+					} else if('${userType}' == 'listener') {
+						$('#aaa').load(window.location.href + ' #ls-msg-cnt');
+						var msg_div = document.getElementById('ls-msg-cnt');
+						$('#aaa').load(window.location.href + ' #ls-req-cnt');
+						var req_div = document.getElementById('ls-req-cnt');
+						if(response.messageCount != 0) 
+							msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\">" + response.messageCount + "</span></a>";	
+						else
+							 msg_div.innerHTML = "<a href=\"/kuku/chat/my_chat_room\">나의 채팅<span class=\"badge badge-danger\"></span></a>";
+						
+						if(response.requestCount != 0) {
+							req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\">" + response.requestCount + "</span></a>";	
+						}else{
+							req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\"></span></a>";
+						}
+					}
+				}
+			});
+		}, 3000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
+}); 
+</script>
 <header class="navbar" id="header-navbar">
 	<div class="container">
 		<a href="/kuku/main" id="logo" class="navbar-brand"> <img
@@ -37,7 +124,9 @@
 						</c:when>
 						<c:when test="${userType eq 'talker'}">
 							<ul class="nav navbar-nav navbar-center">
-								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
+								<li id="tk-msg-cnt">
+								<a href="/kuku/chat/my_chat_room">나의 채팅<span class="badge badge-danger"></span></a>
+								</li>
 								<li><a href="/kuku/talker/talker_listener_search">리스너
 										찾기</a></li>
 								<li><a href="/kuku/talker/my_kuku_stat">내 쿠크 상태</a></li>
@@ -50,8 +139,12 @@
 						</c:when>
 						<c:when test="${userType eq 'listener' }">
 							<ul class="nav navbar-nav navbar-center">
-								<li><a href="/kuku/chat/my_chat_room">나의 채팅</a></li>
-								<li><a href="/kuku/listener/request_chatlist">요청 보기</a></li>
+								<li id="ls-msg-cnt">
+									<a href="/kuku/chat/my_chat_room">나의 채팅<span class="badge badge-danger"></span></a>
+								</li>
+								<li id="ls-req-cnt">
+									<a href="/kuku/listener/request_chatlist">요청 보기<span class="badge badge-danger"></span></a>
+								</li>
 								<li><a href="/kuku/listener/listener_score">평가 보기</a></li>
 								<li><a href="/kuku/user/modify_lock">마이 페이지</a></li>
 								<li><a href="/kuku/user/logout">로그아웃</a></li>

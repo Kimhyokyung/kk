@@ -33,6 +33,11 @@ public class ChatroomService {
 		return list;
 	}
 	
+	public int getListenerRequestCount(String ls_email) {
+		int requestCount = chatroomDao.selectListenerRequestCount(ls_email);
+		return requestCount;
+	}
+	
 	public void responseChatroom(String idx) {
 		chatroomDao.updateListenerResponse(idx);
 	}

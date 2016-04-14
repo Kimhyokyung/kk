@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.kuku.dao.MongoDao;
 import com.bit.kuku.service.ChatroomService;
+import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ChatVo;
 import com.bit.kuku.vo.ChatroomVo;
 import com.bit.kuku.vo.ListenerVo;
@@ -47,6 +48,10 @@ public class ChatController {
 
 		// 읽지 않은 메시지 갯수 (토커, 리스너)
 		List<Integer> cntList = new ArrayList<>();
+		
+		SessionHandler ssHandler = SessionHandler.getInstance();
+		Map<String, HttpSession> userMapList = ssHandler.selectUserMap();
+		mv.addObject("userMap", userMapList);
 
 		if (userType.equals("talker")) {	//receiver가 talker
 			TalkerVo talker = (TalkerVo) session.getAttribute("authUser");

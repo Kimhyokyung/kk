@@ -48,32 +48,31 @@
 	//토커 회원가입 
 	function selectChkBox(button) {
 		var joinform = document.getElementById('join-form');
-		
-		if (joinform.email.value == "") {
-			alert("이메일을 입력해주세요.")
-			joinform.email.focus()
-			return;
-		} else if (joinform.password.value == "") {
-			alert("비밀번호를 입력하지 않았습니다.")
-			joinform.password.focus()
-			return;
+		console.log(joinform.terms_cond);
+		if (joinform.password.value == "") {
+			alert("비밀번호를 입력하지 않았습니다.");
 		} else if (joinform.password2.value == "") {
-			alert("비밀번호를 입력하지 않았습니다.")
-			joinform.password2.focus()
-			return;
+			alert("비밀번호를 입력하지 않았습니다.");
+			//joinform.password2.focus();
+			//return;
 		} else if (joinform.password.value.length<4 || joinform.password.value.length>12) {
-			alert("비밀번호를 4~12자까지 입력해주세요.")
-			joinform.password.focus()
+			alert("비밀번호를 4~12자까지 입력해주세요.");
+			joinform.password.focus();
 			return;
 		} else if (joinform.nickname.value == "") {
-			alert("닉네임을 입력하지 않았습니다.")
-			joinform.nickname.focus()
+			alert("닉네임을 입력하지 않았습니다.");
+			joinform.nickname.focus();
 			return;
-		}
+		} else if (!(joinform.terms_cond.checked)) {
+			
+			alert("이용약관과 개인정보 수집 및 이용에 대한 안내를 모두 동의해 주세요.");
+			joinform.terms_cond.focus();
+			return;
+		} 
 		//비밀번호와 비밀번호 확인 일치여부 체크
 		else if (joinform.password.value != joinform.password2.value) {
-			alert("비밀번호가 일치하지 않습니다")
-			joinform.pwdConfirm.focus()
+			alert("비밀번호가 일치하지 않습니다");
+			joinform.pwdConfirm.focus();
 			return;
 		} else {
 			var userType = "${sessionScope.userType}";
@@ -146,8 +145,8 @@
 																	class="form-control" placeholder="닉네임" name="nickname">
 															</div>
 															<div class="form-group">
-																<h3 align="center">상담 주제를 선택해주세요. ^.^<br>
-																</br> <select class="form-control" name="consulting_topic">
+																<h4 align="center">상담 주제를 선택해주세요. ^.^</h4><br>
+																<select class="form-control" name="consulting_topic">
 																	<option value="직장문제">직장문제</option>
 																	<option value="학교문제">학교문제</option>
 																	<option value="진로상담">진로상담</option>
@@ -162,9 +161,9 @@
 																<div class="row">
 																	<div class="col-xs-12">
 																		<div class="checkbox-nice">
-																			<input type="checkbox" id="terms-cond"
-																				checked="checked" /> <label for="terms-cond">
-																				I accept terms and conditions </label>
+																			<input type="checkbox" id="terms_cond" name="terms_cond"
+																				checked="checked"/> <label for="terms_cond">
+																				회원 가입에 동의하시겠습니까? </label>
 																		</div>
 																	</div>
 																</div>

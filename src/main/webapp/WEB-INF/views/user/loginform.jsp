@@ -2,9 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <html>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
     // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
@@ -68,8 +68,6 @@ function getCookie(cookieName){
 		loginform.submit();
 	}
 </script>
-
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
@@ -120,7 +118,7 @@ function getCookie(cookieName){
 															class="btn btn-primary col-xs-12 btn-facebook"
 															onclick="clickLogin(this)"
 															value="talker">
-															</i> TALKER로 로그인
+															TALKER로 로그인
 														</button>
 													</div>
 													<div class="col-xs-12 col-sm-6">
@@ -128,7 +126,7 @@ function getCookie(cookieName){
 															class="btn btn-primary col-xs-12 btn-twitter"
 															onclick="clickLogin(this)"
 															value="listener">
-															</i> LISTENER로 로그인
+															LISTENER로 로그인
 														</button>
 													</div>
 													<input type="hidden" id="userType" name="userType"/>
@@ -151,6 +149,5 @@ function getCookie(cookieName){
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 </html>

@@ -44,6 +44,14 @@
 		]]>
 	</select>
 	
+	<select id="selectListenerRequestCount" parameterType="string" resultType="int">
+		<![CDATA[
+		select count(idx)
+		from tb_chatroom 
+		where (LISTENER_EMAIL = #{listener_email} && listener_response=0)
+		]]>
+	</select>
+	
 	<update id="updateListenerResponse" parameterType="String">
 		<![CDATA[
 		update

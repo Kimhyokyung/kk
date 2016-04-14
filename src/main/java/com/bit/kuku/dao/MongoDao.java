@@ -60,6 +60,17 @@ public class MongoDao {
 		return list.size();		
 	}
 	
+	public int receiver_response_count_sum(String receiver_email) {
+		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("receiver_email").is(receiver_email).and("receiver_response").is("false"));
+		
+		List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
+		
+		return list.size();		
+	}	
+	
 	public void receiver_response_read(String chatroom_num, String receiver_email){
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
 		

@@ -430,7 +430,7 @@
 								<input type="date" id="datePicker">
 							</div>
 							<div class="btn-group pagination pull-right" style="padding: 10px">
-							   <button class="btn btn-outline btn-primary btn-xs" value="bar" id="clickbargraph">bar grape</button>
+							   <button class="btn btn-outline btn-primary btn-xs" value="bar" id="clickbargraph">bar graph</button>
 							   <button class="btn btn-outline btn-primary btn-xs" value="pie" id="clickpiegraph">pie graph</button>
 							</div>
 							<div id="kukugraph"></div>
@@ -462,20 +462,38 @@
 														<c:choose>
 															<c:when test="${userType=='talker'}">	<!-- talker가 sender일 때! -->
 																<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
+																	<td class="text-center"><c:set var="isDoing" value="true"/> 
+																	<c:forEach items="${userMap}" var="user">
+                                                           			<c:if test="${ chatroom.listener_email == user.key }">
+                                                       		  			<i class="fa fa-circle green"></i>
+                                                       		  			<c:set var="isDoing" value="false"/> 
+                                                       				</c:if>
+                                                       			</c:forEach>
+                                                       			<c:if test="${isDoing}"> 
+                                                       			<i class="fa fa-circle red"></i></c:if></td>
 																	<td>${chatroom.listener_nickname}</td>
 																	<td>${chatroom.last_chat_time}</td>
 																	<c:choose>
 																		<c:when test = "${cntList[status.index] != 0}">
 																			<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
 																		</c:when>
-																		<c:otherwise>
-																			<td></td>
-																		</c:otherwise>
+																				<c:otherwise>
+																						<td></td>
+																					</c:otherwise>
 																	</c:choose>
 																</tr>
 															</c:when>
 															<c:otherwise>
 																<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
+																	<td class="text-center"><c:set var="isDoing" value="true"/> 
+																	<c:forEach items="${userMap}" var="user">
+                                                           			<c:if test="${ chatroom.talker_email == user.key }">
+                                                       		  			<i class="fa fa-circle green"></i>
+                                                       		  			<c:set var="isDoing" value="false"/> 
+                                                       				</c:if>
+                                                       			</c:forEach>
+                                                       			<c:if test="${isDoing}"> 
+                                                       			<i class="fa fa-circle red"></i></c:if></td>
 																	<td>${chatroom.talker_nickname}</td>
 																	<td>${chatroom.last_chat_time}</td>
 																	<c:choose>

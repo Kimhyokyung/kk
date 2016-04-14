@@ -52,6 +52,10 @@ public class ChatroomDao {
 		return list;
 	}
 	
+	public int selectListenerRequestCount(String listener_email){
+		return sqlSession.selectOne("chatroom.selectListenerRequestCount", listener_email);
+	}
+	
 	public void updateListenerResponse(String idx) {
 		sqlSession.update("chatroom.updateListenerResponse", idx);
 	}
