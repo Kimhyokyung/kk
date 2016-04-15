@@ -117,11 +117,7 @@
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
-			<div class="row">
-				<c:import url="/WEB-INF/views/include/nav_sidebar.jsp"></c:import>
-				<div class="container">
-					<div id="content-wrapper">
-						<div class="row">
+						<div class="row" style="width:70%; margin:10 auto;">
 							<div class="col-lg-12">
 								<div class="row">
 									<div class="col-lg-12">
@@ -167,6 +163,9 @@
 																		</tr>
 																	</c:forEach>
 																</c:when>
+																<c:otherwise>
+																	<tr><td align="center" colspan="4">토커의 요청이 존재하지 않습니다</td></tr>
+																</c:otherwise>
 															</c:choose>
 														</tbody>
 													</table>

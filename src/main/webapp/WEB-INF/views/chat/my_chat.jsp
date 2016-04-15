@@ -478,13 +478,8 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<div class="row">
-					<div class="col-lg-12">
-						<h1>내 채팅</h1>
-					</div>
-				</div>
-				<div class="row" id="user-profile">
-					<div class="col-lg-3 col-md-4 col-sm-4">
+				<div class="row" id="user-profile" style="width:70%; margin:10px auto;">
+					<div class="col-lg-3 col-md-4 col-sm-4" style="width: 30%;">
 						<div class="main-box clearfix">
 							<div class="main-box-body clearfix" id="ajax-div">
 								<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
@@ -545,7 +540,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-9 col-md-8 col-sm-8">
+					<div class="col-lg-9 col-md-8 col-sm-8" style="width:55%">
 						<div class="main-box clearfix">
 								<header class="main-box-header clearfix" id="sender-nickname-div">
 								</header>
