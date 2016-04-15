@@ -15,7 +15,6 @@
 <script src="${pageContext.request.contextPath}/assets/js/wizard.js"></script>
 
 <script type="text/javascript">
-
 	function Rradio_OnOff(id) {
 		document.getElementById('next').disabled = false;
 		if (id == "Rradio_On") {
@@ -26,7 +25,6 @@
 			document.getElementById('next').disabled = true;
 		}
 	}
-
 </script>
 </head>
 <body>
@@ -76,7 +74,6 @@
 												style="margin: 100px 0;">
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz1.
 													상담자의 말에 공감해야 하는 이유는?</strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios1"
 														id="optionsRadios1_1" value="option1"
@@ -106,7 +103,6 @@
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz2.
 													한이는 몇 달 동안 구직활동에 실패하고 사기가 저하된 택이의 이야기를 듣고 있다. 한이가 택이의 말을
 													공감하고 있음을 표현하기 위해 가장 적절한 말은? </strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios2"
 														id="optionsRadios2_1" value="option1"
@@ -143,7 +139,6 @@
 												style="margin: 100px 0;">
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz3.
 													다음 중 경청방법이 아닌 것은?</strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios3"
 														id="optionsRadios3_1" value="option1"
@@ -174,7 +169,6 @@
 												style="margin: 100px 0;">
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz4.
 													다음 중 kuku를 이용할 때 적절하지 않은 행동은?</strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
 														id="optionsRadios4_1" value="option1"
@@ -205,7 +199,6 @@
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz5.
 													영희는 리스너 경이와 그녀의 가족 문제에 대해 이야기하고 있다. 그들이 말할 때, 영희는 그녀의 양아버지가
 													최근에 그녀를 성적으로 강간했다고 밝혔다. 경이는 어떻게 반응해야하나?</strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
 														id="optionsRadios5_1" value="option1"
@@ -239,7 +232,6 @@
 													그녀의 삶이 얼마나 가치없는지에 대해 이야기한다. <br />그녀는 그녀가 슬플 때 어떻게 자해해왔는가에
 													대해 묘사한다. 은이는 어떻게 반응해야하나?
 												</strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
 														id="optionsRadios6_1" value="option1"
@@ -270,7 +262,6 @@
 												style="margin: 100px 0;">
 												<i class="fa fa-info-circle fa-fw fa-lg"></i> <strong>Quiz7.
 													당신이 부적절한 채팅을 하게 되었을 때, 어떻게 해야 하는가? </strong><br /> <br />
-
 												<div class="radio">
 													<input type="radio" name="optionsRadios"
 														id="optionsRadios7_1" value="option1"

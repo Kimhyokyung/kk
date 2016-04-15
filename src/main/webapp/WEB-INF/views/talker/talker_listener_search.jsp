@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
-<html>
-<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -47,7 +46,7 @@
 		$("#myModal").modal();
 	}
 </script>
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
+<html>
 <body>
 	<div class="modal fade" id="myModal" role="alertdialog" align="center">
 		<div class="modal-alert">

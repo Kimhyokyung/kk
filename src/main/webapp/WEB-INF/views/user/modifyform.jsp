@@ -1,16 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page contentType="text/html;charset=UTF-8"%>
-<html>
-<head>
-<title>kukuMental</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.9.0.js"></script>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <script type="text/javascript">
-	
-	
 	//토커 회원가입 
 	function selectChkBox(button) {
 		console.log('selectChkBoc called');
@@ -52,6 +45,7 @@
 		updateform.submit();
 	}
 </script>
+<html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div id="theme-wrapper">
@@ -118,11 +112,6 @@
 																	class="btn btn-primary col-xs-12 btn-facebook"
 																	onClick="selectChkBox(this)" value="updateUser">
 																	회원정보수정
-																</button>
-																<button
-																	class="btn btn-danger col-xs-12"
-																	onClick="deleteChkBox(this)" value="deleteUser">
-																	회원탈퇴
 																</button>
 															</div>
 														</div>

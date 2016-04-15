@@ -94,56 +94,39 @@ public class MongoDao {
 	}
 	
 	public void saveEmotionImage(String fileName) {
-		System.out.println("파일 저장 함수 호출");
-		try {
-			GridFS gridFs = new GridFS(mongoTemplate.getDb(), "photo");
-		    GridFSDBFile outputImageFile = gridFs.findOne(fileName);
-		    System.out.println("몽고다오:"+fileName);
-		    System.out.println(outputImageFile);
-		    
-		    //윈도우
-		    //String graph_image_path = "C://Users//bit-user//git//kk//src//main//webapp//assets//graph_image//";
-		    //리눅스
-		    String graph_image_path = "//usr//local//tomcat8//webapps//kuku//assets//graph_image//";;
-		    String imageLocation = graph_image_path + fileName + ".png";
-		    
-		    try {
-		    	File file = new File(imageLocation);
-		    	FileInputStream fis = new FileInputStream(file);
-		    } catch(NullPointerException nullExcp) {
-		    	nullExcp.printStackTrace();
-		    } catch(FileNotFoundException fileExcp) {
+		// 몽고 데이터베이스에서 파일 검색
+		GridFS gridFs = new GridFS(mongoTemplate.getDb(), "photo");
+	    GridFSDBFile outputImageFile = gridFs.findOne(fileName);
+	    String imageLocation = null;
+		
+	    try {
+		    // 파일을 저장할 경로 설정
+		    String graph_image_path = null;
+		    String osType = System.getProperty("os.name").toLowerCase();
+		    if(osType.contains("windows")) {
+		    	graph_image_path = "C://Users//HK-PC//git//kk//src//main//webapp//assets//graph_image//";
+		    } else if(osType.contains("linux")) {
+		    	graph_image_path = "//usr//local//tomcat8//webapps//kuku//assets//graph_image//";;
+		    }
+		    imageLocation = graph_image_path + fileName + ".png";
+		    System.out.println(imageLocation);
+		    // 파일 존재 유무 검사
+		    File file = new File(imageLocation);
+	    	FileInputStream fis = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			try {
+				// 만약 파일이 없다면  파일 생성
+				outputImageFile.writeTo(imageLocation);
+		    	System.out.println(fileName + "감정분석 파일 생성");
 		    	
-		    	try {
-			    	// 새로운 감정분석 이미지 저장
-			    	outputImageFile.writeTo(imageLocation);
-			    	
-			    	// 3초 동안 무조건 타임슬립 코드(3초 이상 걸릴 경우 작동 제대로 안함)
-				    long time = 5;
-			    	TimeUnit.SECONDS.sleep(time);
-			    	System.out.println("3초간 타임슬립");
-		    	} catch(InterruptedException e) {
-		    		
-		    	}
-		    }
-		    
-		    /*System.out.println("파일 저장 체크 while문 진입");
-		    boolean isSaved = false;
-		    File file = null;
-		    while(!isSaved) {
-				try {
-					file = new File(imageLocation);
-					System.out.println(file);
-				} catch(NullPointerException e) {
-					System.out.println("파일 아직 저장 안됨");
-					continue;
-				}
-				System.out.println("파일 저장 완료");
-				isSaved = true;
-		    }
-		    System.out.println("파일 저장 체크 while문 벗어남");	*/	
-		} catch (IOException e) {
-			
+				// 파일 리프레시를 위한 5초간 타임슬립
+			    long time = 5;
+		    	TimeUnit.SECONDS.sleep(time);
+			} catch(IOException ioe) {
+				ioe.printStackTrace();
+			} catch (InterruptedException ite) {
+				ite.printStackTrace();
+			}
 		}
 	}
 }
