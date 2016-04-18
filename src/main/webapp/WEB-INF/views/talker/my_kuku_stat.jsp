@@ -75,7 +75,7 @@
 			<div class="row">
 				<div class="row" id="user-profile">
 					<div class="main-box clearfix">
-						<div align="center">
+						<div align="center" style="margin:60px">
 							<div class="btn-group pagination" style="padding: 10px">
 								<input type="date" id="datePicker" style="text-align: center">
 							</div>

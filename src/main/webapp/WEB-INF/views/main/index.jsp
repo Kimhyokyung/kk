@@ -9,11 +9,7 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				
-					<div id="login-full-wrapper">
-						
-					</div>
-				</div>
+				<div id="login-full-wrapper"></div>
 			</div>
 		</div>
 	</div>

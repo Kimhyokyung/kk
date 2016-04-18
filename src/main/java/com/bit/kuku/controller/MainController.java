@@ -28,7 +28,17 @@ public class MainController {
 	ChatroomService chatroomService;
 
 	@RequestMapping()
-	public String main() {
+	public String main1(HttpServletRequest request) {
+		// 로그인 정보 가져오기
+				HttpSession session = request.getSession();
+				if(session.getAttribute("authUser") != null) {
+				return "main/index";
+				}
+		return "main/prolog";
+	}
+	
+	@RequestMapping("/index")
+	public String main2() {
 		return "main/index";
 	}
 

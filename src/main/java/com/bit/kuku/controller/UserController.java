@@ -1,8 +1,6 @@
 package com.bit.kuku.controller;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -17,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.kuku.service.ChatroomService;
-import com.bit.kuku.service.TalkerService;
 import com.bit.kuku.service.UserService;
 import com.bit.kuku.session.SessionHandler;
 import com.bit.kuku.vo.ListenerVo;
@@ -232,7 +228,7 @@ public class UserController {
 			System.out.println("로그아웃안되는거니?");
 			session.invalidate();
 		}
-		return "main/index";
+		return "main/prolog";
 	}
 	
 	@RequestMapping(value ="/modifyform")

@@ -65,8 +65,8 @@
 		<div id="page-wrapper" class="container">
 			<div class="row">
 			
-					<div id="page-wrapper" class="container">
-						<div class="col-lg-12">
+					<div id="page-wrapper" class="container" >
+						<div class="col-lg-12" style="top:60px">
 							<div class="main-box no-header clearfix">
 								<div class="col-lg-12">
 									<h4 class="text-center" style="color: #000; font-size: 1.5rem;">누구와 이야기를 나누고 싶으십니까?</h4>
@@ -120,7 +120,7 @@
 											</select>
 										</div>
 										<div class="form-group col-xs-12 col-md-3 col-lg-3 col-xl-3">
-											<button id='searchBtn' class="btn btn-success">Search</button>
+											<button id='searchBtn' class="btn btn-primary">Search</button>
 										</div>
 									</div>
 								</div>

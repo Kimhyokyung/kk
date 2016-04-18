@@ -10,11 +10,12 @@ html, body {
 
 body {
   color: #344644;
-  background: url("../../img/whitey.jpg") repeat scroll 0 0 #fff;
+ /*  background: url("../../img/whitey.jpg") repeat scroll 0 0 #fff; */
   background-size: 220px 220px;
+  background-color: #f8f0e9;/*배경색 아래*/
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h7 {
   font-family: "Open Sans", sans-serif;
   font-weight: 300;
 }
@@ -59,6 +60,11 @@ h6 {
   font-size: 0.875em;
 }
 
+/* 쿠크맨탈 회원가입 - 폰트 */
+h7 {
+  font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+  font-size: 15px;
+}
 a {
   color: #3498db;
   outline: none !important;
@@ -236,7 +242,7 @@ a:hover, a:focus {
   }
 }
 #theme-wrapper {
-  box-shadow: 0 0 53px 0 rgba(0, 0, 0, 0.55);
+/*   box-shadow: 0 0 53px 0 rgba(0, 0, 0, 0.55); */
   max-width: 1920px;
 }
 
@@ -441,7 +447,7 @@ h3 .small {
 #logo.navbar-brand > img {
   float: left;
   padding-right: 4px;
-  height: 30px;
+  height: 70px;
 }
 @media (max-width: 767px) {
   #logo.navbar-brand > img {
@@ -1390,12 +1396,13 @@ h3 .small {
   -webkit-transition: border-color 0.1s ease-in-out 0s, background-color 0.1s ease-in-out 0s;
           transition: border-color 0.1s ease-in-out 0s, background-color 0.1s ease-in-out 0s;
   outline: none;
-  border-radius: 3px;
+  border-radius: 290px;
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
 }
 
-.btn-default,
+.btn-default
+,
 .wizard-cancel,
 .wizard-back {
   background-color: #95a5a6;
@@ -3112,9 +3119,9 @@ input[type="radio"] {
   border-radius: 0 0 3px 3px;
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
-  border: 1px solid #e1e1e1;
+/*   border: 1px solid #e1e1e1; */
   border-bottom-width: 5px;
-  padding: 40px 25px;
+  padding: 60px 25px;
 }
 #login-box-inner.with-heading {
   padding-top: 20px;
@@ -3129,18 +3136,18 @@ input[type="radio"] {
 }
 
 #login-logo {
-  background: none repeat scroll 0 0 #34495e;
+  background: none repeat scroll 0 0 #dbf0db;
   color: #fff;
   display: block;
   font-size: 2em;
   font-weight: 400;
-  padding: 35px 0;
+  padding: 0;
   text-align: center;
   text-transform: uppercase;
 }
 #login-logo > img {
   display: block;
-  height: 40px;
+  height: 150px;
   margin: 0 auto;
 }
 #login-logo > span {
@@ -6566,6 +6573,8 @@ svg {
 .theme-amethyst .btn-default,
 .theme-amethyst .btn-info,
 .theme-amethyst .btn-success,
+
+
 .theme-amethyst .btn-warning,
 .theme-amethyst .btn-danger,
 .theme-amethyst .btn-primary:hover,
@@ -7088,7 +7097,7 @@ svg {
 }
 #nav-col,
 #page-wrapper {
-  background-color: #e8ebf2;
+  background-color: #f8f0e9;   /* 배경색 위*/
 }
 #sidebar-nav .nav > li > a {
   color: #16191c;
@@ -7245,16 +7254,17 @@ a:focus,
   color: #fff;
 }
 .btn-primary {
-  background-color: #2ecc71;
-  border-color: #27ae60;
+  background-color: #3b8686; /* 배경 */
+  border-color: #3b8686; /* 테두리 */
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
+/* 버튼 호버 */
 .open .dropdown-toggle.btn-primary {
-  background-color: #27ae60;
-  border-color: #1a8849;
+  background-color: #a8dba8;
+  border-color: #a8dba8;
 }
 .btn-success {
   background-color: #2ecc71;

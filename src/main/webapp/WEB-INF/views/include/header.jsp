@@ -9,6 +9,8 @@
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/kuku.css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
+	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
 	
 	<!-- RTL support - for demo only -->
 	<script src="${pageContext.request.contextPath}/assets/js/demo-rtl.js"></script>
@@ -25,6 +27,7 @@
 	<!-- global styles -->
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/compiled/theme_styles.css" />
 
+
 	<!-- this page specific styles -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/libs/fullcalendar.css" type="text/css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/libs/fullcalendar.print.css" type="text/css" media="print" />
@@ -32,6 +35,8 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/libs/morris.css" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/libs/daterangepicker.css" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/libs/jquery-jvectormap-1.2.2.css" type="text/css" />
+	
+	
 
 	<!-- Favicon -->
 	<link type="image/x-icon" href="${pageContext.request.contextPath}/assets/favicon.png" rel="shortcut icon"/>
@@ -57,4 +62,9 @@
 	<!-- theme scripts -->
 	<script src="${pageContext.request.contextPath}/assets/js/scripts.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/pace.min.js"></script>
+	
+	<!-- bootstrap2 scripts -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>	
+	
 </head>
