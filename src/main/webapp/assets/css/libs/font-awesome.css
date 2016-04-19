@@ -200,6 +200,7 @@
 }
 .fa-star:before {
   content: "\f005";
+  color:#FFD700;
 }
 .fa-star-o:before {
   content: "\f005";

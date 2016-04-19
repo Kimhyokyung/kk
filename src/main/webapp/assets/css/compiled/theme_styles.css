@@ -1270,8 +1270,8 @@ h3 .small {
 }
 
 .btn-primary {
-  background-color: #3498db;
-  border-color: #1abc9c;
+  background-color: #3b8686;
+  border-color: #265757;
 }
 
 .btn-primary:hover,
@@ -1279,8 +1279,8 @@ h3 .small {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  background-color: #1abc9c;
-  border-color: #1c5c87;
+  background-color: #265757;
+  border-color: #1c4040;
 }
 
 .btn-success {
@@ -1324,21 +1324,21 @@ h3 .small {
 }
 
 .btn-facebook {
-  background-color: #3b5998 !important;
-  border-color: #2f477b !important;
+  background-color: #7a6b61!important;
+  border-color: #4d443e!important;
 }
 .btn-facebook:hover {
-  background-color: #2f477b !important;
-  border-color: #263963 !important;
+  background-color: #4d443e !important;
+  border-color: #3C3530 !important;
 }
 
 .btn-twitter {
-  background-color: #00aced !important;
-  border-color: #0098d1 !important;
+  background-color: #3b8686 !important;
+  border-color: #265757!important;
 }
 .btn-twitter:hover {
-  background-color: #0098d1 !important;
-  border-color: #0283b4 !important;
+  background-color: #265757!important;
+  border-color: #1c4040!important;
 }
 
 .icon-box {
@@ -2638,7 +2638,7 @@ input[type="radio"] {
   background: url(../../img/login-img.jpg) no-repeat center center;
   background-size: cover;
   width: 100%;
-  height: 100%;
+  height: 93%;
   position: absolute;
 }
 @media (max-height: 605px) {
@@ -2809,10 +2809,12 @@ input[type="radio"] {
   font-size: 1em;
 }
 #user-profile .profile-stars {
-  font-size: 4em;
-  color: #FABA03;
-  padding: 70px 0;
-  text-align: center;
+	font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  clear: both;
+  font-size: 200px;
+  margin-bottom: 10px;
+  padding: 10px 0 10px 30px;
 }
 #user-profile .profile-stars > i {
   margin-left: -2px;
@@ -4571,10 +4573,10 @@ a:hover,
 a:focus,
 .widget-users li > .details > .name > a:hover,
 .widget-todo .actions > a:hover {
-  color: #2ecc71;
+  color: #3b8686;
 }
 .table a.table-link:hover {
-  color: #27ae60;
+  color: #265757;
 }
 .pagination > li > a,
 .pagination > li > span,
@@ -4584,7 +4586,7 @@ a:focus,
 .pagination > li > span:focus,
 .pagination > li > a:active,
 .pagination > li > span:active {
-  color: #2ecc71;
+  color: #3b8686;
 } 
 .pagination > .active > a,
 .pagination > .active > span,
@@ -4592,8 +4594,8 @@ a:focus,
 .pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
-  background-color: #2ecc71;
-  border-color: #2ecc71;
+  background-color: #3b8686;
+  border-color: #3b8686;
   color: #fff;
 }
 .notifications-list .item-footer {
@@ -4616,9 +4618,10 @@ a:focus,
 .btn-danger:hover {
   color: #fff;
 }
+/* 버튼 기본색 */
 .btn-primary {
   background-color: #3b8686; /* 배경 */
-  border-color: #3b8686; /* 테두리 */
+  border-color: #224d4d; /* 테두리 */
 }
 .btn-primary:hover,
 .btn-primary:focus,

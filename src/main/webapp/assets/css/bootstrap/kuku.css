@@ -1,206 +1,248 @@
 #login-box2 {
-	max-width: 500px;
-	min-width: 300px;
-	margin: 60px auto 20px;
-	overflow: hidden;
-	border-radius: 3px 3px 0 0;
-	background-clip: padding-box;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 60px auto 20px;
+  overflow: hidden;
+  border-radius: 3px 3px 0 0;
+  background-clip: padding-box;
 }
 
 .modal-alert {
-	position: relative;
-	width: 400px;
-	height: 600px;
-	margin: 10px;
+  position: relative;
+  width: 400px;
+  height:600px;
+  margin: 10px;
 }
-
 .modal.fade .modal-alert {
-	-webkit-transform: translate(0, -25%);
-	-ms-transform: translate(0, -25%);
-	transform: translate(0, -25%);
-	-webkit-transition: -webkit-transform 0.3s ease-out;
-	transition: transform 0.3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
 }
-
 .modal.in .modal-alert {
-	-webkit-transform: translate(0, 0);
-	-ms-transform: translate(0, 0);
-	transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 
 .modal-button {
-	padding: 15px;
-	text-align: center;
-	border-top: 1px solid #e5e5e5;
+  padding: 15px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
 }
-
 .modal-button:before, .modal-button:after {
-	content: " ";
-	display: table;
+  content: " ";
+  display: table;
 }
-
 .modal-button:after {
-	clear: both;
+  clear: both;
 }
-
-.modal-button .btn+.btn {
-	margin-left: 5px;
-	margin-bottom: 0;
+.modal-button .btn + .btn {
+  margin-left: 5px;
+  margin-bottom: 0;
 }
-
-.modal-button .btn-group .btn+.btn {
-	margin-left: -1px;
+.modal-button .btn-group .btn + .btn {
+  margin-left: -1px;
 }
-
-.modal-button .btn-block+.btn-block {
-	margin-left: 0;
+.modal-button .btn-block + .btn-block {
+  margin-left: 0;
 }
-
 .modal-show {
-	position: relative;
-	width: 540px;
-	height: 600px;
-	margin: 10px;
+  position: relative;
+  width: 540px;
+  height:600px;
+  margin: 10px;
 }
-
 .modal.fade .modal-show {
-	-webkit-transform: translate(0, -25%);
-	-ms-transform: translate(0, -25%);
-	transform: translate(0, -25%);
-	-webkit-transition: -webkit-transform 0.3s ease-out;
-	transition: transform 0.3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.modal.in .modal-show {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
 }
 
-.modal.in .modal-show {
-	-webkit-transform: translate(0, 0);
-	-ms-transform: translate(0, 0);
-	transform: translate(0, 0);
-}
 
 /* nav_headbar에 추가될 css */
 .navbar-default {
-	border-color: rgba(35, 35, 35, .05);
-	font-family: 'Questrial', 'Helvetica Neue', Arial, sans-serif;
-	background-color: #222;
-	-webkit-transition: all .4s;
-	-moz-transition: all .4s;
-	transition: all .4s;
+    border-color: rgba(35,35,35,.05);
+    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+    background-color: #222;
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
 }
 
-.navbar-header>.navbar-brand {
-	font-family: 'Questrial', 'Helvetica Neue', Arial, sans-serif;
-	color: #fff4cc;
-	/* padding: 15px; */
-	-webkit-transition: padding .2s ease-in;
-	-moz-transition: padding .2s ease-in;
-	/* transition: padding .2s ease-in; */
+.navbar-header > .navbar-brand {
+    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+    color: #fff4cc;
+    /* padding: 15px; */
+    -webkit-transition: padding .2s ease-in;
+    -moz-transition: padding .2s ease-in;
+    /* transition: padding .2s ease-in; */
 }
 
-.navbar-header>.navbar-brand:hover, .navbar-header>.navbar-brand:focus {
-	color: #8b27b0;
+.navbar-header > .navbar-brand:hover,
+.navbar-header > .navbar-brand:focus {
+    color: #8b27b0;
 }
 
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover
-	{
-	background-color: #181818;
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #181818;
 }
-
 .navbar-default .navbar-toggle, .navbar-default .navbar-collapse {
-	border-color: transparent;
+    border-color: transparent;
 }
 
-.navbar-default .nav>li>a, .navbar-default .nav>li>a:focus {
-	text-transform: uppercase;
-	font-size: 14px;
-	font-weight: 800;
-	color: #eee;
-}
-
-.navbar-default .nav>li>a:hover, .navbar-default .nav>li>a:focus:hover {
-	color: #fff4cc;
-}
-/* 해더, 스크롤 위치에 따른 자동 호버색 */
-.navbar-default .nav>li.active>a, .navbar-default .nav>li.active>a:focus
-	{
-	color: #000 !important;
-	background-color: transparent;
-}
-
-.navbar-default .nav>li.active>a:hover, .navbar-default .nav>li.active>a:focus:hover
-	{
-	background-color: transparent;
-}
-
-@media ( min-width :768px) {
-	.navbar-default {
-		border-color: rgba(34, 34, 34, .05);
-		background-color: #cff09e;
-		min-height: 60px;
-		background-clip: padding-box;
-		/* 헤드 아래 부분 줄 안보이게*/
-		box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.1); 
-		position: relative;
-		margin: 0;
-	}
-	.navbar-header>.navbar-brand {
-		font-size: 15px;
-		color: #fff;
-		padding: 0;
-		letter-spacing: 1px;
-	}
-	.navbar-default .navbar-header .navbar-brand:hover, .navbar-default .navbar-header .navbar-brand:focus
-		{
-		color: #8b27b0;
-	}
-	.navbar-default .nav>li>a, .navbar-default .nav>li>a:focus {
-		color: #ffffff;
-		/* text-shadow: 1px 1px 1px rgba(30, 30, 30, 0.7); */
-		text-shadow: 0.5px 0.5px 0.5px #000; 
-		padding: 20px;
-		letter-spacing: 1.1px;
-		font-weight:bold;
-	}
-
-	/* 해더 main일때 호버색 */
-	.navbar-default .nav>li>a:hover, 
-	.navbar-default .nav>li>a:focus:hover,
-	.navbar-default .nav>li>.selected {
-		color: #000;
-		font-weight:bold;
-	}
-}
-/*헤더 반응할 때 색깔 바꿈*/
-.container-fluid {
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-    background-color: #cff09e;	
-}
-/*헤더 글씨 색 변경*/
 .navbar-default .nav > li>a,
 .navbar-default .nav>li>a:focus {
     text-transform: uppercase;
     font-size: 13px;
-    font-weight: bold;
+    font-weight: 700;
     color: #eee;
-   /*  text-shadow: 1px 1px 1px #000; */
-    text-shadow: 0.5px 0.5px 0.5px #000;
 }
-	.navbar-default .nav>li>a:hover, 
-	.navbar-default .nav>li>a:focus:hover,
-	.navbar-default .nav>li>.selected {
-		color: #000;
-		font-weight:bold;
-	}
+
+.navbar-default .nav > li>a:hover,
+.navbar-default .nav>li>a:focus:hover {
+    color: #000;
+}
 /* 해더, 스크롤 위치에 따른 자동 호버색 */
 .navbar-default .nav > li.active>a,
 .navbar-default .nav>li.active>a:focus {
-    color: #000  !important;
+    /* color: #000  !important; */
+    color : #000;
+    font-weight:900;
     background-color: transparent;
 }
+
 .navbar-default .nav > li.active>a:hover,
 .navbar-default .nav>li.active>a:focus:hover
 {
     background-color: transparent;
+}
+
+
+@media(min-width:768px) {
+    .navbar-default {
+        border-color: rgba(34,34,34,.05);
+        background-color: #cff09e;
+        min-height: 60px;
+        background-clip: padding-box;
+        box-shadow: 0px 1px 3px 0 rgba(0, 0, 0, 0.1);
+ 		position: relative;
+ 		margin: 0;
+    }
+
+    .navbar-header > .navbar-brand {
+         font-size: 15px;
+        color: #fff;
+       	padding: 0;
+        letter-spacing: 1px;
+    }
+
+    .navbar-default .navbar-header .navbar-brand:hover,
+    .navbar-default .navbar-header .navbar-brand:focus {
+        color: #8b27b0;
+    }
+   
+    .navbar-default .nav > li>a,
+    .navbar-default .nav>li>a:focus {
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(30,30,30,0.7);
+        padding: 20px;
+        letter-spacing: 1.1px;
+    }
+    
+	/* 해더 main일때 호버색 */
+    .navbar-default .nav > li>a:hover,
+    .navbar-default .nav>li>a:focus:hover,
+    .navbar-default .nav > li> .selected {
+        color: #cccc00;
+        font-weight:border;
+    }
+
+}
+
+/* 버튼 백그라운드색 변경 */
+.btn-primary.disabled, 
+.btn-primary.disabled:hover, 
+.btn-primary.disabled:focus, 
+.btn-primary.disabled.focus, 
+.btn-primary.disabled:active, 
+.btn-primary.disabled.active, 
+.btn-primary[disabled], 
+.btn-primary[disabled]:hover, 
+.btn-primary[disabled]:focus, 
+.btn-primary[disabled].focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary.focus, 
+fieldset[disabled] .btn-primary:active, 
+fieldset[disabled] .btn-primary.active {
+  background-color: #3b8686; /* 배경 */
+  border-color: #224d4d; /* 테두리 */
+}
+
+/* index.jsp 추가 내용 */
+.cursive {
+    font-family: 'Dancing Script', cursive;
+    text-transform: none;
+}
+
+.header-content {
+	font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+    webkit-tap-highlight-color: #222;
+	width: 100%;
+    height: 93%;
+    position: relative;
+    min-height: auto;
+    padding: 100px 15px;
+    text-align: center;
+    z-index: 2;
+    color: #fff;
+    background-color: #c9c9c9;
+     background-image: url('../../img/login-img.jpg');
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.header-content .inner h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #fff;
+}
+
+.header-content .inner p {
+    margin-bottom: 50px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+}
+
+
+#rateTable {
+	font-size:28px;
+	margin: 0 25px;
+}
+
+#rateTable tr {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+#rateTable td ,caption {
+  padding-left: 38px;
+  padding-bottom: 28px;
+  vertical-align: middle;
 }

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -68,7 +68,7 @@
 </script>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <html>
-<body id="login-page">
+<body>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
@@ -84,7 +84,7 @@
 								<button class="btn btn-outline btn-primary btn-xs" onclick="click_graph(this)" value="pie" id="pie">원그래프 결과보기</button>
 							</div>
 						</div>
-						<div align="center" style="height: 80%">
+						<div align="center">
 							<div id="kukugraph"></div>
 						</div>
 					</div>

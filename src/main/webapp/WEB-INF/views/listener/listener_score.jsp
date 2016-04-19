@@ -22,9 +22,11 @@
 												</div>
 											</header>
 											<div id="login-box-inner">
-												<h2>평가 수 : ${calculatedScore.rateNum}</h2>
-												<div class="profile-stars">
-													<h2> 도움성
+											<table id="rateTable">
+												<caption>평가 수 : ${calculatedScore.rateNum}</caption>
+												<tr class="profile-stars">
+													<td> 도움성</td>
+													<td> 
 														<c:forEach var="hscore" begin="1" end="${calculatedScore.helpness}">
 															<i class="fa fa-star"></i>
 														</c:forEach>
@@ -36,10 +38,11 @@
 																</c:forEach>
 															</c:when>
 														</c:choose>
-													</h2>
-												</div>
-												<div class="profile-stars">
-													<h2> 전문성
+													</td>
+												</tr>
+												<tr class="profile-stars">
+													<td> 전문성</td>
+													<td> 
 														<c:forEach var="hscore" begin="1" end="${calculatedScore.professionalism}">
 															<i class="fa fa-star"></i>
 														</c:forEach>
@@ -50,11 +53,12 @@
 																</c:forEach>
 															</c:when>
 														</c:choose>
-													</h2>
-												</div>
-												<div class="profile-stars">
-													<h2>
-														공감성
+													</td>
+												</tr>
+												<tr class="profile-stars">
+													<td>
+														공감성</td>
+														<td> 
 														<c:forEach var="hscore" begin="1" end="${calculatedScore.sympathy}">
 															<i class="fa fa-star"></i>
 														</c:forEach>
@@ -65,11 +69,12 @@
 																</c:forEach>
 															</c:when>
 														</c:choose>
-													</h2>
-												</div>
-												<div class="profile-stars">
-													<h2>
-														응답 수준
+													</td>
+												</tr>
+												<tr class="profile-stars">
+													<td>
+														응답 수준</td>
+														<td> 
 														<c:forEach var="hscore" begin="1" end="${calculatedScore.responsibility }">
 															<i class="fa fa-star"></i>
 														</c:forEach>
@@ -80,10 +85,11 @@
 																</c:forEach>
 															</c:when>
 														</c:choose>
-													</h2>
-												</div>
-												<div class="profile-stars">
-													<h2> 총점
+													</td>
+												</tr>
+												<tr class="profile-stars">
+													<td> 총점</td>
+													<td> 
 														<c:forEach var="hscore" begin="1" end="${calculatedScore.total_avg }">
 															<i class="fa fa-star"></i>
 														</c:forEach>
@@ -94,8 +100,9 @@
 																</c:forEach>
 															</c:when>
 														</c:choose>
-													</h2>
-												</div>
+													</td>
+												</tr>
+											</table>
 											</div>
 										</div>
 									</div>

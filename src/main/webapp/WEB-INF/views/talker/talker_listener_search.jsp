@@ -64,7 +64,6 @@
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-			
 					<div id="page-wrapper" class="container" >
 						<div class="col-lg-12" style="top:60px">
 							<div class="main-box no-header clearfix">
