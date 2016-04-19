@@ -106,20 +106,20 @@
 													<div class="row">
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-user"></i></span>
-															<input class="form-control" type="text" placeholder="이메일(ID)" name="email" id="email">
+															<input class="form-control" type="text" placeholder="이메일" name="email" id="email">
 														</div>
 														<div id="remember-me-wrapper" class="row">
 															<div class="col-xs-12">
-																<input class="btn btn-success col-xs-12" id="button-checkemail" type="button" value="중복 확인 ">
+																<input class="btn btn-primary col-xs-12 btn-twitter" id="button-checkemail" type="button" value="중복 확인 ">
 															</div>
 														</div>
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-															<input class="form-control" type="password" placeholder="패스워드" name="password">
+															<input class="form-control" type="password" placeholder="비밀번호" name="password">
 														</div>
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-															<input class="form-control" type="password" placeholder="패스워드 확인" name="password2">
+															<input class="form-control" type="password" placeholder="비밀번호 확인" name="password2">
 														</div>
 														<div class="input-group">
 															<span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
@@ -149,8 +149,8 @@
 																</div>
 															</div>
 														</div>
-														<div style="width: 315px; height: 80px; margin: auto">
-															<button type="submit" class="btn btn-primary col-xs-12 btn-facebook" onClick="selectChkBox(this)" value="next" disabled="disabled" id="btn_next">다음으로</button>
+														<div style="width: 315px; height: 80px; margin: auto" align="center">
+															<button type="submit" class="btn btn-primary btn-xl page-scroll" style="width:100%" onClick="selectChkBox(this)" value="next" disabled="disabled" id="btn_next">다음으로</button>
 														</div>
 													</div>
 												</form>

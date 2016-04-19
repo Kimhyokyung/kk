@@ -86,11 +86,11 @@
 											<form role="form" method="post" id="loginform">
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-user"></i></span>
-													<input class="form-control" type="text" placeholder="email" name="email" id="email">
+													<input class="form-control" type="text" placeholder="이메일" name="email" id="email">
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-key"></i></span>
-													<input type="password" class="form-control" placeholder="password" name="password">
+													<input type="password" class="form-control" placeholder="비밀번호" name="password">
 												</div>
 												<div id="remember-me-wrapper">
 													<div class="row">

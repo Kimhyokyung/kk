@@ -65,18 +65,22 @@
 											</header>
 											<div id="login-box-inner">
 												<form role="form" method="post" id="modify_lock">
-
+													<div>
+														<h7>&nbsp;&nbsp;&nbsp;비밀번호를 입력해주세요.</h7>
+														<br>
+														<br>
+													</div>
 													<div class="input-group">
 														<span class="input-group-addon"><i
 															class="fa fa-lock"></i></span> <input type="password"
 															class="form-control" id="password-unlock"
-															placeholder="Enter password">
+															placeholder="비밀번호">
 													</div>
 													<div class="row">
 														<div class="col-xs-12" align="center">
 															<button id="button-unlock" type="submit"
 																class="btn btn-primary btn-xl page-scroll"
-																style="width: 100%">Unlock</button>
+																style="width: 100%">회원 정보 수정</button>
 														</div>
 													</div>
 												</form>

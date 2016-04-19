@@ -63,7 +63,7 @@
 												<header id="login-header">
 													<div id="login-logo">
 														<img
-															src="${pageContext.request.contextPath}/assets/img/logo.png"
+															src="${pageContext.request.contextPath}/assets/img/logo-black.png"
 															alt="" />
 													</div>
 												</header>
@@ -80,13 +80,13 @@
 															<div class="input-group">
 																<span class="input-group-addon"><i
 																	class="fa fa-envelope"></i></span> <input class="form-control"
-																	type="password" placeholder="패스워드" name="password">
+																	type="password" placeholder="비밀번호" name="password">
 															</div>
 
 															<div class="input-group">
 																<span class="input-group-addon"><i
 																	class="fa fa-envelope"></i></span> <input class="form-control"
-																	type="password" placeholder="패스워드 확인" name="password2">
+																	type="password" placeholder="비밀번호 확인" name="password2">
 															</div>
 
 															<div class="input-group">
@@ -107,11 +107,11 @@
 																	<option value="기타">기타</option>
 																</select>
 															</div>
-															<div style="width: 315px; height: 80px; margin: auto">
+															<div style="width: 315px; height: 80px; margin: auto" align="center">
 																<button
-																	class="btn btn-primary col-xs-12 btn-facebook"
-																	onClick="selectChkBox(this)" value="updateUser">
-																	회원정보수정
+																	class="btn btn-primary btn-xl page-scroll"
+																	onClick="selectChkBox(this)" style="width:100%" value="updateUser">
+																	회원 정보 수정
 																</button>
 															</div>
 														</div>
