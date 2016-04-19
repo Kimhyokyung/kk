@@ -355,9 +355,9 @@ h3 .small {
 .nav > li {
   float: left;
 }
-
+/*일 - 헤더 마진 삭제*/
 .navbar-nav {
-  margin: 0 0 0 10px;
+/*   margin: 0 0 0 10px; */
 }
 .navbar-nav > li > a {
   padding-bottom: 15px;
@@ -449,9 +449,10 @@ h3 .small {
   padding-right: 4px;
   height: 70px;
 }
+/*일 - 가로 작아질 때 그림 작아지는거 없앰 */
 @media (max-width: 767px) {
   #logo.navbar-brand > img {
-    height: 25px;
+/*     height: 25px; */
   }
 }
 @media (min-width: 992px) {

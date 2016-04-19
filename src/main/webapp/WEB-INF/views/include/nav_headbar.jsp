@@ -191,7 +191,7 @@
 									<li><a href="/kuku/user/logout">로그아웃</a></li>
 								</ul>
 								<li class="dropdown profile-dropdown"><a><span
-										class="hidden-xs"><B>${sessionScope.authUser.nickname}</B>님안녕하세요</span></a></li>
+										class="hidden-xs"><h7 style="color:#000;">${sessionScope.authUser.nickname}</h7>님안녕하세요</span></a></li>
 							</c:when>
 							<c:when test="${userType eq 'listener' }">
 								<ul class="nav navbar-nav navbar-center">
@@ -206,7 +206,7 @@
 									<li><a href="/kuku/user/logout">로그아웃</a></li>
 								</ul>
 								<li class="dropdown profile-dropdown"><a><span
-										class="hidden-xs"><B>${sessionScope.authUser.nickname}</B>님안녕하세요</span></a></li>
+										class="hidden-xs"><h7 style="color:#000;">${sessionScope.authUser.nickname}</h7>님안녕하세요</span></a></li>
 							</c:when>
 						</c:choose>
 					</ul>
