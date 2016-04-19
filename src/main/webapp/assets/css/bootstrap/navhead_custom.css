@@ -8,16 +8,17 @@ http://www.bootstrapzero.com
 @import url(https://fonts.googleapis.com/css?family=Questrial);
 @import url(http://fonts.googleapis.com/css?family=Dancing+Script:700);
 
-html, body{
+html,
+body {
     width: 100%;
     height: 100%;
 }
-
 /* 메인 바디 색 */
 body {
     font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
     background-color: #dbf0db;
-    color: #d3d3d3;
+/* 메인 바디 폰트 색 */
+    color: #000;
     webkit-tap-highlight-color: #222;
 }
 
@@ -48,12 +49,12 @@ a:focus {
 
 h1,h2,h3,h4,h5,h6 {
 /*     font-family: 'Questrial','Helvetica Neue',Arial,sans-serif; */
-	font-family: 휴먼편지체;
+     font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
 }
 
 p {
     font-size: 23px;
-    font-family: 휴먼편지체;
+      font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
     line-height: 1.7;
     margin-bottom: 20px;
 }
@@ -69,6 +70,7 @@ p {
 /* 첫 번째 바디 색 */
 .bg-primary {
     background-color: #edf7ed ;
+    color:#000;
 }
 
 .bg-dark {
@@ -94,7 +96,7 @@ p {
 }
 
 .modal-content {
-    background-color: #1d1d1d;
+    background-color: #fff;
 }
 
 section {
@@ -116,7 +118,7 @@ footer {
 .navbar-default {
     border-color: rgba(35,35,35,.05);
     font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
-    background-color: #cff09e;
+    background-color: #222;
     -webkit-transition: all .4s;
     -moz-transition: all .4s;
     transition: all .4s;
@@ -125,7 +127,7 @@ footer {
 .navbar-header > .navbar-brand {
     font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
     color: #fff4cc;
-    padding: 0;
+    padding: 0px;
     -webkit-transition: padding .2s ease-in;
     -moz-transition: padding .2s ease-in;
     transition: padding .2s ease-in;
@@ -159,11 +161,9 @@ footer {
 /* 해더, 스크롤 위치에 따른 자동 호버색 */
 .navbar-default .nav > li.active>a,
 .navbar-default .nav>li.active>a:focus {
-    color: #000  !important;
+    color: #cccc00  !important;
     background-color: transparent;
 }
-
-
 
 .navbar-default .nav > li.active>a:hover,
 .navbar-default .nav>li.active>a:focus:hover
@@ -178,15 +178,15 @@ footer {
         background-color: transparent;
         min-height: 60px;
     }
-
+/* 스크롤 top 일대 로고 색 */
     .navbar-header > .navbar-brand {
         color: rgba(255,255,255,0.7);
-/*         padding: 19px; */
+        padding: 1px;
     }
-
+/* 스코롤 top 일때 로고 호버색 */
     .navbar-default .navbar-header .navbar-brand:hover,
     .navbar-default .navbar-header .navbar-brand:focus {
-        color: #f4f4f4;
+        color: #000;
     }
 
     .navbar-default .nav > li>a,
@@ -199,18 +199,19 @@ footer {
 /* 해더 main일때 호버색 */
     .navbar-default .nav > li>a:hover,
     .navbar-default .nav>li>a:focus:hover {
-        color: #000;
+        color: #ffffff;
+        
     }
 /* 해더매인색 */
     .navbar-default.affix {
         border-color: rgba(34,34,34,.05);
         background-color: #cff09e;
     }
-
+/* 로고 스크롤 중단일때 변색 */
     .navbar-default.affix .navbar-header .navbar-brand {
         font-size: 15px;
-        color: #fff;
-        padding: 1px;
+        color: #000;
+/*         padding: 20px; */
         letter-spacing: 1px;
     }
 
@@ -228,7 +229,7 @@ footer {
 /* 해더, 중간일때 호버색 */
     .navbar-default.affix .nav > li>a:hover,
     .navbar-default.affix .nav>li>a:focus:hover {
-        color: #000;
+        color: #cccc00;
     }
 }
 
@@ -239,7 +240,7 @@ header {
     color: #fff;
     width: 100%;
     background-color: #c9c9c9;
-    background-image: url('../../img/login-img.jpg');
+     background-image: url('../../img/login-img.jpg');
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -327,7 +328,7 @@ footer {
     }
 
 }
-
+/* e-mail 보내기 설정 */
 .form-control {
     display: block;
     width: 100%;
@@ -335,8 +336,10 @@ footer {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.5;
-    color: #eee;
-    background-color: #36333d;
+/*     글자색 */
+    color: #000;
+/*     폼배경색 */
+    background-color: #fff;
     background-image: none;
     border: 1px solid #36333d;
     border-radius: 4px;
