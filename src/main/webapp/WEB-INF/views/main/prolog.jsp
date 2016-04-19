@@ -13,7 +13,6 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/navhead_custom.css" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
 	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
 <title>Kukumental</title>
 </head>
 <body>
@@ -247,10 +246,10 @@
 			</div>
 		</div>
 	</div>
+</body>
 	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/assets/js/bootstrap.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>	
 	<script src="${pageContext.request.contextPath}/assets/js/navhead_custom.js"></script>
-</body>
 </html>
