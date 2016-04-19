@@ -5,13 +5,18 @@
 <html>
 <c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
-	<div id="theme-wrapper">
-		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
-		<div id="page-wrapper" class="container">
-			<div class="row">
-				<div id="login-full-wrapper"></div>
-			</div>
-		</div>
-	</div>
+   <div id="theme-wrapper">
+      <c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
+      <div id="page-wrapper" class="container">
+         <div class="row">
+               <div class="header-content">
+                  <div class="inner">
+                     <h1 class="cursive">Hello! for kukumental</h1>
+                     <h4>대화가 필요하신가요?</h4>
+                  </div>
+               </div>
+         </div>
+      </div>
+   </div>
 </body>
 </html>
