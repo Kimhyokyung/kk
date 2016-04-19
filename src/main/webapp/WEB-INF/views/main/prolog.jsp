@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/bootstrap/navhead_custom.css" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
 	<link rel="stylesheet" href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+	<script src="${pageContext.request.contextPath}/assets/js/jquery.js"></script>
 <title>Kukumental</title>
 </head>
 <body>
@@ -26,9 +27,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand page-scroll" href="#first">
-					<div id="login-logo">
 						<img src="${pageContext.request.contextPath}/assets/img/logo.png" style="height:70px"/>
-					</div>
 				</a>
 			</div>
 			<div class="navbar-collapse collapse" id="bs-navbar">

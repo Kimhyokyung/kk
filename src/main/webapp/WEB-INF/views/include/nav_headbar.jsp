@@ -4,11 +4,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$
-								.ajax({
+	$(document).ready(function() {
+						$.ajax({
 									url : "/kuku/main/nav_headbar",
 									type : "post",
 									dataType : "json",
@@ -131,6 +128,21 @@
 												}
 											});
 								}, 5000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
+								
+					 	 $page = jQuery(location).attr('pathname');
+						    if(!$page) {
+						        $page = '/kuku/main/index';
+						    }
+						    console.log('page : '+$page);
+						    $('.nav li a').each(function(){
+						        var $href = $(this).attr('href');
+						        console.log('href : '+$href);
+						        if ( ($href == $page) || ($href == '') ) {
+						            $(this).addClass('selected');
+						        } else {
+						            $(this).removeClass('selected');
+						        }
+						    }); 
 					});
 </script>
 <header>
@@ -160,10 +172,12 @@
 						<c:set var="userType" value="${userType}" />
 						<c:choose>
 							<c:when test="${empty authUser}">
-								<li><a href="/kuku/user/select_join_type">회원가입</a></li>
-								<li><a href="/kuku/user/loginform">로그인</a></li>
-								<li class="dropdown profile-dropdown"><a><span
-										class="hidden-xs">게스트님 안녕하세요</span></a></li>
+								<ul class="nav navbar-nav navbar-center">
+									<li><a href="/kuku/user/select_join_type">회원가입</a></li>
+									<li><a href="/kuku/user/loginform">로그인</a></li>
+									<li class="dropdown profile-dropdown"><a><span
+											class="hidden-xs">게스트님 안녕하세요</span></a></li>
+								</ul>
 							</c:when>
 							<c:when test="${userType eq 'talker'}">
 								<ul class="nav navbar-nav navbar-center">
