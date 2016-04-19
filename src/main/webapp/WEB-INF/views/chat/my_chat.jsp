@@ -151,7 +151,7 @@
 
 	// 채팅방 리스트 리로드
 	function reloadChatList() {
-		$('#ajax-div').load('/kuku/chat/my_chat_room #ajax-div');
+		$('#temp').load('/kuku/chat/my_chat_room #ajax-div');
 	}
 	
 	// 채팅 버튼 클릭 시 호출되는 함수
