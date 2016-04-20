@@ -230,6 +230,19 @@ fieldset[disabled] .btn-primary.active {
     font-size: 60px;
 }
 
+.header-content .inner h4 {
+    color: #fff;
+    font-size: 18px;
+}
+
+.header-content .inner hr {
+    max-width: 80px;
+    border-width: 3px;
+    opacity: 0.09;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
 .header-content .inner p {
     margin-bottom: 50px;
     font-size: 16px;

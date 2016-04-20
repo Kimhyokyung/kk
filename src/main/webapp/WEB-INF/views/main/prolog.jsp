@@ -71,8 +71,8 @@
                   </h1>
                   <br>
                   <p class="text-faded" align="center">
-                     쿠크에 오신것을 환영합니다!<br><br> 간단한 절차로 쿠크의 회원이 되어보세요!<br><br> 어떤 고민이
-                     있든 익명으로 실시간 고민을 나눌 수 있습니다.<br><br> 쿠크의 리스너들이 당신의 고민을 경청해주고 <br> <br>소통할
+                     쿠크에 오신것을 환영합니다!<br><br> 간단한 가입 절차를 통해 쿠크의 회원이 되어보세요!<br><br> 어떤 고민이
+                     있든 익명으로 실시간 고민을 나눌 수 있습니다.<br><br> 쿠크의 리스너들은 당신의 고민을 경청해주고 <br> <br>소통할
                      준비가 되어있습니다.<br>
                   </p>
                   <a href="/kuku/user/loginform"
@@ -100,14 +100,14 @@
                      src="${pageContext.request.contextPath}/assets/img/talker.png"
                      alt="" />
                   <h2>Talker</h2>
-                  <p class="text-muted">당신의 이야기를 나눠 보세요.</p>
+                  <p class="text-muted">당신의 이야기를 나눠 보세요. 대화를 통해 당신의 지친 멘탈을 힐링하세요!</p>
                </div>
             </div>
             <div class="col-lg-6 col-md-6 text-center">
                <div class="feature">
                   <img src="${pageContext.request.contextPath}/assets/img/listener.png" alt="" />
                   <h2>Listener</h2>
-                  <p class="text-muted">이야기를 들어 주는 것만으로도 힘이 됩니다.</p>
+                  <p class="text-muted">이야기를 들어 주는 것만으로도 힘이 됩니다. 전문 상담가가 아닌 그 누구라도 리스너가 될 수 있습니다.</p>
                </div>
             </div>
          </div>
@@ -125,7 +125,7 @@
             <div class="media wow fadeInRight">
                <h3>실시간 상담</h3>
                <div class="media-body media-middle">
-                  <h4>원하는 상담 주제와 리스너를 선택해서 이야기를 나눌 수 있습니다.</h4>
+                  <h4>원하는 상담 주제와 리스너를 선택해서 언제나 이야기를 나눌 수 있습니다.</h4>
                </div>
                <div class="media-right">
                   <i class="icon-lg ion-ios-bolt-outline"></i>
@@ -138,14 +138,14 @@
                   <i class="icon-lg ion-ios-cloud-download-outline"></i>
                </div>
                <div class="media-body media-middle">
-                  <h4>익명성으로 편하게 대화를 나눌수 있고 까다로운 절차가 필요하지 않습니다.</h4>
+                  <h4>익명성으로 편하게 대화를 나눌수 있고 까다로운 가입 절차가 필요하지 않습니다.</h4>
                </div>
             </div>
             <hr>
             <div class="media wow fadeInRight">
                <h3>감정 분석</h3>
                <div class="media-body media-middle">
-                  <h4>채팅 내용을 텍스트 마이닝하여 감정분석을 통해 토커의 감정 상태를 시각화하여 볼수 있습니다.</h4>
+                  <h4>채팅 내용을 텍스트 마이닝하여 감정분석을 통해 토커의 감정 상태를 시각화하여 볼 수 있습니다.</h4>
                </div>
                <div class="media-right">
                   <i class="icon-lg ion-ios-snowy"></i>

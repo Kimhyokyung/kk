@@ -12,7 +12,8 @@
                <div class="header-content">
                   <div class="inner">
                      <h1 class="cursive">Hello! for kukumental</h1>
-                     <h4>대화가 필요하신가요?</h4>
+                     <h4>쿠크멘탈에 오신 것을 환영합니다!</h4>
+                     <hr>
                   </div>
                </div>
          </div>
