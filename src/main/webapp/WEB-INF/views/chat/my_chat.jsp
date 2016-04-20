@@ -151,7 +151,7 @@
 
 	// 채팅방 리스트 리로드
 	function reloadChatList() {
-		$('#temp').load('/kuku/chat/my_chat_room #ajax-div');
+		$('#ajax-div').load('/kuku/chat/my_chat_room #ajax-div');
 	}
 	
 	// 채팅 버튼 클릭 시 호출되는 함수
@@ -366,7 +366,7 @@
 						<button class="md-close close" id="close">&times;</button>
 						<h4 class="modal-title" align="center">리스너 평가하기</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" align="center">
 						<form id="Evaluation" name="Evaluation" method="POST">
 							<div class="form-inline">
 								<div class="form-group">
@@ -481,61 +481,63 @@
 				<div class="row" id="user-profile" style="width:70%; margin:60px auto;">
 					<div class="col-lg-3 col-md-4 col-sm-4" style="width: 30%;">
 						<div class="main-box clearfix">
-							<div class="main-box-body clearfix" id="ajax-div">
-								<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
-									<table id="chat-table" class="table table-hover dataTable no-footer" role="grid">
-										<tbody>
-											<c:forEach items="${chatroomList}" var="chatroom" varStatus="status">
-												<c:choose>
-													<c:when test="${userType=='talker'}">	<!-- talker가 sender일 때! -->
-														<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
-															<td class="text-center"><c:set var="isDoing" value="true"/> 
-																<c:forEach items="${userMap}" var="user">
-																	<c:if test="${ chatroom.listener_email == user.key }">
-																		<i class="fa fa-circle green"></i>
-																		<c:set var="isDoing" value="false"/> 
+							<div class="main-box-body clearfix">
+							 	<div id="ajax-div">
+									<div class="table-responsive" style="overflow: auto; height: 480px; overflow-X: hidden">
+										<table id="chat-table" class="table table-hover dataTable no-footer" role="grid">
+											<tbody>
+												<c:forEach items="${chatroomList}" var="chatroom" varStatus="status">
+													<c:choose>
+														<c:when test="${userType=='talker'}">	<!-- talker가 sender일 때! -->
+															<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.listener_email}','${chatroom.listener_nickname}');">
+																<td class="text-center"><c:set var="isDoing" value="true"/> 
+																	<c:forEach items="${userMap}" var="user">
+																		<c:if test="${ chatroom.listener_email == user.key }">
+																			<i class="fa fa-circle green"></i>
+																			<c:set var="isDoing" value="false"/> 
+																		</c:if>
+																	</c:forEach>
+																	<c:if test="${isDoing}"> 
+																		<i class="fa fa-circle red"></i>
 																	</c:if>
-																</c:forEach>
-																<c:if test="${isDoing}"> 
-																	<i class="fa fa-circle red"></i>
+																</td>
+																<td>${chatroom.listener_nickname}</td>
+																<td>${chatroom.last_chat_time}</td>
+																<c:choose>
+																	<c:when test = "${cntList[status.index] != 0}">
+																		<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
+																	</c:when>
+																	<c:otherwise>
+																	<td></td>
+																	</c:otherwise>
+																</c:choose>
+															</tr>
+														</c:when>
+														<c:otherwise>
+															<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
+																<td class="text-center"><c:set var="isDoing" value="true"/> 
+																<c:forEach items="${userMap}" var="user">
+																<c:if test="${ chatroom.talker_email == user.key }">
+																	<i class="fa fa-circle green"></i>
+																	<c:set var="isDoing" value="false"/> 
 																</c:if>
-															</td>
-															<td>${chatroom.listener_nickname}</td>
-															<td>${chatroom.last_chat_time}</td>
-															<c:choose>
-																<c:when test = "${cntList[status.index] != 0}">
-																	<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
-																</c:when>
-																<c:otherwise>
-																<td></td>
-																</c:otherwise>
-															</c:choose>
-														</tr>
-													</c:when>
-													<c:otherwise>
-														<tr onclick="clickChatroom('${chatroom.idx}','${chatroom.talker_email}','${chatroom.talker_nickname}');">
-															<td class="text-center"><c:set var="isDoing" value="true"/> 
-															<c:forEach items="${userMap}" var="user">
-															<c:if test="${ chatroom.talker_email == user.key }">
-																<i class="fa fa-circle green"></i>
-																<c:set var="isDoing" value="false"/> 
-															</c:if>
-														</c:forEach>
-														<c:if test="${isDoing}"> 
-														<i class="fa fa-circle red"></i></c:if></td>
-															<td>${chatroom.talker_nickname}</td>
-															<td>${chatroom.last_chat_time}</td>
-															<c:choose>
-																<c:when test = "${cntList[status.index] != 0}">
-																	<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
-																</c:when>
-															</c:choose>	
-														</tr>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</tbody>
-									</table>
+															</c:forEach>
+															<c:if test="${isDoing}"> 
+															<i class="fa fa-circle red"></i></c:if></td>
+																<td>${chatroom.talker_nickname}</td>
+																<td>${chatroom.last_chat_time}</td>
+																<c:choose>
+																	<c:when test = "${cntList[status.index] != 0}">
+																		<td><span class="badge badge-danger">${cntList[status.index]}</span></td>	
+																	</c:when>
+																</c:choose>	
+															</tr>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

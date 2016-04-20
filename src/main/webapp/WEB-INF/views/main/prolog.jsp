@@ -97,7 +97,7 @@
             <div class="col-lg-6 col-md-6 text-center">
                <div class="feature">
                   <img
-                     src="${pageContext.request.contextPath}/assets/img/talker.jpg"
+                     src="${pageContext.request.contextPath}/assets/img/talker.png"
                      alt="" />
                   <h2>Talker</h2>
                   <p class="text-muted">당신의 이야기를 나눠 보세요.</p>
@@ -105,9 +105,7 @@
             </div>
             <div class="col-lg-6 col-md-6 text-center">
                <div class="feature">
-                  <img
-                     src="${pageContext.request.contextPath}/assets/img/listener.jpg"
-                     alt="" />
+                  <img src="${pageContext.request.contextPath}/assets/img/listener.png" alt="" />
                   <h2>Listener</h2>
                   <p class="text-muted">이야기를 들어 주는 것만으로도 힘이 됩니다.</p>
                </div>
