@@ -99,23 +99,20 @@ public class MongoDao {
 	    GridFSDBFile outputImageFile = gridFs.findOne(fileName);
 	    String imageLocation = null;
 		
-	    try {
+
 		    // 파일을 저장할 경로 설정
 		    String graph_image_path = null;
 		    String osType = System.getProperty("os.name").toLowerCase();
 		    if(osType.contains("windows")) {
-		    	graph_image_path = "C://Users//HK-PC//git//kk//src//main//webapp//assets//graph_image//";
+		    	graph_image_path = "C://Users//bit-user//git//kk//src//main//webapp//assets//graph_image//";
 		    } else if(osType.contains("linux")) {
 		    	graph_image_path = "//usr//local//tomcat8//webapps//kuku//assets//graph_image//";;
 		    }
 		    imageLocation = graph_image_path + fileName + ".png";
 		    System.out.println(imageLocation);
-		    // 파일 존재 유무 검사
-		    File file = new File(imageLocation);
-	    	FileInputStream fis = new FileInputStream(file);
-		} catch (FileNotFoundException e) {
+		   
 			try {
-				// 만약 파일이 없다면  파일 생성
+				
 				outputImageFile.writeTo(imageLocation);
 		    	System.out.println(fileName + "감정분석 파일 생성");
 		    	
@@ -127,6 +124,6 @@ public class MongoDao {
 			} catch (InterruptedException ite) {
 				ite.printStackTrace();
 			}
-		}
+		
 	}
 }
