@@ -18,7 +18,10 @@ public class UserService {
 	ListenerDao listenerDao;
 
 	public void join_talker(TalkerVo vo) {
-		talkerDao.insert_talker(vo);
+		
+		if(!checkEmail(vo.getEmail(), "talker")) {
+			talkerDao.insert_talker(vo);
+		}
 	}
 	
 	public void join_listener(ListenerVo vo) {
