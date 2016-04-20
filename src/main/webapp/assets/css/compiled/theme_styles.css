@@ -297,6 +297,12 @@ a:hover, a:focus {
   background-clip: padding-box;
   /* stops bg color from leaking outside the border: */
 }
+
+
+.main-box2 {
+    background: #f8f0e9; 
+}
+
 @media (max-width: 767px) {
   .main-box {
     margin-bottom: 10px;
@@ -363,6 +369,7 @@ h3 .small {
   padding-bottom: 15px;
   padding-top: 15px;
   line-height: 24px;
+  text-shadow: 1px 1px 1px rgba(30,30,30,0.7);
 }
 .navbar-nav > li > .dropdown-menu {
   border-radius: 3px;
@@ -422,10 +429,10 @@ h3 .small {
 
 @media (max-width: 767px) {
   #logo {
-    width: 150px;
-    padding-left: 0;
-    font-size: 1em;
-    margin-left: 6px;
+	font-size: 15px;
+    color: #fff;
+    padding: 0;
+    letter-spacing: 1px;
   }
 }
 @media (max-width: 400px) {
@@ -458,6 +465,9 @@ h3 .small {
 @media (min-width: 992px) {
   #logo.navbar-brand > img.normal-logo.logo-white {
     display: block;
+    padding-left: 10px;
+    padding-top: 7px;
+    height: 50px;
   }
 }
 @media (max-width: 991px) {

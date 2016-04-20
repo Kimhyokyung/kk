@@ -95,8 +95,9 @@
 																	class="form-control" placeholder="닉네임" name="nickname">
 															</div>
 															<div class="form-group">
-																<h3 align="center">상담 주제를 선택해주세요. ^.^<br>
-																</br> <select class="form-control" name="consulting_topic">
+																<br>
+															<h5 align="center">상담 주제를 선택해주세요.</h5>
+																<select class="form-control" name="consulting_topic">
 																	<option value="직장문제">직장문제</option>
 																	<option value="학교문제">학교문제</option>
 																	<option value="진로상담">진로상담</option>
@@ -107,6 +108,7 @@
 																	<option value="기타">기타</option>
 																</select>
 															</div>
+															<br>
 															<div style="width: 315px; height: 80px; margin: auto" align="center">
 																<button
 																	class="btn btn-primary btn-xl page-scroll"

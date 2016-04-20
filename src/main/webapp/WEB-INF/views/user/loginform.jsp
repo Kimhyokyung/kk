@@ -97,7 +97,7 @@
 														<div class="col-xs-6">
 															<div class="checkbox-nice">
 																<input type="checkbox" id="remember-me" checked="checked" />
-																<label for="remember-me">Remember me</label>
+																<label for="remember-me">아이디 저장</label>
 															</div>
 														</div>
 													</div>
@@ -126,7 +126,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										계정이 없으십니까 ? 
-										<a href="/kuku/user/select_join_type">지금 당장 가입하세요!</a>
+										<a href="/kuku/user/select_join_type">지금 가입하세요!</a>
 									</div>
 								</div>
 							</div>

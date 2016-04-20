@@ -30,8 +30,7 @@
                   class="icon-bar"></span>
             </button>
             <a class="navbar-brand page-scroll" href="#first"> <img
-               src="${pageContext.request.contextPath}/assets/img/logo.png"
-               style="height: 70px" />
+               src="${pageContext.request.contextPath}/assets/img/logo.png" />
             </a>
          </div>
          <div class="navbar-collapse collapse" id="bs-navbar">

@@ -21,7 +21,6 @@
 						dataType : "json",
 						data : "",
 						success : function(response) {
-							console.log("뀨 리스폰 success!");
 							console.log(response);
 
 							if (response.isEqual == true) {
@@ -65,9 +64,8 @@
 											</header>
 											<div id="login-box-inner">
 												<form role="form" method="post" id="modify_lock">
-													<div>
-														<h7>&nbsp;&nbsp;&nbsp;비밀번호를 입력해주세요.</h7>
-														<br>
+													<div align="center">
+														<h4><b>&nbsp;&nbsp;&nbsp;비밀번호를 재입력해주세요.</b></h4>
 														<br>
 													</div>
 													<div class="input-group">

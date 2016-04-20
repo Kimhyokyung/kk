@@ -10,7 +10,7 @@
 				var email = $("#email").val();
 				console.log(email);
 				if (email == "" || email == null || email == 'undefined') {
-					alert("email을 입력해주세요.");
+					alert("이메일을 입력해주세요.");
 					return;
 				}
 				
@@ -126,8 +126,9 @@
 															<input type="text" class="form-control" placeholder="닉네임" name="nickname">
 														</div>
 														<div class="form-group">
-															<h4 align="center">상담 주제를 선택해주세요</h4>
-															<br> <select class="form-control"
+														<br>
+															<h5 align="center">상담 주제를 선택해주세요.</h5>
+															 <select class="form-control"
 																name="consulting_topic">
 																<option value="직장문제">직장문제</option>
 																<option value="학교문제">학교문제</option>

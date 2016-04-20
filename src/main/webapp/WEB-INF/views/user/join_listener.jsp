@@ -66,7 +66,7 @@
 						<!------------------------------------------------------------------------------------------------------------------------------------->
 						<div class="row">
 							<div class="col-lg-12">
-								<div class="main-box clearfix" style="min-height: 820px;">
+								<div class="main-box2 clearfix" style="min-height: 820px;">
 									<div class="step-content">
 										<div class="step-pane active" id="step1">
 											<br />

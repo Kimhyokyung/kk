@@ -79,32 +79,32 @@
 									<div class="col-xs-12">
 										<header id="login-header">
 											<div id="login-logo">
-												<img src="${pageContext.request.contextPath}/assets/img/logo.png"alt="" />
+												<img src="${pageContext.request.contextPath}/assets/img/logo-black.png"alt="" />
 											</div>
 										</header>
 										<div id="login-box-inner">
 											<form role="form" method="post" id="loginform">
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-user"></i></span>
-													<input class="form-control" type="text" placeholder="email" name="email" id="email">
+													<input class="form-control" type="text" placeholder="이메일" name="email" id="email">
 												</div>
 												<div class="input-group">
 													<span class="input-group-addon"><i class="fa fa-key"></i></span>
-													<input type="password" class="form-control" placeholder="password" name="password">
+													<input type="password" class="form-control" placeholder="비밀번호" name="password">
 												</div>
 												<div id="remember-me-wrapper">
 													<div class="row">
 														<div class="col-xs-6">
 															<div class="checkbox-nice">
 																<input type="checkbox" id="remember-me" checked="checked" />
-																<label for="remember-me">Remember me</label>
+																<label for="remember-me">아이디 저장</label>
 															</div>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-xs-12">
-														<p class="social-text">환영합니다</p>
+														<p class="social-text">로그인에 실패하였습니다.</p>
 													</div>
 												</div>
 												<div class="row">
@@ -126,7 +126,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										계정이 없으십니까 ? 
-										<a href="/kuku/user/select_join_type">지금 당장 가입하세요!</a>
+										<a href="/kuku/user/select_join_type">지금 가입하세요!</a>
 									</div>
 								</div>
 							</div>

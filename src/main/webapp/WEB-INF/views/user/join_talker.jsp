@@ -15,7 +15,7 @@
 		} else {
 			var userType = "${sessionScope.userType}";
 			console.log(userType);
-				alert("ㅊㅋㅊㅋ회원 가입 되었습니다!");
+				alert("회원 가입 되었습니다!");
 				joinform.action = "join_success";
 				joinform.submit();
 		}
@@ -36,13 +36,12 @@
 										<div class="col-md-12">
 											<header id="login-header">
 												<div id="login-logo">
-													<img src="${pageContext.request.contextPath}/assets/img/logo.png" alt="" />
+													<img src="${pageContext.request.contextPath}/assets/img/logo-black.png" alt="" />
 												</div>
 											</header>
-											<div id="login-box-inner">
+											<div id="login-box-inner" align="center">
 												<form id="join-form" name="joinForm" method="post">
-													<h1 align="center">스트레스 정도&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-													<h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3> 
+													<h1 align="center"><b>스트레스 정도</b></h1> 
 													<input type="radio" name="stress_degree" value="1">&nbsp; 1 &nbsp; 
 													<input type="radio" name="stress_degree" value="2">&nbsp; 2 &nbsp; 
 													<input type="radio" name="stress_degree" value="3">&nbsp; 3 &nbsp; 
@@ -54,7 +53,7 @@
 													<input type="radio" name="stress_degree" value="9">&nbsp; 9 &nbsp; 
 													<input type="radio" name="stress_degree" value="10">&nbsp; 10 &nbsp;
 													<div style="width: 340px; height: 80px; margin: auto">
-														<br/>
+														<br><br><br>
 														<button type="submit" class="btn btn-primary col-xs-12 btn-facebook" onClick="selectChkBox(this)">회원가입완료</button>
 													</div>
 												</form>

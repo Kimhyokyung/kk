@@ -22,6 +22,7 @@
 		var listenerEmail = document.getElementById('listener_email');
 		listenerEmail.value = email;
 		
+		
 		var listenerNick = document.getElementById('listener_nick');
 		listenerNick.value = nick;
 		
@@ -39,7 +40,7 @@
 		
 		$("#modalbody").empty();
 		$("#modalbody").append(
-				"현재 리스너가 비접속 상태입니다.<br>채팅을 계속 진행하시겠습니까?<br>"+listenerEmail.value+" "+ listenerNick.value);
+				"현재 리스너가 비접속 상태입니다.<br>채팅을 계속 진행하시겠습니까?<br>");
 		  $('#gochat').on('click', function () {
 			  clickChat(listenerEmail.value, listenerNick.value);
 		  })
@@ -54,8 +55,8 @@
 				<div class="modal-body" align="center" id="modalbody">
 				</div>
 				<div class="modal-button" id="modalbutton">
-					<button type="button" class="btn btn-default" data-dismiss="modal">안해안해</button>
-					<button type="button" class="btn btn-primary" id="gochat">채팅고고</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" id="gochat">채팅하기</button>
 				</div>
 			</div>
 		</div>

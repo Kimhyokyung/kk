@@ -80,16 +80,17 @@
   border-radius: 4px 0 0 4px;
 }
 .wizard .wizard-inner .actions {
-  position: absolute;
-  right: 0;
-  z-index: 1000;
-  float: right;
-  padding-right: 15px;
-  padding-left: 15px;
-  line-height: 46px;
-  vertical-align: middle;
-  background-color: #e5e5e5;
-  border-left: 1px solid #d4d4d4;
+/*   position: absolute; */
+/*   right: 0; */
+/*   z-index: 1000; */
+    float: right;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+/*   line-height: 46px; */
+/*   vertical-align: middle; */
+/*   background-color: #e5e5e5; */
+/*   border-left: 1px solid #d4d4d4; */
 }
 .wizard .wizard-inner .actions a {
   margin-right: 8px;

@@ -485,3 +485,13 @@ img::-moz-selection {
     color: #fff;
     background: 0 0;
 }
+/* 로고 이미지 위치 */
+.navbar-brand>img {
+    display: block;
+    padding-left: 10px;
+    padding-top: 7px;
+    height: 50px;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
