@@ -11,12 +11,11 @@
 <meta name="generator" content="Codeply">
 <link rel="stylesheet" type="text/css"
    href="${pageContext.request.contextPath}/assets/css/bootstrap/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-   href="${pageContext.request.contextPath}/assets/css/bootstrap/navhead_custom.css" />
 <link rel="stylesheet"
    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" />
-<link rel="stylesheet"
-   href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/assets/css/bootstrap/navhead_custom.css" />
 <title>Kukumental</title>
 </head>
 <body>
@@ -128,27 +127,27 @@
                   <h4>원하는 상담 주제와 리스너를 선택해서 언제나 이야기를 나눌 수 있습니다.</h4>
                </div>
                <div class="media-right">
-                  <i class="icon-lg ion-ios-bolt-outline"></i>
+                  <i class="icon-lg fa fa-weixin" aria-hidden="true"></i>
                </div>
             </div>
             <hr>
             <div class="media wow fadeIn">
                <h3>익명성과 간단한 절차</h3>
                <div class="media-left">
-                  <i class="icon-lg ion-ios-cloud-download-outline"></i>
+                  <i class="fa fa-users icon-lg" aria-hidden="true"></i>
                </div>
                <div class="media-body media-middle">
-                  <h4>익명성으로 편하게 대화를 나눌수 있고 까다로운 가입 절차가 필요하지 않습니다.</h4>
+                  <h4>익명성으로 편하게 대화를 나눌 수 있고 까다로운 가입 절차가<br> 필요하지 않습니다.</h4>
                </div>
             </div>
             <hr>
             <div class="media wow fadeInRight">
                <h3>감정 분석</h3>
                <div class="media-body media-middle">
-                  <h4>채팅 내용을 텍스트 마이닝하여 감정분석을 통해 토커의 감정 상태를 시각화하여 볼 수 있습니다.</h4>
+                  <h4>채팅 내용을 텍스트 마이닝하여 감정 분석을 통해 토커의 감정 상태를 한 눈에 볼 수 있습니다.</h4>
                </div>
                <div class="media-right">
-                  <i class="icon-lg ion-ios-snowy"></i>
+                  <i class="icon-lg fa fa-bar-chart-o" aria-hidden="true"></i>
                </div>
             </div>
          </div>

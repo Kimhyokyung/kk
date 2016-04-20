@@ -220,7 +220,8 @@ fieldset[disabled] .btn-primary.active {
     background-size: cover;
     -o-background-size: cover;
      -webkit-transform: translateY(-50%);
-    
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
 }
 
 .header-content .inner h1 {

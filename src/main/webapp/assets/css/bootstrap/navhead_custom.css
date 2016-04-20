@@ -495,3 +495,10 @@ img::-moz-selection {
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
 }
+
+/* feature icon 편집 */
+.media-left, .media-right, .media-body {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top:10px;
+}
