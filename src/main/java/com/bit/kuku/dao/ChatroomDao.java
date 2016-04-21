@@ -85,7 +85,7 @@ public class ChatroomDao {
 		map.put("pageStart", cri.getPageStart());
 		map.put("perPageNum", cri.getPerPageNum());
 		map.put("listener_email", ls_email);
-		List<Map<String, Object>> list = sqlSession.selectList("chatroom.listCriteria", map);
+		//List<Map<String, Object>> list = sqlSession.selectList("chatroom.listCriteria", map);
 		
 		return sqlSession.selectList("chatroom.listCriteria", map);
 	}

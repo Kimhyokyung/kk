@@ -82,7 +82,6 @@ public class MongoDao {
 			//query.addCriteria(Criteria.where("receiver_email").is(listener_email).and("receiver_response").is("false").and("chatroom_num").is(nChatroomNum));
 			query.addCriteria(Criteria.where("chatroom_num").is(nChatroomNum).and("receiver_email").is(listener_email).and("receiver_response").is("false"));
 			List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
-			System.out.println(listener_email+"의 "+ nChatroomNum + "번 방 읽지 않은 채팅 갯수=" + list.size());
 			
 			// 현재 채팅방에서 읽지 않은 채팅 갯수 더하기
 			nChatCnt += list.size();
@@ -108,7 +107,6 @@ public class MongoDao {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("chatroom_num").is(chatroom_num));
 		int chatroomCnt = mongoOperation.find(query, Object.class, "chatlog").size();
-		System.out.println(chatroom_num + "번 채팅방 채팅 갯수 : " + chatroomCnt);
 		
 		return chatroomCnt;
 	}

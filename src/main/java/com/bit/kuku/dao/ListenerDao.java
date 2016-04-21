@@ -59,7 +59,7 @@ public class ListenerDao extends UserDao{
 	}
 	
 	public List<ListenerVo> listCriteria(Criteria cri) throws Exception {
-		List<ListenerVo> list = sqlSession.selectList("listener.listCriteria", cri);
+		//List<ListenerVo> list = sqlSession.selectList("listener.listCriteria", cri);
 		return sqlSession.selectList("listener.listCriteria", cri);
 	}
 

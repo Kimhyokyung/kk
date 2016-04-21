@@ -1,7 +1,6 @@
 package com.bit.kuku.chat;
 
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
@@ -13,11 +12,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.bit.kuku.dao.ChatroomDao;
 import com.bit.kuku.dao.MongoDao;
 import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.vo.ChatVo;
-import com.sun.jmx.snmp.Timestamp;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
@@ -80,9 +77,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		} else if (func.equals("chat")) {
 			
 			System.out.println("-------------------chat-------------------");
-			
-			//String chat = "chat/1/khk_tk/khk_ls/안녕";
-			
+						
 			String chatroom_idx = msgArr[1];
 			String sender_email = msgArr[2];
 			String receiver_email = msgArr[3];
@@ -114,7 +109,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			
 			// 채팅 전송
 			String sendChat = chatroom_idx + '/' + sender_email + '/' + chat;
-			String example = "1/khk_tk/안녕하세요";
 			System.out.println("sendChat : "+sendChat);
 			System.out.println("users in chat "+ users+"///"+receiver_email);
 			TextMessage msg = new TextMessage(sendChat);

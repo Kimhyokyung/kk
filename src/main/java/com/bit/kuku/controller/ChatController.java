@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.bit.kuku.dao.MongoDao;
 import com.bit.kuku.service.ChatroomService;
 import com.bit.kuku.session.SessionHandler;
-import com.bit.kuku.vo.ChatVo;
 import com.bit.kuku.vo.ChatroomVo;
 import com.bit.kuku.vo.ListenerVo;
 import com.bit.kuku.vo.TalkerVo;
