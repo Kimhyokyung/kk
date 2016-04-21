@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,6 +53,10 @@ public class ChatroomDao {
 	
 	public int selectListenerRequestCount(String listener_email){
 		return sqlSession.selectOne("chatroom.selectListenerRequestCount", listener_email);
+	}
+	
+	public List<ChatroomVo> selectListenerChatroom(String listener_email) {
+		return sqlSession.selectList("chatroom.selectListenerChatroom", listener_email);
 	}
 	
 	public void updateListenerResponse(String idx) {

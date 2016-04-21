@@ -1,13 +1,6 @@
 package com.bit.kuku.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -20,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.bit.kuku.vo.ChatVo;
+import com.bit.kuku.vo.ChatroomVo;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
 
@@ -28,6 +22,9 @@ public class MongoDao {
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
+	
+	@Autowired
+	private ChatroomDao chatroomDao;
 	
 	@Autowired
 	public void setMongoTemplate(MongoTemplate mongoTemplate) {
@@ -60,16 +57,39 @@ public class MongoDao {
 		return list.size();		
 	}
 	
-	public int receiver_response_count_sum(String receiver_email) {
+	public int talker_response_count_sum(String talker_email) {
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
 		
 		Query query = new Query();
-		query.addCriteria(Criteria.where("receiver_email").is(receiver_email).and("receiver_response").is("false"));
+		query.addCriteria(Criteria.where("receiver_email").is(talker_email).and("receiver_response").is("false"));
 		
 		List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
 		
 		return list.size();		
-	}	
+	}
+	
+	public int listener_response_count_sum(String listener_email) {
+		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;
+		
+		int nChatCnt = 0; 
+		// 요청을 승인한 채팅방 리스트 가져오기
+		List<ChatroomVo> chatroomList = chatroomDao.selectListenerChatroom(listener_email);
+		for(int i=0; i<chatroomList.size(); i++) {
+			
+			String nChatroomNum = String.valueOf(chatroomList.get(i).getIdx());
+			
+			Query query = new Query();
+			//query.addCriteria(Criteria.where("receiver_email").is(listener_email).and("receiver_response").is("false").and("chatroom_num").is(nChatroomNum));
+			query.addCriteria(Criteria.where("chatroom_num").is(nChatroomNum).and("receiver_email").is(listener_email).and("receiver_response").is("false"));
+			List<Object> list = mongoOperation.find(query, Object.class, "chatlog");
+			System.out.println(listener_email+"의 "+ nChatroomNum + "번 방 읽지 않은 채팅 갯수=" + list.size());
+			
+			// 현재 채팅방에서 읽지 않은 채팅 갯수 더하기
+			nChatCnt += list.size();
+		}
+		
+		return nChatCnt;
+	}
 	
 	public void receiver_response_read(String chatroom_num, String receiver_email){
 		MongoOperations mongoOperation = (MongoOperations) mongoTemplate;

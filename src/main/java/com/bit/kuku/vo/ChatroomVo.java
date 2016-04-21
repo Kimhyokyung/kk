@@ -7,7 +7,7 @@ public class ChatroomVo {
 	private String talker_nickname;
 	private String listener_email;
 	private String listener_nickname;
-	private boolean listener_response;
+	private boolean listener_response;	//1이면 채팅방 있음, 0이면 요청리스트에 있어서 아직 채팅방 없음.
 	private String last_chat_time;
 
 	public int getIdx() {

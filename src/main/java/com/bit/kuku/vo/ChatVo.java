@@ -1,7 +1,5 @@
 package com.bit.kuku.vo;
 
-import java.text.SimpleDateFormat;
-
 public class ChatVo {
 
 	private String chatroom_num;
@@ -10,7 +8,7 @@ public class ChatVo {
 	private String receiver_email;
 	private String chat;
 	private String time;
-	private String receiver_response;
+	private String receiver_response;//0이면 안읽은거고 1이면 읽은 메시지
 
 	public String getChatroom_num() {
 		return chatroom_num;

@@ -62,12 +62,12 @@ public class MainController {
 			TalkerVo talker = (TalkerVo) session.getAttribute("authUser");
 			
 			String tk_email = talker.getEmail();
-			messageCount = mongoDao.receiver_response_count_sum(tk_email);
+			messageCount = mongoDao.talker_response_count_sum(tk_email);
 		} else if (userType.equals("listener")) {
 			ListenerVo listener = (ListenerVo) session.getAttribute("authUser");
 			
 			String ls_email = listener.getEmail();
-			messageCount = mongoDao.receiver_response_count_sum(ls_email);
+			messageCount = mongoDao.listener_response_count_sum(ls_email);
 			requestCount = chatroomService.getListenerRequestCount(ls_email);
 		}
 		
