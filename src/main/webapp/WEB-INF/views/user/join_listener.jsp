@@ -29,11 +29,11 @@
 </head>
 <body>
 	<div id="theme-wrapper">
-		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/nav_headbar2.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
 				<form id="join_listener" name="joinListener" method="post">
-					<div id="myWizard" class="wizard">
+					<div id="myWizard" class="wizard" style="padding-top:120px">
 						<div class="wizard-inner">
 							<ul class="steps">
 								<li data-target="#step1" class="active"><span

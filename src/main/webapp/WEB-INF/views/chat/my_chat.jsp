@@ -475,10 +475,10 @@
 		</div>
 	</div>
 	<div id="theme-wrapper">
-		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/nav_headbar2.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<div class="row" id="user-profile" style="width:70%; margin:60px auto;">
+				<div class="row" id="user-profile" style="width:70%; margin:120px auto;">
 					<div class="col-lg-3 col-md-4 col-sm-4" style="width: 30%;">
 						<div class="main-box clearfix">
 							<div class="main-box-body clearfix">

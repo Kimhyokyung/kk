@@ -40,7 +40,6 @@
 	});
 </script>
 <html>
-<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 <body>
 	<div id="theme-wrapper">
 		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>

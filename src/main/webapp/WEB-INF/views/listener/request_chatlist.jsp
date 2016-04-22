@@ -118,10 +118,10 @@
 		</div>
 	</div>
 	<div id="theme-wrapper">
-		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/nav_headbar2.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row" style="width: 70%; margin: 10 auto;">
-				<div class="col-lg-12">
+				<div class="col-lg-12" style="margin:60px">
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="main-box no-header clearfix" style="margin: 60px">

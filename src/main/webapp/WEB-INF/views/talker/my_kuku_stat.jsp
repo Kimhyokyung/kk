@@ -70,10 +70,10 @@
 <html>
 <body>
 	<div id="theme-wrapper">
-		<c:import url="/WEB-INF/views/include/nav_headbar.jsp"></c:import>
+		<c:import url="/WEB-INF/views/include/nav_headbar2.jsp"></c:import>
 		<div id="page-wrapper" class="container">
 			<div class="row">
-				<div class="row" id="user-profile">
+				<div class="row" id="user-profile" style="margin:60px auto">
 					<div>
 						<div align="center" style="margin:60px">
 							<div class="btn-group pagination" style="padding: 10px">

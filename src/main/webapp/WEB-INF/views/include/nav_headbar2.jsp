@@ -4,8 +4,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <script type="text/javascript">
-	$(document).ready(function() {
-						$.ajax({
+	$(document)
+			.ready(
+					function() {
+						$
+								.ajax({
 									url : "/kuku/main/nav_headbar",
 									type : "post",
 									dataType : "json",
@@ -60,13 +63,29 @@
 												req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\"></span></a>";
 											}
 										}
+										$page = jQuery(location).attr('pathname');
+										console.log($page);
+								    if(!$page) {
+								        $page = '/kuku/main/index';
+								    }
+								    console.log('page : '+$page);
+								    $('.nav li a').each(function(){
+								        var $href = $(this).attr('href');
+								        console.log('href : '+$href);
+								        if ($href == $page) {
+								        	console.log('page=href');
+								        	console.log('this : '+this);
+								            $(this).addClass('selected');
+								        } else {
+								            $(this).removeClass('selected');
+								        }
+								    });
 									}
 								});
-
+						
 						setInterval(
 								function() {
-									$
-											.ajax({
+									$.ajax({
 												url : "/kuku/main/nav_headbar",
 												type : "post",
 												dataType : "json",
@@ -83,10 +102,7 @@
 													}
 
 													if ('${userType}' == 'talker') {
-														$('#aaa')
-																.load(
-																		window.location.href
-																				+ ' #tk-msg-cnt');
+														$('#aaa').load(window.location.href+ ' #tk-msg-cnt');
 														var msg_div = document
 																.getElementById('tk-msg-cnt');
 
@@ -125,29 +141,33 @@
 															req_div.innerHTML = "<a href=\"/kuku/listener/request_chatlist\">요청 보기<span class=\"badge badge-danger\"></span></a>";
 														}
 													}
+													
+													$page = jQuery(location).attr('pathname');
+													console.log($page);
+											    if(!$page) {
+											        $page = '/kuku/main/index';
+											    }
+											    console.log('page : '+$page);
+											    $('.nav li a').each(function(){
+											        var $href = $(this).attr('href');
+											        console.log('href : '+$href);
+											        if ($href == $page) {
+											        	console.log('page=href');
+											        	console.log('this : '+this);
+											            $(this).addClass('selected');
+											        } else {
+											            $(this).removeClass('selected');
+											        }
+											    })
 												}
 											});
+									
+								;
 								}, 5000); // 3000ms(3초)가 경과하면 이 함수가 실행됩니다.
-								
-					 	 $page = jQuery(location).attr('pathname');
-					 	console.log('page : '+$page);
-						    if(!$page) {
-						        $page = '/kuku/main/index';
-						    }
-						    console.log('page : '+$page);
-						    $('.nav li a').each(function(){
-						        var $href = $(this).attr('href');
-						        console.log('href : '+$href);
-						        if ($href == $page) {
-						            $(this).addClass('selected');
-						        } else {
-						            $(this).removeClass('selected');
-						        }
-						    }); 
 					});
 </script>
 <header>
-	<nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+	<nav id="topNav" class="navbar2 navbar2-default navbar2-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a href="/kuku/main" id="logo" class="navbar-brand"> <img
@@ -173,12 +193,10 @@
 						<c:set var="userType" value="${userType}" />
 						<c:choose>
 							<c:when test="${empty authUser}">
-								<ul class="nav navbar-nav navbar-center">
-									<li><a href="/kuku/user/select_join_type">회원가입</a></li>
-									<li><a href="/kuku/user/loginform">로그인</a></li>
-									<li class="dropdown profile-dropdown"><a><span
-											class="hidden-xs"><h7>게스트</h7>님 안녕하세요</span></a></li>
-								</ul>
+								<li><a href="/kuku/user/select_join_type">회원가입</a></li>
+								<li><a href="/kuku/user/loginform">로그인</a></li>
+								<li class="dropdown profile-dropdown"><a><span
+										class="hidden-xs"><h7>게스트</h7>님 안녕하세요</span></a></li>
 							</c:when>
 							<c:when test="${userType eq 'talker'}">
 								<ul class="nav navbar-nav navbar-center">
