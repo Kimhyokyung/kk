@@ -48,6 +48,7 @@
 				if (chatArr[0] == chatroom_num) {
 					createReceiveChat(chatArr[1], chatArr[2], null);
 					readMsg();
+					checkRating();
 				} else {
 					// 내가 보고 있지 않은 채팅방에 새로운 메세지가 도착
 					console.log("안 읽은 메시지 도착");
@@ -81,9 +82,6 @@
 		chatroom_num = chatroom;
 		receiver_email = email;
 		receiver_nick = nick;
-
-		// 토커 평가 조건 확인
-		checkRating(chatroom_num);
 		
 		// 채팅창 상대방 닉네임 보여주기
 		showReceiverNickname(receiver_email, receiver_nick);
@@ -113,6 +111,7 @@
 		});
 		
 		readMsg();
+		checkRating();
 	}
 	
 	// 평가하기 조건 검사
@@ -130,6 +129,8 @@
 					console.log('hide rating btn');
 					$('#listener_rating').hide();
 				}
+				
+				$('#temp').load('/kuku/chat/my_chat_room #listener_rating');
 			}
 		});
 	}
@@ -174,6 +175,7 @@
 		document.getElementById('chat').value = '';
 		
 		reloadChatList();
+		checkRating();
 	}
 
 	// 메세지 보낼 때나 받을 때 현재 시간 설정
