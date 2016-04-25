@@ -164,7 +164,7 @@ Wizard.prototype = {
 			
 			// 리스너 질문이 끝났을 때 회원가입 완료 페이지로 이동(리스너 회원가입 완료)
 			var form = document.getElementById('join_listener');
-			alert("ㅊㅋㅊㅋ회원 가입 되었습니다!");
+			alert("회원 가입 되었습니다.");
 			form.action = "join_success2";
 			form.submit();
 			console.log("submit");

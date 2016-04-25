@@ -34,7 +34,7 @@
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.1.9/spring_schema" />
+		<property name="url" value="jdbc:mysql://192.168.1.8/spring_schema" />
 		<property name="username" value="haha" />
 		<property name="password" value="8282" />
 	</bean>
@@ -50,7 +50,7 @@
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 
-	<mongo:mongo host="192.168.1.9" port="27017" />
+	<mongo:mongo host="192.168.1.8" port="27017" />
 
 	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
 		<constructor-arg ref="mongo" />
