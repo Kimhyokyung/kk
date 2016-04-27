@@ -1,8 +1,6 @@
-#���̺� ����
 drop table tb_user;
 drop table tb_listener;
 
-#ȸ�� ���̺�
 CREATE TABLE tb_user (
   `IDX` INT(11) NOT NULL AUTO_INCREMENT,
   `EMAIL` VARCHAR(50) NOT NULL,
@@ -34,11 +32,14 @@ CREATE TABLE talker (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-#ȸ���߰�  
 insert into tb_user(EMAIL, PASSWORD, NICKNAME) values ('youngt1004', '1234', 'youngt1004');
+insert into tb_rating (IDX, TALKER_EMAIL,LISTENER_EMAIL, HELPNESS, PROFESSIONALISM, SYMPATHY, RESPONSIBILITY, TOTAL_AVG) values (1,'kkyu_tk','ddd',1,1,1,1,1);
 
-#ȸ������
 delete from tb_user where idx=3;
 
-#ȸ���˻�
+select sysdate();
+select now();
 SELECT * FROM tb_user;
+SELECT * FROM tb_listener;
+SELECT * FROM tb_rating;
+SELECT * FROM tb_chatroom;
